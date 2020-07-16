@@ -14,6 +14,7 @@
 		5A1856C424C0691300F935FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A1856C324C0691300F935FC /* Assets.xcassets */; };
 		5A1856C724C0691300F935FC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A1856C624C0691300F935FC /* Preview Assets.xcassets */; };
 		5A1856CA24C0691300F935FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A1856C824C0691300F935FC /* LaunchScreen.storyboard */; };
+		5A1856D324C06C9F00F935FC /* CoffeeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856D224C06C9F00F935FC /* CoffeeIcon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		5A1856C624C0691300F935FC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5A1856C924C0691300F935FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5A1856CB24C0691300F935FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5A1856D224C06C9F00F935FC /* CoffeeIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeIcon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		5A1856B924C0691100F935FC /* CoffeeMarketplace */ = {
 			isa = PBXGroup;
 			children = (
+				5A1856D124C06C6900F935FC /* Laurens */,
 				5A1856BA24C0691100F935FC /* AppDelegate.swift */,
 				5A1856BC24C0691100F935FC /* SceneDelegate.swift */,
 				5A1856C124C0691100F935FC /* ContentView.swift */,
@@ -76,6 +79,14 @@
 				5A1856C624C0691300F935FC /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5A1856D124C06C6900F935FC /* Laurens */ = {
+			isa = PBXGroup;
+			children = (
+				5A1856D224C06C9F00F935FC /* CoffeeIcon.swift */,
+			);
+			path = Laurens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +162,7 @@
 			files = (
 				5A1856BB24C0691100F935FC /* AppDelegate.swift in Sources */,
 				5A1856BD24C0691100F935FC /* SceneDelegate.swift in Sources */,
+				5A1856D324C06C9F00F935FC /* CoffeeIcon.swift in Sources */,
 				5A1856C224C0691100F935FC /* ContentView.swift in Sources */,
 				5A1856C024C0691100F935FC /* CoffeeMarketplace.xcdatamodeld in Sources */,
 			);
