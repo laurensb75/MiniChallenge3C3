@@ -8,36 +8,40 @@
 
 import SwiftUI
 
-var screenSize = UIScreen.main
-
 
 struct CoffeeIcon: View {
+    
+    var coffeeImage: String = "Coffee"
+    var coffeeName: String = "Coffee Name"
+    var coffeePrice: Int = 100000
+    
     var body: some View {
         ZStack(alignment: .bottomLeading){
-            Image("Coffee")
+            Image(coffeeImage)
                 .resizable()
-                .aspectRatio(contentMode: .fill)
+                .aspectRatio(contentMode: .fit)
                 .frame(
-                    width: screenSize.bounds.width * 0.45,
-                    height: screenSize.bounds.height * 0.15,
+                    width: UIScreen.main.bounds.width * 0.5,
+                    height: UIScreen.main.bounds.height * 0.15,
                     alignment: .topLeading
                 )
                 .clipped()
             HStack(){
-                Text("Coffee Name")
-                    .foregroundColor(Color.gray)
+                Text(coffeeName)
+                    .foregroundColor(Color.white)
                     .multilineTextAlignment(.leading)
                     .padding(.leading,5)
+                    .font(.system(size: 20))
                 Spacer()
-                Text("Price")
-                    .foregroundColor(Color.gray)
+                Text("Rp.\(coffeePrice)")
+                    .foregroundColor(Color.white)
                     .multilineTextAlignment(.trailing)
                     .padding(.trailing,5)
             }
             .background(Color.black.opacity(0.6))
         }
         .cornerRadius(10)
-        .frame(width: screenSize.bounds.width * 0.45, height: screenSize.bounds.height * 0.15)
+        .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.15)
     }
 }
 
