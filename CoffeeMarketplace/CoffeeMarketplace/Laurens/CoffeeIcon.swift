@@ -21,27 +21,28 @@ struct CoffeeIcon: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(
-                    width: UIScreen.main.bounds.width * 0.5,
+                    width: UIScreen.main.bounds.width * 0.45,
                     height: UIScreen.main.bounds.height * 0.15,
                     alignment: .topLeading
                 )
                 .clipped()
-            HStack(){
+            VStack(){
                 Text(coffeeName)
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.leading)
                     .padding(.leading,5)
                     .font(.system(size: 20))
-                Spacer()
+//                Spacer()
                 Text("Rp.\(coffeePrice)")
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.trailing)
                     .padding(.trailing,5)
             }
-            .background(Color.black.opacity(0.6))
+            .frame(width: UIScreen.main.bounds.width * 0.45)
+            .background(Color.black.opacity(0.7))
         }
         .cornerRadius(10)
-        .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.15)
+        .frame(width: UIScreen.main.bounds.width * 0.45, height: UIScreen.main.bounds.height * 0.15)
     }
 }
 
