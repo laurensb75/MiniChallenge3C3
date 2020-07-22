@@ -11,7 +11,7 @@ import SwiftUI
 struct ProductDetail: View {
     var coffeeName: String = "Coffee Name"
     var coffeeDescription: String = "Coffee Description"
-    var coffeePrice: Int = 100000
+    var coffeePrice: Int = 0
     var coffeeFlavours: [String] = ["Roasted", "Spices", "Nutty/Cocoa", "Sweet", "Floral", "Fruity", "Sour/Fermented", "Green/Vegetative", "Papery/Musty", "Chemical"]
     
     
@@ -85,7 +85,10 @@ struct ProductDetail: View {
                             .scaledToFill()
                     )
                     .navigationBarTitle("",displayMode: .inline)
-                    .navigationBarItems(leading: Text("Cancel"), trailing: Text("Done"))
+                    .navigationBarItems(
+                        leading: Text("<Back"),
+                        trailing: Text("Done")
+                    )
             }
             Text("Product Detail")
                 .font(.headline)

@@ -13,7 +13,7 @@ struct CoffeeIcon: View {
     
     var coffeeImage: String = "Coffee"
     var coffeeName: String = "Coffee Name"
-    var coffeePrice: Int = 100000
+    var coffeePrice: Int = 0
     
     var body: some View {
         ZStack(alignment: .bottomLeading){
@@ -38,11 +38,11 @@ struct CoffeeIcon: View {
                     .multilineTextAlignment(.trailing)
                     .padding(.trailing,5)
             }
-            .frame(width: UIScreen.main.bounds.width * 0.45)
-            .background(Color.black.opacity(0.7))
+                .frame(width: UIScreen.main.bounds.width * 0.45)
+                .background(Color.black.opacity(0.7))
         }
-        .cornerRadius(10)
-        .frame(width: UIScreen.main.bounds.width * 0.45, height: UIScreen.main.bounds.height * 0.15)
+            .cornerRadius(10)
+            .frame(width: UIScreen.main.bounds.width * 0.45, height: UIScreen.main.bounds.height * 0.15)
     }
 }
 
