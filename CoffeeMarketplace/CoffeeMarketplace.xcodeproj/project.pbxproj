@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D65FDC824C85482002732A3 /* ProfileAfterLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D65FDC624C85482002732A3 /* ProfileAfterLogin.swift */; };
+		1D65FDC924C85482002732A3 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D65FDC724C85482002732A3 /* Profile.swift */; };
 		5A1856BB24C0691100F935FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BA24C0691100F935FC /* AppDelegate.swift */; };
 		5A1856BD24C0691100F935FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BC24C0691100F935FC /* SceneDelegate.swift */; };
 		5A1856C024C0691100F935FC /* CoffeeMarketplace.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BE24C0691100F935FC /* CoffeeMarketplace.xcdatamodeld */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D65FDC624C85482002732A3 /* ProfileAfterLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileAfterLogin.swift; sourceTree = "<group>"; };
+		1D65FDC724C85482002732A3 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		5A1856B724C0691100F935FC /* CoffeeMarketplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoffeeMarketplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A1856BA24C0691100F935FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A1856BC24C0691100F935FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +74,8 @@
 				5A1856BA24C0691100F935FC /* AppDelegate.swift */,
 				5A1856BC24C0691100F935FC /* SceneDelegate.swift */,
 				5A1856C124C0691100F935FC /* ContentView.swift */,
+				1D65FDC724C85482002732A3 /* Profile.swift */,
+				1D65FDC624C85482002732A3 /* ProfileAfterLogin.swift */,
 				5A1856C324C0691300F935FC /* Assets.xcassets */,
 				5A1856C824C0691300F935FC /* LaunchScreen.storyboard */,
 				5A1856CB24C0691300F935FC /* Info.plist */,
@@ -170,8 +176,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AECF64F24C086BA004D2678 /* CoffeeData.swift in Sources */,
+				1D65FDC924C85482002732A3 /* Profile.swift in Sources */,
 				5AE6712C24C1A3C300B919EB /* DashboardView.swift in Sources */,
 				5A1856BB24C0691100F935FC /* AppDelegate.swift in Sources */,
+				1D65FDC824C85482002732A3 /* ProfileAfterLogin.swift in Sources */,
 				5A1856BD24C0691100F935FC /* SceneDelegate.swift in Sources */,
 				5A1856D324C06C9F00F935FC /* CoffeeIcon.swift in Sources */,
 				5A1856C224C0691100F935FC /* ContentView.swift in Sources */,
