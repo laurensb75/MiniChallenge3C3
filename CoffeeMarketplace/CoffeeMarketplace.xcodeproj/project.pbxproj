@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5313741B24C8160100BC95E3 /* MC3LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5313741924C8160100BC95E3 /* MC3LoginPage.swift */; };
+		5313741C24C8160100BC95E3 /* MC3RegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5313741A24C8160100BC95E3 /* MC3RegisterPage.swift */; };
 		5A1856BB24C0691100F935FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BA24C0691100F935FC /* AppDelegate.swift */; };
 		5A1856BD24C0691100F935FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BC24C0691100F935FC /* SceneDelegate.swift */; };
 		5A1856C024C0691100F935FC /* CoffeeMarketplace.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BE24C0691100F935FC /* CoffeeMarketplace.xcdatamodeld */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5313741924C8160100BC95E3 /* MC3LoginPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MC3LoginPage.swift; sourceTree = "<group>"; };
+		5313741A24C8160100BC95E3 /* MC3RegisterPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MC3RegisterPage.swift; sourceTree = "<group>"; };
 		5A1856B724C0691100F935FC /* CoffeeMarketplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoffeeMarketplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A1856BA24C0691100F935FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A1856BC24C0691100F935FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +51,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5313741824C8159C00BC95E3 /* Alnodi */ = {
+			isa = PBXGroup;
+			children = (
+				5313741924C8160100BC95E3 /* MC3LoginPage.swift */,
+				5313741A24C8160100BC95E3 /* MC3RegisterPage.swift */,
+			);
+			path = Alnodi;
+			sourceTree = "<group>";
+		};
 		5A1856AE24C0691100F935FC = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +79,7 @@
 		5A1856B924C0691100F935FC /* CoffeeMarketplace */ = {
 			isa = PBXGroup;
 			children = (
+				5313741824C8159C00BC95E3 /* Alnodi */,
 				5A1856D124C06C6900F935FC /* Laurens */,
 				5A1856BA24C0691100F935FC /* AppDelegate.swift */,
 				5A1856BC24C0691100F935FC /* SceneDelegate.swift */,
@@ -175,8 +189,10 @@
 				5A1856BD24C0691100F935FC /* SceneDelegate.swift in Sources */,
 				5A1856D324C06C9F00F935FC /* CoffeeIcon.swift in Sources */,
 				5A1856C224C0691100F935FC /* ContentView.swift in Sources */,
+				5313741B24C8160100BC95E3 /* MC3LoginPage.swift in Sources */,
 				5A1856D724C07A4900F935FC /* CoffeeHorizontalCollectionView.swift in Sources */,
 				5A1856C024C0691100F935FC /* CoffeeMarketplace.xcdatamodeld in Sources */,
+				5313741C24C8160100BC95E3 /* MC3RegisterPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
