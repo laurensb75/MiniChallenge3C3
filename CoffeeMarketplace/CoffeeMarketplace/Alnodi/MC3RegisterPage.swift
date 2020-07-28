@@ -7,40 +7,70 @@
 //
 
 import SwiftUI
-//import CloudKit
+import CloudKit
 
 //var newUser : userData?
 
 struct MC3RegisterPage: View {
     
     @State var newUser = userData()
+    @State var photoPreview = Image(systemName: "person.fill")
+    @State var isShowingImagePicker = false
+    //@State var inputImage = Image("test")
     
     var body: some View {
-        ZStack{
+        
+        VStack{
+            //Untuk pemisah antara nav title dengan konten dibawahnya
             Rectangle()
-                .foregroundColor(.gray)
+                .frame(width: 10, height: 10)
+                .foregroundColor(Color.clear)
             
-            VStack{
-                ZStack{
-                    RegisterFormBackgroundView()
-                    RegisterFormText(newUser: $newUser)
-                }
-                
-                RegisterButton(newUser: $newUser)
-                
-                Spacer()
+            ZStack{
+                RegisterFormBackgroundView()
+                RegisterFormText(newUser: $newUser)
             }
             
+            photoPreview
+                .resizable()
+                .scaledToFit()
+                .clipShape(Circle())
+            
+            Text("Tap here to select a picture")
+                .foregroundColor(.black)
+                .padding()
+                .onTapGesture {
+                    self.isShowingImagePicker = true
+                }
+            
+            RegisterButton(newUser: $newUser)
+            Spacer()
         }
-        
+            //.background(Image("Background2"))
+            .background(Image("Background"))
+            .navigationBarTitle("Create an Account")
+            .sheet(isPresented: $isShowingImagePicker,
+                   onDismiss: loadImage) {
+                    ImagePicker(image: self.$newUser.profilePhoto)
+        }
+    }
+    
+    func loadImage(){
+        photoPreview = Image(uiImage: newData.profilePhoto!)
     }
 }
+
 
 struct userData {
     var name: String = ""
     var email: String = ""
     var password: String = ""
     var phoneNumber: String = ""
+    var profilePhoto = Image("test")
+}
+
+struct newData {
+    static var profilePhoto = UIImage(named: "test")
 }
 
 struct RegisterFormBackgroundView: View {
@@ -55,38 +85,44 @@ struct RegisterFormBackgroundView: View {
 
 struct RegisterFormText: View {
     @Binding var newUser: userData
+    var lineColor = Color(red: 0.843, green: 0.843, blue: 0.852)
     
     var body: some View {
         VStack(alignment: .leading){
             Text("Name")
                 .font(.system(size: 24, weight: .bold))
-            TextField("Name", text: $newUser.name)
-                .padding()
+            VStack{
+                TextField("Name", text: $newUser.name)
+                HorizontalLine(color: lineColor)
+            }
+            .padding()
             
             Text("Email")
                 .font(.system(size: 24, weight: .bold))
-            TextField("Email@email.com", text: $newUser.email)
-                .padding()
+            VStack{
+                TextField("Email@email.com", text: $newUser.email)
+                HorizontalLine(color: lineColor)
+            }
+            .padding()
             
             Text("Password")
                 .font(.system(size: 24, weight: .bold))
-            TextField("Password", text: $newUser.password)
-                .padding()
+            VStack{
+                SecureField("Password", text: $newUser.password)
+                HorizontalLine(color: lineColor)
+            }
+            .padding()
             
             Text("Phone Number")
                 .font(.system(size: 24, weight: .bold))
-            TextField("Phone Number", text: $newUser.phoneNumber)
-                .padding()
-                .keyboardType(UIKeyboardType.decimalPad)
-            
+            VStack{
+                TextField("Phone Number", text: $newUser.phoneNumber)
+                    .keyboardType(UIKeyboardType.decimalPad)
+                HorizontalLine(color: lineColor)
+            }
+            .padding()
         }
-        .padding()
-    }
-    
-    
-    
-    func saveToCloudKit(){
-        print("Data saved")
+        .padding(.horizontal, 25.0)
     }
 }
 
@@ -95,45 +131,62 @@ struct RegisterButton: View {
     
     var body: some View {
         Button (action: {
-            //self.saveDataToCloudKit()
+            self.saveDataToCloudKit()
         }) {
             Text("Register")
                 .padding()
                 .frame(width: UIScreen.main.bounds.width - 60)
-            
+                .foregroundColor(Color(red: 1.0, green: 1.0, blue: 1.0))
         }
-        .background(Color.black)
+        .background(Color(red: 0.511, green: 0.298, blue: 0.001))
         .cornerRadius(10)
         .padding(.top, 15)
     }
     
-//    func saveDataToCloudKit(){
-//        //Insert data ke cloudkit
-//
-//        //1.Buat dulu recordnya
-//        let newRecord = CKRecord(recordType: "UserData")
-//
-//        //2.Set property
-//        newRecord.setValue(newUser.name, forKey: "name")
-//        newRecord.setValue(newUser.email, forKey: "email")
-//        newRecord.setValue(newUser.password, forKey: "password")
-//        newRecord.setValue(newUser.phoneNumber, forKey: "phoneNumber")
-//
-//        //3.Execute save or insert
-//        let database = CKContainer.default().publicCloudDatabase
-//        database.save(newRecord) { record, error in
-//            if let err = error {
-//                print(err.localizedDescription)
-//            }
-//
-//            print(record)
-//
-//            DispatchQueue.main.async {
-//                //Update UI
-//            }
-//
-//        }
-//    }
+    func saveDataToCloudKit(){
+        //Insert data ke cloudkit
+        
+        //1.Buat dulu recordnya
+        let newRecord = CKRecord(recordType: "UserData")
+        
+        //Saving image
+        //let data = UIImage(named: "Background1")!.pngData()
+        let data = newData.profilePhoto?.pngData()// UIImage -> NSData, see also UIImageJPEGRepresentation
+        //let data2 = Image(UIImage)
+        
+        let url = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(NSUUID().uuidString+".dat")
+        
+        do {
+            //try data!.writeToURL(url, options: [])
+            try data!.write(to: url!, options: [])
+        } catch let e as NSError {
+            print("Error! \(e)");
+            return
+        }
+        let profilePhoto = CKAsset(fileURL: url!)
+        
+        //2.Set property
+        newRecord.setValue(newUser.name, forKey: "name")
+        newRecord.setValue(newUser.email, forKey: "email")
+        newRecord.setValue(newUser.password, forKey: "password")
+        newRecord.setValue(newUser.phoneNumber, forKey: "phoneNumber")
+        newRecord.setValue(profilePhoto, forKey: "profilePhoto")
+        
+        //3.Execute save or insert
+        let database = CKContainer.default().publicCloudDatabase
+        database.save(newRecord) { record, error in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+            
+            print(record)
+            
+            DispatchQueue.main.async {
+                //Update UI
+            }
+            
+        }
+    }
 }
 
 

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct Profile: View {
+struct ProfileTest: View {
     var body: some View {
             TabView{
                 ProfileLogin()
@@ -58,6 +58,6 @@ struct ProfileLogin: View {
 
 struct Profile_Previews: PreviewProvider {
     static var previews: some View {
-        Profile()
+        ProfileTest()
     }
 }
