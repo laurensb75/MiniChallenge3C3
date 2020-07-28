@@ -118,16 +118,16 @@ struct CoffeeHorizontalCollectionView: View {
                 .fontWeight(.bold)
                 .foregroundColor(Color.black)
                 .padding(.leading ,10)
-            ScrollView(.horizontal, showsIndicators: true){
+            ScrollView(.horizontal, showsIndicators: false){
                 HStack{
                     ForEach(0 ..< 5){ index in
                         NavigationLink(destination: ProductDetail(selectedCoffee: self.coffeeInCategory[index])){
-                            CoffeeIcon(coffeeToDisplay: self.coffeeInCategory[index])
+                            CoffeeIcon(coffeeToDisplay: self.coffeeInCategory[index]).opacity(1)
                         }
-//                        CoffeeIcon(coffeeToDisplay: self.coffeeInCategory[index])
+                            .buttonStyle(PlainButtonStyle())
                     }
                 }.padding(.leading, 10)
-            }
+            }.frame(height: 100)
         }
     }
 }
