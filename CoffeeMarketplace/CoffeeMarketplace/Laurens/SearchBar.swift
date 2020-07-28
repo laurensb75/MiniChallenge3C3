@@ -42,17 +42,7 @@ struct SearchBar: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.gray)
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, 8)
-         
-                if isEditing {
-                    Button(action: {
-                        self.text = ""
-                    }) {
-                        Image(systemName: "multiply.circle.fill")
-                            .foregroundColor(.gray)
-                            .padding(.trailing, 8)
-                    }
-                }
+                    .padding(.leading, 15)
             }
         )
     }

@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5313741B24C8160100BC95E3 /* MC3LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5313741924C8160100BC95E3 /* MC3LoginPage.swift */; };
-		5313741C24C8160100BC95E3 /* MC3RegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5313741A24C8160100BC95E3 /* MC3RegisterPage.swift */; };
-		1D65FDC824C85482002732A3 /* ProfileAfterLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D65FDC624C85482002732A3 /* ProfileAfterLogin.swift */; };
-		1D65FDC924C85482002732A3 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D65FDC724C85482002732A3 /* Profile.swift */; };
 		5A1856BB24C0691100F935FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BA24C0691100F935FC /* AppDelegate.swift */; };
 		5A1856BD24C0691100F935FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BC24C0691100F935FC /* SceneDelegate.swift */; };
 		5A1856C024C0691100F935FC /* CoffeeMarketplace.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BE24C0691100F935FC /* CoffeeMarketplace.xcdatamodeld */; };
@@ -19,17 +15,17 @@
 		5A1856C724C0691300F935FC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A1856C624C0691300F935FC /* Preview Assets.xcassets */; };
 		5A1856CA24C0691300F935FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A1856C824C0691300F935FC /* LaunchScreen.storyboard */; };
 		5A1856D324C06C9F00F935FC /* CoffeeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856D224C06C9F00F935FC /* CoffeeIcon.swift */; };
-		5A1856D724C07A4900F935FC /* CoffeeHorizontalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856D624C07A4900F935FC /* CoffeeHorizontalCollectionView.swift */; };
 		5A64F2B624C83B2300E1FACD /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A64F2B524C83B2300E1FACD /* SearchBar.swift */; };
 		5A64F2B824C83EAF00E1FACD /* ProductDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A64F2B724C83EAF00E1FACD /* ProductDetail.swift */; };
+		5A84C8CD24CAE799008AF806 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A84C8CC24CAE799008AF806 /* Model.swift */; };
 		5AE6712C24C1A3C300B919EB /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE6712B24C1A3C300B919EB /* DashboardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5313741924C8160100BC95E3 /* MC3LoginPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MC3LoginPage.swift; sourceTree = "<group>"; };
-		5313741A24C8160100BC95E3 /* MC3RegisterPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MC3RegisterPage.swift; sourceTree = "<group>"; };
 		1D65FDC624C85482002732A3 /* ProfileAfterLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileAfterLogin.swift; sourceTree = "<group>"; };
 		1D65FDC724C85482002732A3 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		5313741924C8160100BC95E3 /* MC3LoginPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MC3LoginPage.swift; sourceTree = "<group>"; };
+		5313741A24C8160100BC95E3 /* MC3RegisterPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MC3RegisterPage.swift; sourceTree = "<group>"; };
 		5A1856B724C0691100F935FC /* CoffeeMarketplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoffeeMarketplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A1856BA24C0691100F935FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A1856BC24C0691100F935FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,9 +36,9 @@
 		5A1856C924C0691300F935FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5A1856CB24C0691300F935FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A1856D224C06C9F00F935FC /* CoffeeIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeIcon.swift; sourceTree = "<group>"; };
-		5A1856D624C07A4900F935FC /* CoffeeHorizontalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeHorizontalCollectionView.swift; sourceTree = "<group>"; };
 		5A64F2B524C83B2300E1FACD /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		5A64F2B724C83EAF00E1FACD /* ProductDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetail.swift; sourceTree = "<group>"; };
+		5A84C8CC24CAE799008AF806 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		5AE6712B24C1A3C300B919EB /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,11 +108,11 @@
 		5A1856D124C06C6900F935FC /* Laurens */ = {
 			isa = PBXGroup;
 			children = (
+				5A84C8CC24CAE799008AF806 /* Model.swift */,
 				5A1856D224C06C9F00F935FC /* CoffeeIcon.swift */,
-				5A64F2B724C83EAF00E1FACD /* ProductDetail.swift */,
-				5A1856D624C07A4900F935FC /* CoffeeHorizontalCollectionView.swift */,
-				5AE6712B24C1A3C300B919EB /* DashboardView.swift */,
 				5A64F2B524C83B2300E1FACD /* SearchBar.swift */,
+				5A64F2B724C83EAF00E1FACD /* ProductDetail.swift */,
+				5AE6712B24C1A3C300B919EB /* DashboardView.swift */,
 			);
 			path = Laurens;
 			sourceTree = "<group>";
@@ -193,19 +189,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A64F2B824C83EAF00E1FACD /* ProductDetail.swift in Sources */,
-				5AECF64F24C086BA004D2678 /* CoffeeData.swift in Sources */,
-				1D65FDC924C85482002732A3 /* Profile.swift in Sources */,
 				5AE6712C24C1A3C300B919EB /* DashboardView.swift in Sources */,
 				5A1856BB24C0691100F935FC /* AppDelegate.swift in Sources */,
-				1D65FDC824C85482002732A3 /* ProfileAfterLogin.swift in Sources */,
 				5A1856BD24C0691100F935FC /* SceneDelegate.swift in Sources */,
 				5A1856D324C06C9F00F935FC /* CoffeeIcon.swift in Sources */,
+				5A84C8CD24CAE799008AF806 /* Model.swift in Sources */,
 				5A64F2B624C83B2300E1FACD /* SearchBar.swift in Sources */,
 				5A1856C224C0691100F935FC /* ContentView.swift in Sources */,
-				5313741B24C8160100BC95E3 /* MC3LoginPage.swift in Sources */,
-				5A1856D724C07A4900F935FC /* CoffeeHorizontalCollectionView.swift in Sources */,
 				5A1856C024C0691100F935FC /* CoffeeMarketplace.xcdatamodeld in Sources */,
-				5313741C24C8160100BC95E3 /* MC3RegisterPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

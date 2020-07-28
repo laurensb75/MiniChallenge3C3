@@ -10,14 +10,11 @@ import SwiftUI
 
 
 struct CoffeeIcon: View {
-    
-    var coffeeImage: String = "Coffee"
-    var coffeeName: String = "Coffee Name"
-    var coffeePrice: Int = 0
+    var coffeeToDisplay: Coffeee = Coffeee(name: "Coffee Name", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 0, roastLevel: 1, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee")
     
     var body: some View {
         ZStack(alignment: .bottomLeading){
-            Image(coffeeImage)
+            Image(coffeeToDisplay.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(
@@ -27,13 +24,13 @@ struct CoffeeIcon: View {
                 )
                 .clipped()
             VStack(){
-                Text(coffeeName)
+                Text(coffeeToDisplay.name)
                     .foregroundColor(Color.white)
-                    .multilineTextAlignment(.leading)
+                    .multilineTextAlignment(.center)
                     .padding(.leading,5)
                     .font(.system(size: 20))
 //                Spacer()
-                Text("Rp.\(coffeePrice)")
+                Text("Rp.\(coffeeToDisplay.price)")
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.trailing)
                     .padding(.trailing,5)
