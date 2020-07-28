@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d962d345-741a-479e-b61b-b3679ffd30eb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/CoffeeMarketplace/Laurens/DashboardView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/CoffeeMarketplace/Laurens/DashboardView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoffeeMarketplace/Laurens/ProductDetail.swift" beforeDir="false" afterPath="$PROJECT_DIR$/CoffeeMarketplace/Laurens/ProductDetail.swift" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="iphonesimulator_1FB685F0-95E6-473A-9968-C7249484A69F" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1fJO4TgJlTTtodoDgrruEMCdI7a" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/CoffeeMarketplace.xcodeproj" />
+  </component>
+  <component name="RunManager">
+    <configuration name="CoffeeMarketplace" type="AppleRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CoffeeMarketplace" TARGET_NAME="CoffeeMarketplace" CONFIG_NAME="Debug" SCHEME_NAME="CoffeeMarketplace" IS_LOCATION_SIMULATION_ALLOWED="true" APPLICATION_LANGUAGE="IDELaunchSchemeLanguageUseSystemLanguage" APPLICATION_REGION="" RUN_TARGET_PROJECT_NAME="CoffeeMarketplace" RUN_TARGET_NAME="CoffeeMarketplace" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <embedded_app_extension_list />
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d962d345-741a-479e-b61b-b3679ffd30eb" name="Default Changelist" comment="" />
+      <created>1595932537076</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1595932537076</updated>
+      <workItem from="1595932539671" duration="69000" />
+    </task>
+    <servers />
+  </component>
+</project>
