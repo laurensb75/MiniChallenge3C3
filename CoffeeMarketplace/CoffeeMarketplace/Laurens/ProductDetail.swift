@@ -17,16 +17,16 @@ struct ProductDetail: View {
     var coffeeFlavours: [String] = ["FruityFlavour", "SpicesFlavour", "NuttyCocoaFlavour", "GreenVegetativeFlavour", "ChemicalFlavour", "SweetFlavour", "FloralFlavour", "SourFermentedFlavour", "PaperyMustyFlavour"]
     var flavours: Int = 9
     
-    var comments: [Comment] = [
-        Comment(sender: "Aaaaa", rating: 4, description: "asdfasdfadfasdf"),
-        Comment(sender: "Bbbb", rating: 3, description: "asdfasdfadfasdf"),
-        Comment(sender: "Ccccc", rating: 1, description: "asdfasdfadfasdf")
+    var comments: [Review] = [
+        Review(sender: "Aaaaa", rating: 4, description: "asdfasdfadfasdf"),
+        Review(sender: "Bbbb", rating: 3, description: "asdfasdfadfasdf"),
+        Review(sender: "Ccccc", rating: 1, description: "asdfasdfadfasdf")
     ]
     
     
     
     var body: some View {
-        ZStack(alignment: .top){
+        ZStack(alignment: .bottom){
             NavigationView {
                 ScrollView(.vertical, showsIndicators: true){
                     //Coffee image
@@ -113,13 +113,8 @@ struct ProductDetail: View {
                     
                     
                     //Comments
-                    HStack{
-                        Text("Review")
-                            .font(.title)
-                            .padding(.leading, 5.0)
-                        Spacer()
-                    }.frame(width: UIScreen.main.bounds.width * 0.9).padding([.top, .leading], 10).padding(.bottom, 5.0)
-                    CommentGenerator(commentsArray: comments)
+                    
+                    ReviewGenerator(commentsArray: comments)
                     
                     
                     
@@ -154,25 +149,37 @@ struct ProductDetail: View {
                             }
                     )
             }
+            Spacer()
+            AddToCartBtnView(ammount: 0)
         }
     }
 }
 
 
 
-struct CommentGenerator: View {
-    var commentsArray: [Comment]
+struct ReviewGenerator: View {
+    var commentsArray: [Review]
     
     var body: some View {
         VStack{
-            ForEach(0 ..< commentsArray.count){ index in
-                CommentSection(sender: self.commentsArray[index].sender , rating: self.commentsArray[index].rating, description: self.commentsArray[index].description).padding(.vertical, 5.0)
+            HStack{
+                Text("Review")
+                    .font(.title)
+                    .padding(.leading, 5.0)
+                Spacer()
+            }.frame(width: UIScreen.main.bounds.width * 0.9).padding([.top, .leading], 10).padding(.bottom, 5.0)
+            
+            VStack{
+                ForEach(0 ..< commentsArray.count){ index in
+                    ReviewSection(sender: self.commentsArray[index].sender , rating: self.commentsArray[index].rating, description: self.commentsArray[index].description).padding(.vertical, 5.0)
+                }
             }
         }
+        .padding(.bottom, 50.0)
     }
 }
 
-struct CommentSection: View {
+struct ReviewSection: View {
     var sender: String = "Aaaa"
     var rating: Int = 4
     var description: String = "asdfasdfasdfasdf asdfasd fasdf asdfasfasd fff"
@@ -232,6 +239,49 @@ struct Rating: View {
             return offImage ?? onImage
         } else {
             return onImage
+        }
+    }
+}
+
+
+struct AddToCartBtnView: View {
+    @State var ammount: Int = 0
+
+    var body: some View {
+        HStack {
+            Button(action: {
+                
+            }) {
+                Text("Add to Cart")
+                    .foregroundColor(Color.black)
+            }
+                .frame(width: UIScreen.main.bounds.width * 0.6, height: 45)
+                .background(Color.init(.brown))
+                .cornerRadius(10.0)
+            
+            HStack{
+                TextField("0", value: $ammount, formatter: NumberFormatter()).padding(.leading, 10.0).keyboardType(UIKeyboardType.decimalPad)
+                VStack{
+                    Button(action: {
+                        self.ammount += 1
+                    }) {
+                        Image(systemName: "chevron.up")
+                    }
+                    .padding(.trailing, 5.0)
+                    Button(action: {
+                        self.ammount -= 1
+                    }) {
+                        Image(systemName: "chevron.down")
+                    }
+                    .padding(.trailing, 5.0)
+                }
+            }
+                .frame(width: 70, height: 45)
+                .background(Color.white)
+                .overlay(
+                    Rectangle()
+                        .stroke(Color.black, lineWidth: 1)
+                )
         }
     }
 }

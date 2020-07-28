@@ -36,7 +36,7 @@ struct CoffeeIcon: View {
                     .padding(.trailing,5)
             }
                 .frame(width: UIScreen.main.bounds.width * 0.45)
-                .background(Color.black.opacity(0.7))
+            .background(Color.black.opacity(0.7))
         }
             .cornerRadius(10)
             .frame(width: UIScreen.main.bounds.width * 0.45, height: UIScreen.main.bounds.height * 0.15)
