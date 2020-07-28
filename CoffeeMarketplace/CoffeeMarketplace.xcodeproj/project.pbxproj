@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-<<<<<<< HEAD
-=======
+
 		1D65FDC824C85482002732A3 /* ProfileAfterLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D65FDC624C85482002732A3 /* ProfileAfterLogin.swift */; };
 		1D65FDC924C85482002732A3 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D65FDC724C85482002732A3 /* Profile.swift */; };
 		5313741B24C8160100BC95E3 /* MC3LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5313741924C8160100BC95E3 /* MC3LoginPage.swift */; };
@@ -28,7 +27,6 @@
 		53C4348024CEB53600F582F0 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C4347424CEB53600F582F0 /* TextView.swift */; };
 		53C4348124CEB53600F582F0 /* AddItem-BeanType-View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C4347524CEB53600F582F0 /* AddItem-BeanType-View.swift */; };
 		53C4348724CEC79F00F582F0 /* ProfileAfterLoginB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C4348624CEC79F00F582F0 /* ProfileAfterLoginB.swift */; };
->>>>>>> master
 		5A1856BB24C0691100F935FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BA24C0691100F935FC /* AppDelegate.swift */; };
 		5A1856BD24C0691100F935FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BC24C0691100F935FC /* SceneDelegate.swift */; };
 		5A1856C024C0691100F935FC /* CoffeeMarketplace.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BE24C0691100F935FC /* CoffeeMarketplace.xcdatamodeld */; };
@@ -48,8 +46,6 @@
 		1D65FDC724C85482002732A3 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		5313741924C8160100BC95E3 /* MC3LoginPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MC3LoginPage.swift; sourceTree = "<group>"; };
 		5313741A24C8160100BC95E3 /* MC3RegisterPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MC3RegisterPage.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
-=======
 		535BD75924D0191500204454 /* ProfileAccountDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAccountDetail.swift; sourceTree = "<group>"; };
 		536760B124CEAFCA005470DD /* CoffeeMarketplace.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoffeeMarketplace.entitlements; sourceTree = "<group>"; };
 		536760B324CEAFCE005470DD /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -66,7 +62,6 @@
 		53C4347424CEB53600F582F0 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		53C4347524CEB53600F582F0 /* AddItem-BeanType-View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AddItem-BeanType-View.swift"; sourceTree = "<group>"; };
 		53C4348624CEC79F00F582F0 /* ProfileAfterLoginB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAfterLoginB.swift; sourceTree = "<group>"; };
->>>>>>> master
 		5A1856B724C0691100F935FC /* CoffeeMarketplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoffeeMarketplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A1856BA24C0691100F935FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A1856BC24C0691100F935FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -267,10 +262,6 @@
 				53C4347A24CEB53600F582F0 /* AddItem-ProductDescription-View.swift in Sources */,
 				53C4347D24CEB53600F582F0 /* AddItem-Flavour-View.swift in Sources */,
 				5A64F2B824C83EAF00E1FACD /* ProductDetail.swift in Sources */,
-<<<<<<< HEAD
-				5AE6712C24C1A3C300B919EB /* DashboardView.swift in Sources */,
-				5A1856BB24C0691100F935FC /* AppDelegate.swift in Sources */,
-=======
 				1D65FDC924C85482002732A3 /* Profile.swift in Sources */,
 				535BD75A24D0191500204454 /* ProfileAccountDetail.swift in Sources */,
 				5AE6712C24C1A3C300B919EB /* DashboardView.swift in Sources */,
@@ -279,7 +270,6 @@
 				53C4348024CEB53600F582F0 /* TextView.swift in Sources */,
 				53C4347F24CEB53600F582F0 /* AddItem-ProductImage-View.swift in Sources */,
 				53C4347B24CEB53600F582F0 /* AddItem-ProductDescriptionGuideline-View.swift in Sources */,
->>>>>>> master
 				5A1856BD24C0691100F935FC /* SceneDelegate.swift in Sources */,
 				53C4348124CEB53600F582F0 /* AddItem-BeanType-View.swift in Sources */,
 				53C4347724CEB53600F582F0 /* MyShopView.swift in Sources */,
@@ -288,9 +278,6 @@
 				5A84C8CD24CAE799008AF806 /* Model.swift in Sources */,
 				5A64F2B624C83B2300E1FACD /* SearchBar.swift in Sources */,
 				5A1856C224C0691100F935FC /* ContentView.swift in Sources */,
-<<<<<<< HEAD
-				5A1856C024C0691100F935FC /* CoffeeMarketplace.xcdatamodeld in Sources */,
-=======
 				5313741B24C8160100BC95E3 /* MC3LoginPage.swift in Sources */,
 				5A1856D724C07A4900F935FC /* CoffeeHorizontalCollectionView.swift in Sources */,
 				53C4348724CEC79F00F582F0 /* ProfileAfterLoginB.swift in Sources */,
@@ -298,7 +285,7 @@
 				53C4347E24CEB53600F582F0 /* AddItemView.swift in Sources */,
 				5313741C24C8160100BC95E3 /* MC3RegisterPage.swift in Sources */,
 				53C4347824CEB53600F582F0 /* MultilineTextField.swift in Sources */,
->>>>>>> master
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
