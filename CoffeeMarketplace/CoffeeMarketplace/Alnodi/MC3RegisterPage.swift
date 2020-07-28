@@ -14,11 +14,12 @@ import CloudKit
 struct MC3RegisterPage: View {
     
     @State var newUser = userData()
-    @State var photoPreview : Image?
+    @State var photoPreview = Image(systemName: "person.fill")
     @State var isShowingImagePicker = false
     //@State var inputImage = Image("test")
     
     var body: some View {
+        
         VStack{
             //Untuk pemisah antara nav title dengan konten dibawahnya
             Rectangle()
@@ -30,28 +31,24 @@ struct MC3RegisterPage: View {
                 RegisterFormText(newUser: $newUser)
             }
             
-            RegisterButton(newUser: $newUser)
-            
-            if photoPreview != nil {
-                photoPreview?
+            photoPreview
                 .resizable()
                 .scaledToFit()
                 .clipShape(Circle())
-            }
-            else {
-                Text("Tap here to select a picture")
-                    .foregroundColor(.black)
-                    .padding()
-                    .onTapGesture {
-                        self.isShowingImagePicker = true
-                }
-            }
             
+            Text("Tap here to select a picture")
+                .foregroundColor(.black)
+                .padding()
+                .onTapGesture {
+                    self.isShowingImagePicker = true
+                }
+            
+            RegisterButton(newUser: $newUser)
             Spacer()
         }
             //.background(Image("Background2"))
-        .background(Image("Background"))
-        .navigationBarTitle("Create an Account")
+            .background(Image("Background"))
+            .navigationBarTitle("Create an Account")
             .sheet(isPresented: $isShowingImagePicker,
                    onDismiss: loadImage) {
                     ImagePicker(image: self.$newUser.profilePhoto)
@@ -59,7 +56,7 @@ struct MC3RegisterPage: View {
     }
     
     func loadImage(){
-        photoPreview = Image(uiImage: newUserData.profilePhoto!)
+        photoPreview = Image(uiImage: newData.profilePhoto!)
     }
 }
 
@@ -70,6 +67,10 @@ struct userData {
     var password: String = ""
     var phoneNumber: String = ""
     var profilePhoto = Image("test")
+}
+
+struct newData {
+    static var profilePhoto = UIImage(named: "test")
 }
 
 struct RegisterFormBackgroundView: View {
@@ -142,50 +143,50 @@ struct RegisterButton: View {
         .padding(.top, 15)
     }
     
-        func saveDataToCloudKit(){
-            //Insert data ke cloudkit
-    
-            //1.Buat dulu recordnya
-            let newRecord = CKRecord(recordType: "UserData")
-            
-            //Saving image
-            //let data = UIImage(named: "Background1")!.pngData()
-            let data = newUserData.profilePhoto?.pngData()// UIImage -> NSData, see also UIImageJPEGRepresentation
-            //let data2 = Image(UIImage)
-            
-            let url = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(NSUUID().uuidString+".dat")
-            
-            do {
-                //try data!.writeToURL(url, options: [])
-                try data!.write(to: url!, options: [])
-            } catch let e as NSError {
-                print("Error! \(e)");
-                return
-            }
-            let profilePhoto = CKAsset(fileURL: url!)
-    
-            //2.Set property
-            newRecord.setValue(newUser.name, forKey: "name")
-            newRecord.setValue(newUser.email, forKey: "email")
-            newRecord.setValue(newUser.password, forKey: "password")
-            newRecord.setValue(newUser.phoneNumber, forKey: "phoneNumber")
-            newRecord.setValue(profilePhoto, forKey: "profilePhoto")
-    
-            //3.Execute save or insert
-            let database = CKContainer.default().publicCloudDatabase
-            database.save(newRecord) { record, error in
-                if let err = error {
-                    print(err.localizedDescription)
-                }
-    
-                print(record)
-    
-                DispatchQueue.main.async {
-                    //Update UI
-                }
-    
-            }
+    func saveDataToCloudKit(){
+        //Insert data ke cloudkit
+        
+        //1.Buat dulu recordnya
+        let newRecord = CKRecord(recordType: "UserData")
+        
+        //Saving image
+        //let data = UIImage(named: "Background1")!.pngData()
+        let data = newData.profilePhoto?.pngData()// UIImage -> NSData, see also UIImageJPEGRepresentation
+        //let data2 = Image(UIImage)
+        
+        let url = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(NSUUID().uuidString+".dat")
+        
+        do {
+            //try data!.writeToURL(url, options: [])
+            try data!.write(to: url!, options: [])
+        } catch let e as NSError {
+            print("Error! \(e)");
+            return
         }
+        let profilePhoto = CKAsset(fileURL: url!)
+        
+        //2.Set property
+        newRecord.setValue(newUser.name, forKey: "name")
+        newRecord.setValue(newUser.email, forKey: "email")
+        newRecord.setValue(newUser.password, forKey: "password")
+        newRecord.setValue(newUser.phoneNumber, forKey: "phoneNumber")
+        newRecord.setValue(profilePhoto, forKey: "profilePhoto")
+        
+        //3.Execute save or insert
+        let database = CKContainer.default().publicCloudDatabase
+        database.save(newRecord) { record, error in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+            
+            print(record)
+            
+            DispatchQueue.main.async {
+                //Update UI
+            }
+            
+        }
+    }
 }
 
 

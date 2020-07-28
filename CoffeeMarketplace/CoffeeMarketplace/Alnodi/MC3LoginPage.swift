@@ -130,25 +130,8 @@ struct EmailPasswordFormText: View {
 struct LoginButton: View {
     @Binding var newLogin: loginData
     @State var isShowingProfileView = false
-    //var loginResult = userLoggedOn()
     
     var body: some View {
-        //        Button (action: {
-        //            print("Login Button pressed")
-        //            self.fetchLoginData()
-        //        }) {
-        //            Text("Log in")
-        //                .foregroundColor(Color(red: 1.0, green: 1.0, blue: 1.0))
-        //                .padding()
-        //                .frame(width: UIScreen.main.bounds.width - 60)
-        //
-        //        }
-        //        .background(Color(red: 0.511, green: 0.298, blue: 0.001))
-        //        .cornerRadius(10)
-        //        .padding(.top, 15)
-        
-        
-        
         VStack{
             NavigationLink(destination: ProfileAfterLoginB(), isActive: $isShowingProfileView){
                 EmptyView()
@@ -172,8 +155,6 @@ struct LoginButton: View {
     
     func fetchLoginData(){
         //fetch data dari cloudkit
-        
-        
         //1.Tunjuk database yang mau di fetch
         let database = CKContainer.default().publicCloudDatabase
         
@@ -187,9 +168,21 @@ struct LoginButton: View {
             if let fetchedRecords = records { //kalo misal record yang diambil tidak empty
                 print(fetchedRecords)
                 userLoggedOn.name = fetchedRecords.first?.value(forKey: "name") as! String
+                
+                userLoggedOn.email = fetchedRecords.first?.value(forKey: "email") as! String
+                
+                userLoggedOn.password = fetchedRecords.first?.value(forKey: "password") as! String
+                
+                userLoggedOn.phone = fetchedRecords.first?.value(forKey: "phoneNumber") as! String
+                
                 if let asset = fetchedRecords.first?.value(forKey: "profilePhoto") as? CKAsset, let data = try? Data(contentsOf: asset.fileURL!){
                     userLoggedOn.profilePhoto = UIImage(data: data)
                 }
+                
+                print("Record ID:")
+                //print(fetchedRecords.first?.recordID)
+                userLoggedOn.id = fetchedRecords.first?.recordID
+                print(userLoggedOn.id)
                 
                 DispatchQueue.main.async {
                     

@@ -11,6 +11,7 @@
 		1D65FDC924C85482002732A3 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D65FDC724C85482002732A3 /* Profile.swift */; };
 		5313741B24C8160100BC95E3 /* MC3LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5313741924C8160100BC95E3 /* MC3LoginPage.swift */; };
 		5313741C24C8160100BC95E3 /* MC3RegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5313741A24C8160100BC95E3 /* MC3RegisterPage.swift */; };
+		535BD75A24D0191500204454 /* ProfileAccountDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535BD75924D0191500204454 /* ProfileAccountDetail.swift */; };
 		536760B424CEAFCE005470DD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536760B324CEAFCE005470DD /* CloudKit.framework */; };
 		53C4347624CEB53600F582F0 /* SellerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C4346A24CEB53600F582F0 /* SellerConstants.swift */; };
 		53C4347724CEB53600F582F0 /* MyShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C4346B24CEB53600F582F0 /* MyShopView.swift */; };
@@ -44,6 +45,7 @@
 		1D65FDC724C85482002732A3 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		5313741924C8160100BC95E3 /* MC3LoginPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MC3LoginPage.swift; sourceTree = "<group>"; };
 		5313741A24C8160100BC95E3 /* MC3RegisterPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MC3RegisterPage.swift; sourceTree = "<group>"; };
+		535BD75924D0191500204454 /* ProfileAccountDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAccountDetail.swift; sourceTree = "<group>"; };
 		536760B124CEAFCA005470DD /* CoffeeMarketplace.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoffeeMarketplace.entitlements; sourceTree = "<group>"; };
 		536760B324CEAFCE005470DD /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		53C4346A24CEB53600F582F0 /* SellerConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellerConstants.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				5313741924C8160100BC95E3 /* MC3LoginPage.swift */,
 				5313741A24C8160100BC95E3 /* MC3RegisterPage.swift */,
 				53C4348624CEC79F00F582F0 /* ProfileAfterLoginB.swift */,
+				535BD75924D0191500204454 /* ProfileAccountDetail.swift */,
 			);
 			path = Alnodi;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				53C4347D24CEB53600F582F0 /* AddItem-Flavour-View.swift in Sources */,
 				5A64F2B824C83EAF00E1FACD /* ProductDetail.swift in Sources */,
 				1D65FDC924C85482002732A3 /* Profile.swift in Sources */,
+				535BD75A24D0191500204454 /* ProfileAccountDetail.swift in Sources */,
 				5AE6712C24C1A3C300B919EB /* DashboardView.swift in Sources */,
 				5A1856BB24C0691100F935FC /* AppDelegate.swift in Sources */,
 				1D65FDC824C85482002732A3 /* ProfileAfterLogin.swift in Sources */,

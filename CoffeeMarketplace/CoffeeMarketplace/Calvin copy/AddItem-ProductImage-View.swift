@@ -50,7 +50,7 @@ struct ImagePicker: UIViewControllerRepresentable {
                                    didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             let uiImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
             image = Image(uiImage: uiImage)
-            newUserData.profilePhoto = uiImage
+            newData.profilePhoto = uiImage
             presentationMode.dismiss()
             
         }
