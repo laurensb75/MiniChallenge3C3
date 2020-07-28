@@ -17,10 +17,10 @@ struct ProductDetail: View {
     var coffeeFlavours: [String] = ["FruityFlavour", "SpicesFlavour", "NuttyCocoaFlavour", "GreenVegetativeFlavour", "ChemicalFlavour", "SweetFlavour", "FloralFlavour", "SourFermentedFlavour", "PaperyMustyFlavour"]
     var flavours: Int = 9
     
-    var comments: [Comment] = [
-        Comment(sender: "Aaaaa", rating: 4, description: "asdfasdfadfasdf"),
-        Comment(sender: "Bbbb", rating: 3, description: "asdfasdfadfasdf"),
-        Comment(sender: "Ccccc", rating: 1, description: "asdfasdfadfasdf")
+    var comments: [Review] = [
+        Review(sender: "Aaaaa", rating: 4, description: "asdfasdfadfasdf"),
+        Review(sender: "Bbbb", rating: 3, description: "asdfasdfadfasdf"),
+        Review(sender: "Ccccc", rating: 1, description: "asdfasdfadfasdf")
     ]
     
     
@@ -161,7 +161,7 @@ struct ProductDetail: View {
 
 
 struct CommentGenerator: View {
-    var commentsArray: [Comment]
+    var commentsArray: [Review]
     
     var body: some View {
         VStack{

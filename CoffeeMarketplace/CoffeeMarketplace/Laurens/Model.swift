@@ -15,7 +15,7 @@ struct Coffeee {
     var image: String
 }
 
-struct Comment {
+struct Review {
     var sender: String
     var rating: Int
     var description: String
