@@ -12,6 +12,10 @@
 		5313741B24C8160100BC95E3 /* MC3LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5313741924C8160100BC95E3 /* MC3LoginPage.swift */; };
 		5313741C24C8160100BC95E3 /* MC3RegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5313741A24C8160100BC95E3 /* MC3RegisterPage.swift */; };
 		535BD75A24D0191500204454 /* ProfileAccountDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535BD75924D0191500204454 /* ProfileAccountDetail.swift */; };
+		535BD75C24D0440000204454 /* GlobalStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535BD75B24D0440000204454 /* GlobalStruct.swift */; };
+		535BD75E24D05EA500204454 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535BD75D24D05EA500204454 /* ProfileView.swift */; };
+		535BD76024D1406A00204454 /* AddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535BD75F24D1406A00204454 /* AddProductView.swift */; };
+		535BD76224D1665A00204454 /* TestShowProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535BD76124D1665A00204454 /* TestShowProductView.swift */; };
 		536760B424CEAFCE005470DD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536760B324CEAFCE005470DD /* CloudKit.framework */; };
 		53C4347624CEB53600F582F0 /* SellerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C4346A24CEB53600F582F0 /* SellerConstants.swift */; };
 		53C4347724CEB53600F582F0 /* MyShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C4346B24CEB53600F582F0 /* MyShopView.swift */; };
@@ -46,6 +50,10 @@
 		5313741924C8160100BC95E3 /* MC3LoginPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MC3LoginPage.swift; sourceTree = "<group>"; };
 		5313741A24C8160100BC95E3 /* MC3RegisterPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MC3RegisterPage.swift; sourceTree = "<group>"; };
 		535BD75924D0191500204454 /* ProfileAccountDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAccountDetail.swift; sourceTree = "<group>"; };
+		535BD75B24D0440000204454 /* GlobalStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStruct.swift; sourceTree = "<group>"; };
+		535BD75D24D05EA500204454 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		535BD75F24D1406A00204454 /* AddProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductView.swift; sourceTree = "<group>"; };
+		535BD76124D1665A00204454 /* TestShowProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestShowProductView.swift; sourceTree = "<group>"; };
 		536760B124CEAFCA005470DD /* CoffeeMarketplace.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoffeeMarketplace.entitlements; sourceTree = "<group>"; };
 		536760B324CEAFCE005470DD /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		53C4346A24CEB53600F582F0 /* SellerConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellerConstants.swift; sourceTree = "<group>"; };
@@ -96,6 +104,10 @@
 				5313741A24C8160100BC95E3 /* MC3RegisterPage.swift */,
 				53C4348624CEC79F00F582F0 /* ProfileAfterLoginB.swift */,
 				535BD75924D0191500204454 /* ProfileAccountDetail.swift */,
+				535BD75B24D0440000204454 /* GlobalStruct.swift */,
+				535BD75D24D05EA500204454 /* ProfileView.swift */,
+				535BD75F24D1406A00204454 /* AddProductView.swift */,
+				535BD76124D1665A00204454 /* TestShowProductView.swift */,
 			);
 			path = Alnodi;
 			sourceTree = "<group>";
@@ -267,6 +279,8 @@
 				5A1856BB24C0691100F935FC /* AppDelegate.swift in Sources */,
 				1D65FDC824C85482002732A3 /* ProfileAfterLogin.swift in Sources */,
 				53C4348024CEB53600F582F0 /* TextView.swift in Sources */,
+				535BD76224D1665A00204454 /* TestShowProductView.swift in Sources */,
+				535BD75E24D05EA500204454 /* ProfileView.swift in Sources */,
 				53C4347F24CEB53600F582F0 /* AddItem-ProductImage-View.swift in Sources */,
 				53C4347B24CEB53600F582F0 /* AddItem-ProductDescriptionGuideline-View.swift in Sources */,
 				5A1856BD24C0691100F935FC /* SceneDelegate.swift in Sources */,
@@ -279,10 +293,12 @@
 				5313741B24C8160100BC95E3 /* MC3LoginPage.swift in Sources */,
 				5A1856D724C07A4900F935FC /* CoffeeHorizontalCollectionView.swift in Sources */,
 				53C4348724CEC79F00F582F0 /* ProfileAfterLoginB.swift in Sources */,
+				535BD76024D1406A00204454 /* AddProductView.swift in Sources */,
 				5A1856C024C0691100F935FC /* CoffeeMarketplace.xcdatamodeld in Sources */,
 				53C4347E24CEB53600F582F0 /* AddItemView.swift in Sources */,
 				5313741C24C8160100BC95E3 /* MC3RegisterPage.swift in Sources */,
 				53C4347824CEB53600F582F0 /* MultilineTextField.swift in Sources */,
+				535BD75C24D0440000204454 /* GlobalStruct.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
