@@ -36,14 +36,14 @@ struct ProfileAfterLoginB: View {
     }
 }
 
-struct userLoggedOn{
-    static var id: CKRecord.ID!
-    static var name: String = ""
-    static var email: String = ""
-    static var password: String = ""
-    static var phone: String = ""
-    static var profilePhoto = UIImage(systemName: "person.fill")
-}
+//struct userLoggedOn{
+//    static var id: CKRecord.ID!
+//    static var name: String = ""
+//    static var email: String = ""
+//    static var password: String = ""
+//    static var phone: String = ""
+//    static var profilePhoto = UIImage(systemName: "person.fill")
+//}
 
 
 
@@ -51,10 +51,10 @@ struct ProfileAfterLoginPageB: View{
     @Binding var isShowingAccountDetailView: Bool
     
     var body: some View{
-        VStack(spacing: 100){
+        VStack(spacing: 50){
             Image.init(uiImage: userLoggedOn.profilePhoto!)
                 .resizable()
-                //.frame(height:150)
+                .frame(width: 200, height: 200)
                 .scaledToFit()
                 .clipShape(Circle())
             
