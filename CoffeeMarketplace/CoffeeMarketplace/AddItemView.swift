@@ -7,6 +7,11 @@
 //
 
 import SwiftUI
+import CloudKit
+
+struct newData {
+    static var profilePhoto = UIImage(named: "test")
+}
 
 struct AddItemView: View {
     
@@ -21,6 +26,8 @@ struct AddItemView: View {
     @State var roastTypeSelected: String = ""
     @State var flavourSelected: [String] = []
     
+    @State private var showingAlert = false
+    
     var body: some View {
             VStack{
                 ProductNameAndPriceView(productTextField: $productName, priceTextField: $productPrice).padding(.vertical, 20)
@@ -30,7 +37,72 @@ struct AddItemView: View {
                 CoffeeTypeView(beanTypeSelected: $beanTypeSelected, roastTypeSelected: $roastTypeSelected, flavourSelected: $flavourSelected).padding(.vertical, 20)
                 
                 Spacer()
-            }.background(SellerConstant.mainBackground).navigationBarTitle("Add Item", displayMode: .inline).navigationBarItems(trailing: Text("Add"))
+            }.background(SellerConstant.mainBackground).navigationBarTitle("Add Item", displayMode: .inline).navigationBarItems(trailing: Button (action: {
+                self.saveProductToCloudKit()
+            }) {
+                Text("Add")
+                    .foregroundColor(SellerConstant.darkBrown)
+                }).alert(isPresented: $showingAlert) {
+                    Alert(title: Text("All Fields Required"), message: Text("All fields need to be filled"), dismissButton: .default(Text("OK")))
+                }
+    }
+    
+    // Refer ke codenya arnoldi dengan tambahan sedikit
+    func saveProductToCloudKit(){
+        
+        if productName.isEmpty || productPrice.isEmpty || stockNumber <= 0 || productDescription.isEmpty || beanTypeSelected.isEmpty || roastTypeSelected.isEmpty || flavourSelected.isEmpty {
+            //Error handling here
+            showingAlert.toggle()
+            return
+        }
+        
+        //Insert data ke cloudkit
+        
+        //1.Buat dulu recordnya
+        let newRecord = CKRecord(recordType: "Product")
+
+        //Saving image
+        //let data = UIImage(named: "Background1")!.pngData()
+        let data = newData.profilePhoto?.pngData()// UIImage -> NSData, see also UIImageJPEGRepresentation
+        //let data2 = Image(UIImage)
+        
+        let url = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(NSUUID().uuidString+".dat")
+
+        do {
+            //try data!.writeToURL(url, options: [])
+            try data!.write(to: url!, options: [])
+        } catch let e as NSError {
+            print("Error! \(e)");
+            return
+        }
+        let productPhoto = CKAsset(fileURL: url!)
+        
+        
+
+        //2.Set property
+        newRecord.setValue(productName, forKey: "name")
+        newRecord.setValue(productPrice, forKey: "price")
+        newRecord.setValue(stockNumber, forKey: "stock")
+        newRecord.setValue(productDescription, forKey: "description")
+        newRecord.setValue(productPhoto, forKey: "image")
+        newRecord.setValue(beanTypeSelected, forKey: "bean")
+        newRecord.setValue(roastTypeSelected, forKey: "roast")
+        newRecord.setValue(flavourSelected, forKey: "flavour")
+
+        //3.Execute save or insert
+        let database = CKContainer.default().publicCloudDatabase
+        database.save(newRecord) { record, error in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+
+            print(record)
+
+            DispatchQueue.main.async {
+                //Update UI
+            }
+
+        }
     }
 }
 

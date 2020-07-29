@@ -79,7 +79,7 @@ struct MyShopItem: View{
                 
                 VStack(alignment: .leading, spacing: 0) {
 
-                    Rectangle().foregroundColor(Color.gray).overlay(
+                    Rectangle().foregroundColor(Color(red: 216/255, green: 216/255, blue: 216/255)).overlay(
                     coffeeImage
                     .resizable()
                     .scaledToFit()
