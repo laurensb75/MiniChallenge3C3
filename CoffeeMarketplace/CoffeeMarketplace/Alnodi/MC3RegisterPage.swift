@@ -14,51 +14,46 @@ import CloudKit
 struct MC3RegisterPage: View {
     
     @State var newUser = userData()
-    @State var photoPreview = Image(systemName: "person.circle")
+    @State var photoPreview = Image(systemName: "person.fill")
     @State var isShowingImagePicker = false
     //@State var inputImage = Image("test")
     
     var body: some View {
-        ScrollView{
-            VStack{
-                    //Untuk pemisah antara nav title dengan konten dibawahnya
-                    Rectangle()
-                        .frame(height: 75)
-                        .foregroundColor(Color.clear)
-                    
-                    ZStack{
-                        RegisterFormBackgroundView()
-                        RegisterFormText(newUser: $newUser)
-                    }
-                    
-                    photoPreview
-                        .resizable()
-                        .frame(width: 200, height: 200)
-                        .scaledToFit()
-                        .clipShape(Circle())
-                    
-                    Text("Tap here to select a picture")
-                        .foregroundColor(.blue)
-                        .padding()
-                        .onTapGesture {
-                            self.isShowingImagePicker = true
-                    }
-                    
-                    RegisterButton(newUser: $newUser)
-                    Spacer()
-                }
-                    //.background(Image("Background2"))
-                    .background(Image("Background"))
-                    .navigationBarTitle("Create an Account", displayMode: .inline)
-                    .sheet(isPresented: $isShowingImagePicker,
-                           onDismiss: loadImage) {
-                            ImagePicker(image: self.$newUser.profilePhoto)
-                    }
-                //.navigationBarTitle("")
-                //.navigationBarHidden(true)
-            }
-        }
         
+        VStack{
+            //Untuk pemisah antara nav title dengan konten dibawahnya
+            Rectangle()
+                .frame(width: 10, height: 10)
+                .foregroundColor(Color.clear)
+            
+            ZStack{
+                RegisterFormBackgroundView()
+                RegisterFormText(newUser: $newUser)
+            }
+            
+            photoPreview
+                .resizable()
+                .scaledToFit()
+                .clipShape(Circle())
+            
+            Text("Tap here to select a picture")
+                .foregroundColor(.black)
+                .padding()
+                .onTapGesture {
+                    self.isShowingImagePicker = true
+                }
+            
+            RegisterButton(newUser: $newUser)
+            Spacer()
+        }
+            //.background(Image("Background2"))
+            .background(Image("Background"))
+            .navigationBarTitle("Create an Account")
+            .sheet(isPresented: $isShowingImagePicker,
+                   onDismiss: loadImage) {
+                    ImagePicker(image: self.$newUser.profilePhoto)
+        }
+    }
     
     func loadImage(){
         photoPreview = Image(uiImage: newData.profilePhoto!)
@@ -74,15 +69,15 @@ struct userData {
     var profilePhoto = Image("test")
 }
 
-//struct newData {
-//    static var profilePhoto = UIImage(named: "test")
-//}
+struct newData {
+    static var profilePhoto = UIImage(named: "test")
+}
 
 struct RegisterFormBackgroundView: View {
     var body: some View {
         Rectangle()
             .foregroundColor(.white)
-            .frame(width: UIScreen.main.bounds.width * 0.95, height: 500)
+            .frame(width: UIScreen.main.bounds.width - 20, height: 500)
             .cornerRadius(20)
     }
 }
