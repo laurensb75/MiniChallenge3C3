@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ProfileTest: View {
+struct ProfilePage: View {
     var body: some View {
             TabView{
                 ProfileLogin()
@@ -29,17 +29,7 @@ struct ProfileLogin: View {
                         .clipShape(Circle())
 
                     VStack(spacing: 15){
-                    Button(action: {
-                        // your action here
-                    }) {
-                        Text("Log in")
-                            .foregroundColor(Color.white)
-                            .frame(minWidth: 0, maxWidth: 300)
-                            .padding()
-                            .background(Color.init(.brown))
-                            .font(.title)
-                            .cornerRadius(15)
-                    }
+                    LoginButton()
                     Button(action: {
                         // your action here
                     }) {
@@ -55,9 +45,23 @@ struct ProfileLogin: View {
     }
     }
 
-
+struct LoginButton: View{
+    var body: some View{
+    Button(action: {
+        // your action here
+    }) {
+        Text("Log in")
+            .foregroundColor(Color.white)
+            .frame(minWidth: 0, maxWidth: 300)
+            .padding()
+            .background(Color.init(.brown))
+            .font(.title)
+            .cornerRadius(15)
+    }
+    }
+}
 struct Profile_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileTest()
+        ProfilePage()
     }
 }
