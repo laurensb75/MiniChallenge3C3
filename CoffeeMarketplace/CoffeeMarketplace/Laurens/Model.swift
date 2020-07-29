@@ -6,7 +6,8 @@
 //  Copyright © 2020 laurens bryan. All rights reserved.
 //
 
-struct Coffeee {
+struct Coffeee: Identifiable {
+    var id: String
     var name: String
     var description: String
     var price: Int

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ProductDetail: View {
     
-    var selectedCoffee: Coffeee = Coffeee(name: "Coffee Name", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 0, roastLevel: 1, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee")
+    var selectedCoffee: Coffeee = .init(id: "0", name: "Coffee Name", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 0, roastLevel: 1, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee")
     
     
     var roastImg : [String] = ["Green Beans", "LightRoast", "MediumRoast", "DarkRoast"]
@@ -76,16 +76,16 @@ struct ProductDetail: View {
                     
                     //Flavour
                     
-//                    HStack{
-//                        ForEach(coffeeFlavours, id: \.self) { flavour in
-//                            HStack {
-//                                Image(flavour)
-//                                    .resizable()
-//                                    .aspectRatio(contentMode: .fit)
-//                                    .frame(height: 30)
-//                            }
-//                        }
-//                    }
+                    HStack{
+                        ForEach(coffeeFlavours, id: \.self) { flavour in
+                            HStack {
+                                Image(flavour)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(height: 30)
+                            }
+                        }
+                    }
 
                     
                     
@@ -245,7 +245,7 @@ struct Rating: View {
 
 
 struct AddToCartBtnView: View {
-    @State var ammount: Int = 0
+    @State var ammount: Int = 1
 
     var body: some View {
         HStack {
@@ -269,7 +269,7 @@ struct AddToCartBtnView: View {
                     }
                     .padding(.trailing, 5.0)
                     Button(action: {
-                        self.ammount -= 1
+                        self.ammount -= (self.ammount<=1 ? 0 : 1)
                     }) {
                         Image(systemName: "chevron.down")
                     }

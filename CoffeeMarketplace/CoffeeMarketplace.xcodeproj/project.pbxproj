@@ -18,6 +18,7 @@
 		5A64F2B624C83B2300E1FACD /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A64F2B524C83B2300E1FACD /* SearchBar.swift */; };
 		5A64F2B824C83EAF00E1FACD /* ProductDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A64F2B724C83EAF00E1FACD /* ProductDetail.swift */; };
 		5A84C8CD24CAE799008AF806 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A84C8CC24CAE799008AF806 /* Model.swift */; };
+		5A96238524D16563004F17A7 /* SearchFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A96238424D16563004F17A7 /* SearchFilterView.swift */; };
 		5AE6712C24C1A3C300B919EB /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE6712B24C1A3C300B919EB /* DashboardView.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		5A64F2B524C83B2300E1FACD /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		5A64F2B724C83EAF00E1FACD /* ProductDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetail.swift; sourceTree = "<group>"; };
 		5A84C8CC24CAE799008AF806 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		5A96238424D16563004F17A7 /* SearchFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterView.swift; sourceTree = "<group>"; };
 		5AE6712B24C1A3C300B919EB /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,7 +91,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		53C4346924CEB53600F582F0 /* Calvin copy */ = {
+		53C4346924CEB53600F582F0 /* Calvin */ = {
 			isa = PBXGroup;
 			children = (
 				53C4346A24CEB53600F582F0 /* SellerConstants.swift */,
@@ -105,7 +107,7 @@
 				53C4347424CEB53600F582F0 /* TextView.swift */,
 				53C4347524CEB53600F582F0 /* AddItem-BeanType-View.swift */,
 			);
-			path = "Calvin copy";
+			path = Calvin;
 			sourceTree = "<group>";
 		};
 		5A1856AE24C0691100F935FC = {
@@ -128,7 +130,7 @@
 		5A1856B924C0691100F935FC /* CoffeeMarketplace */ = {
 			isa = PBXGroup;
 			children = (
-				53C4346924CEB53600F582F0 /* Calvin copy */,
+				53C4346924CEB53600F582F0 /* Calvin */,
 				536760B124CEAFCA005470DD /* CoffeeMarketplace.entitlements */,
 				5313741824C8159C00BC95E3 /* Alnodi */,
 				5A1856D124C06C6900F935FC /* Laurens */,
@@ -162,6 +164,7 @@
 				5A64F2B524C83B2300E1FACD /* SearchBar.swift */,
 				5A64F2B724C83EAF00E1FACD /* ProductDetail.swift */,
 				5AE6712B24C1A3C300B919EB /* DashboardView.swift */,
+				5A96238424D16563004F17A7 /* SearchFilterView.swift */,
 			);
 			path = Laurens;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				5A84C8CD24CAE799008AF806 /* Model.swift in Sources */,
 				5A64F2B624C83B2300E1FACD /* SearchBar.swift in Sources */,
 				5A1856C224C0691100F935FC /* ContentView.swift in Sources */,
+				5A96238524D16563004F17A7 /* SearchFilterView.swift in Sources */,
 				5A1856C024C0691100F935FC /* CoffeeMarketplace.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
