@@ -15,17 +15,17 @@ struct CoffeeData{
 }
 
 let testData: [CoffeeData] = [
-    CoffeeData(name: "Coffee 1", price: "1", coffeeImage: Image("Coffee")),
-    CoffeeData(name: "Coffee 2", price: "2", coffeeImage: Image("Coffee")),
-    CoffeeData(name: "Coffee 3", price: "3", coffeeImage: Image("Coffee")),
-    CoffeeData(name: "Coffee 4", price: "4", coffeeImage: Image("Coffee")),
-    CoffeeData(name: "Coffee 5", price: "5", coffeeImage: Image("Coffee")),
-    CoffeeData(name: "Coffee 6", price: "6", coffeeImage: Image("Coffee")),
-    CoffeeData(name: "Coffee 7", price: "7", coffeeImage: Image("Coffee")),
-    CoffeeData(name: "Coffee 8", price: "8", coffeeImage: Image("Coffee")),
-    CoffeeData(name: "Coffee 9", price: "9", coffeeImage: Image("Coffee")),
-    CoffeeData(name: "Coffee 10", price: "10", coffeeImage: Image("Coffee")),
-    CoffeeData(name: "Coffee 11", price: "11", coffeeImage: Image("Coffee"))
+    CoffeeData(name: "Coffee 1", price: "1", coffeeImage: Image(systemName: "cart")),
+    CoffeeData(name: "Coffee 2", price: "2", coffeeImage: Image(systemName: "cart")),
+    CoffeeData(name: "Coffee 3", price: "3", coffeeImage: Image(systemName: "cart")),
+    CoffeeData(name: "Coffee 4", price: "4", coffeeImage: Image(systemName: "cart")),
+    CoffeeData(name: "Coffee 5", price: "5", coffeeImage: Image(systemName: "cart")),
+    CoffeeData(name: "Coffee 6", price: "6", coffeeImage: Image(systemName: "cart")),
+    CoffeeData(name: "Coffee 7", price: "7", coffeeImage: Image(systemName: "cart")),
+    CoffeeData(name: "Coffee 8", price: "8", coffeeImage: Image(systemName: "cart")),
+    CoffeeData(name: "Coffee 9", price: "9", coffeeImage: Image(systemName: "cart")),
+    CoffeeData(name: "Coffee 10", price: "10", coffeeImage: Image(systemName: "cart")),
+    CoffeeData(name: "Coffee 11", price: "11", coffeeImage: Image(systemName: "cart"))
 ]
 
 struct MyShopView: View {
@@ -79,7 +79,7 @@ struct MyShopItem: View{
                 
                 VStack(alignment: .leading, spacing: 0) {
 
-                    Rectangle().foregroundColor(Color.gray).overlay(
+                    Rectangle().foregroundColor(Color(red: 216/255, green: 216/255, blue: 216/255)).overlay(
                     coffeeImage
                     .resizable()
                     .scaledToFit()
