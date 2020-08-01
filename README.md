@@ -1,1 +1,0 @@
-# MiniChallenge3C3
