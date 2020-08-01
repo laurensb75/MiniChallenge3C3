@@ -23,7 +23,7 @@ struct SearchBar: View {
                 .padding(.horizontal, 10)
                 .onTapGesture {
                     self.isEditing = true
-                   }
+                }
     
             if isEditing {
                 Button(action: {
@@ -48,7 +48,11 @@ struct SearchBar: View {
     }
 }
 
-
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
 
 struct SearchBar_Previews: PreviewProvider {
     static var previews: some View {

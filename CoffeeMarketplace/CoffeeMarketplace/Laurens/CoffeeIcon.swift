@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-
 struct CoffeeIcon: View {
     var coffeeToDisplay: Coffeee = Coffeee(id: "0", name: "Coffee Name", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 0, roastLevel: 1, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee")
     

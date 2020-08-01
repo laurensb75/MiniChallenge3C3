@@ -62,47 +62,42 @@ struct DashboardView: View {
     
     
     var body: some View {
-        VStack {
-            HStack{
-                SearchBar(text: $searchText)
-                    .frame(height: UIScreen.main.bounds.height * 0.05)
-                    .padding(.leading, 5)
-                Button(action: {
-
-                }) {
-                    Image("FilterIcon")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: UIScreen.main.bounds.width * 0.07)
-                }.padding(.trailing, 5)
-                Button(action: {
-
-                }) {
-                    Image(systemName: "heart.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: UIScreen.main.bounds.width * 0.07)
-                }.padding(.trailing, 15)
-            }
-            
-            ScrollView(.vertical, showsIndicators: true){
-                CoffeeHorizontalCollectionView(coffeeInCategory: trendingCoffee, category: "Trending")
-                    .padding(5)
-                CoffeeHorizontalCollectionView(coffeeInCategory: newCoffee, category: "New")
-                    .padding(5)
-                CoffeeHorizontalCollectionView(coffeeInCategory: greenBeansCoffee, category: "Green Beans")
-                    .padding(5)
-                CoffeeHorizontalCollectionView(coffeeInCategory: lightRoastCoffee, category: "Light Roast")
-                    .padding(5)
-                CoffeeHorizontalCollectionView(coffeeInCategory: mediumRoastCoffee, category: "Medium Roast")
-                    .padding(5)
-                CoffeeHorizontalCollectionView(coffeeInCategory: darkRoastCoffee, category: "Dark Roast")
-                    .padding(5)
-            }
-            
-//
-            
+        NavigationView{
+            VStack{
+                HStack{
+                    SearchBar(text: $searchText)
+                        .frame(height: UIScreen.main.bounds.height * 0.05)
+                        .padding(.leading, 5)
+                    Button(action: {
+                        
+                    }) {
+                        Image("FilterIcon")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: UIScreen.main.bounds.width * 0.07)
+                    }
+                        .foregroundColor(Color.black)
+                        .padding(.trailing, 15.0)
+                }
+                //display item in category
+                ScrollView(.vertical, showsIndicators: true){
+                    CoffeeHorizontalCollectionView(coffeeInCategory: trendingCoffee, category: "Trending")
+                        .padding([.leading, .bottom, .trailing], 5)
+                    CoffeeHorizontalCollectionView(coffeeInCategory: newCoffee, category: "New")
+                        .padding(5)
+                    CoffeeHorizontalCollectionView(coffeeInCategory: greenBeansCoffee, category: "Green Beans")
+                        .padding(5)
+                    CoffeeHorizontalCollectionView(coffeeInCategory: lightRoastCoffee, category: "Light Roast")
+                        .padding(5)
+                    CoffeeHorizontalCollectionView(coffeeInCategory: mediumRoastCoffee, category: "Medium Roast")
+                        .padding(5)
+                    CoffeeHorizontalCollectionView(coffeeInCategory: darkRoastCoffee, category: "Dark Roast")
+                        .padding(5)
+                }
+            }.background(Image("Background").resizable().edgesIgnoringSafeArea(.all).scaledToFill().edgesIgnoringSafeArea(.all))
         }
+            .onTapGesture {UIApplication.shared.endEditing()}
+            .navigationBarTitle("asdfasdf", displayMode: .automatic)
     }
 }
 
