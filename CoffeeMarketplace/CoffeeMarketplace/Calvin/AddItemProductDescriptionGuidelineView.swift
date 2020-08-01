@@ -24,21 +24,15 @@ var guidelines: [Guideline] = [
 
 struct AddItem_ProductDescriptionGuideline_View: View {
     var body: some View {
-            ZStack{
-                        RoundedRectangle(cornerRadius: 15).frame(width: UIScreen.main.bounds.width*0.9, height: UIScreen.main.bounds.height*0.8).foregroundColor(SellerConstant.lightBrown).addBorder(Color.black, cornerRadius: 15).padding()
-                        
-                        VStack(alignment: .leading, spacing: 0){
-                            ForEach(guidelines.indices){ index in
-                                VStack(alignment: .leading){
-                                    Text(guidelines[index].title).font(.system(size: 22)).padding(.horizontal, UIScreen.main.bounds.width*0.05)
-                                    Text(guidelines[index].description).padding(.horizontal, UIScreen.main.bounds.width*0.05)
-                                    
-                                }.padding(.bottom, 20)
-                            }
-                        }.frame(width: UIScreen.main.bounds.width*0.9, height: UIScreen.main.bounds.height*0.9)
-                        .offset(x: 0, y: -UIScreen.main.bounds.height*0.01)
-
-                    }.background(SellerConstant.mainBackground.scaledToFit()).offset(x: 0, y: UIScreen.main.bounds.height*0.02).navigationBarTitle("Description Guideline")
+        VStack(alignment: .leading, spacing: 0){
+            ForEach(guidelines.indices){ index in
+                VStack(alignment: .leading){
+                    Text(guidelines[index].title).font(.headline).padding(.horizontal, UIScreen.main.bounds.width*0.05)
+                    Text(guidelines[index].description).padding(.horizontal, UIScreen.main.bounds.width*0.05).font(.body)
+                    
+                }.padding(.top, 20)
+            }
+            }.background(SellerConstant.lightBrown).cornerRadius(15).addBorder(Color.black, cornerRadius: 15).padding().background(SellerConstant.mainBackground.scaledToFit()).navigationBarTitle("Description Guideline")
     }
 }
 

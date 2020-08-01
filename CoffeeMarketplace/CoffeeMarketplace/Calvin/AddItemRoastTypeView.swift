@@ -11,7 +11,8 @@ import SwiftUI
 struct AddItem_RoastType_View: View {
     
      @Environment(\.presentationMode) var presentation
-    
+    @Environment (\.defaultMinListRowHeight) var rowHeight
+
      @State var beanType: [String] = [
            "Light",
            "Medium",
@@ -22,7 +23,7 @@ struct AddItem_RoastType_View: View {
        
        var body: some View{
            VStack{
-               RoundedRectangle(cornerRadius: 15).frame(width: UIScreen.main.bounds.width*0.9, height: UIScreen.main.bounds.height*0.2).foregroundColor(.white).overlay(
+               RoundedRectangle(cornerRadius: 15).frame(width: UIScreen.main.bounds.width*0.9, height: rowHeight * 4).foregroundColor(.white).overlay(
                List {
                 ForEach(0..<self.beanType.count, id: \.self) { index in
                     SelectionRow(title: self.beanType[index], isSelected: self.beanType[index] == self.selections) {

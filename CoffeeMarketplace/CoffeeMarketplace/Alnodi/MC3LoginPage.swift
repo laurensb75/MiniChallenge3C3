@@ -15,10 +15,10 @@ struct MC3LoginPage: View {
     @State var profilePhoto = UIImage()
     
     var body: some View {
-        NavigationView {
-            VStack{
+        //NavigationView {
+            VStack(){
                 //Untuk pemisah antara nav title dengan konten dibawahnya
-                Rectangle()
+                Rectangle() 
                     .frame(width: 10, height: 10)
                     .foregroundColor(Color.clear)
                 
@@ -28,27 +28,13 @@ struct MC3LoginPage: View {
                 }
                 
                 LoginButton(newLogin: $newLogin)
-                
-                //Test
-                NavigationLink(destination: MC3RegisterPage()){
-                    Text("To Register")
-                        .foregroundColor(Color(red: 1.0, green: 1.0, blue: 1.0))
-                        .padding()
-                        .frame(width: UIScreen.main.bounds.width - 60)
-                }
-                .background(Color(red: 0.511, green: 0.298, blue: 0.001))
-                .cornerRadius(10)
-                .padding(.top, 15)
-                
-                
-                
-                
                 Spacer()
             }
+            //.frame(alignment: .topLeading)
             .background(Image("Background"))
+            //.navigationBarHidden(true)
             .navigationBarTitle("Login", displayMode: .inline)
-            
-        }
+        //}
         
         
     }
@@ -149,6 +135,17 @@ struct LoginButton: View {
             .background(Color(red: 0.511, green: 0.298, blue: 0.001))
             .cornerRadius(10)
             .padding(.top, 15)
+            
+                            //Test
+            //                NavigationLink(destination: MC3RegisterPage()){
+            //                    Text("To Register")
+            //                        .foregroundColor(Color(red: 1.0, green: 1.0, blue: 1.0))
+            //                        .padding()
+            //                        .frame(width: UIScreen.main.bounds.width - 60)
+            //                }
+            //                .background(Color(red: 0.511, green: 0.298, blue: 0.001))
+            //                .cornerRadius(10)
+            //                .padding(.top, 15)
         }
         
     }

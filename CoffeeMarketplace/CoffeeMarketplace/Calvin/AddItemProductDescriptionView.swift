@@ -28,7 +28,7 @@ struct AddItem_ProductDescription_View: View {
                     .frame(width: UIScreen.main.bounds.width*0.9, height: UIScreen.main.bounds.height*0.25).cornerRadius(15).addBorder(Color.black, cornerRadius: 15).offset(x: 0, y: 50)
                 
                 if descriptionTextField.isEmpty{
-                    Text("Tap left right for Coffee Description Guideline").foregroundColor(.secondary).offset(x: 0, y: (UIScreen.main.bounds.height*0.25)/5)
+                    Text("Tap left right for Coffee Description Guideline").foregroundColor(.secondary).offset(x: 0, y: (UIScreen.main.bounds.height*0.25)/5).frame(width: UIScreen.main.bounds.width*0.9, height: UIScreen.main.bounds.height*0.25)
                 }
             }
 

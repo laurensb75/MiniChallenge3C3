@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ProfileAccountDetail: View {
     var body: some View {
-        VStack {
+        VStack{
             Image.init(uiImage: userLoggedOn.profilePhoto!)
             .resizable()
             .scaledToFit()

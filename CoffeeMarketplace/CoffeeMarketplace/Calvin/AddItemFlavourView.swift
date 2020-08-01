@@ -13,9 +13,11 @@ struct AddItem_Flavour_View: View {
     @State var flavourType: [String] = ["Roasted", "Spices", "Nutty/Cocoa", "Sweet", "Floral", "Fruity", "Sour/Fermented", "Green/Vegetative", "Papery/Musty", "Chemical/Industrial"]
     @Binding var selections: [String]
     
+    @Environment (\.defaultMinListRowHeight) var rowHeight
+    
     var body: some View{
         VStack{
-            RoundedRectangle(cornerRadius: 15).frame(width: UIScreen.main.bounds.width*0.9, height: UIScreen.main.bounds.height*0.5).foregroundColor(.white).overlay(
+            RoundedRectangle(cornerRadius: 15).frame(width: UIScreen.main.bounds.width*0.9, height: rowHeight * 10).foregroundColor(.white).overlay(
             List {
                 ForEach(self.flavourType, id: \.self) { item in
                     SelectionRow(title: item, isSelected: self.selections.contains(item)) {

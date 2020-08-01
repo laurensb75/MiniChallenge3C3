@@ -9,10 +9,6 @@
 import SwiftUI
 import CloudKit
 
-struct newData {
-    static var profilePhoto = UIImage(named: "test")
-}
-
 struct AddItemView: View {
     
     @State var productName: String = ""
@@ -63,7 +59,7 @@ struct AddItemView: View {
 
         //Saving image
         //let data = UIImage(named: "Background1")!.pngData()
-        let data = newData.profilePhoto?.pngData()// UIImage -> NSData, see also UIImageJPEGRepresentation
+        let data = newData.profilePhoto?.pngData()//
         //let data2 = Image(UIImage)
         
         let url = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(NSUUID().uuidString+".dat")
@@ -81,12 +77,12 @@ struct AddItemView: View {
 
         //2.Set property
         newRecord.setValue(productName, forKey: "name")
-        newRecord.setValue(productPrice, forKey: "price")
+        newRecord.setValue(Int(productPrice), forKey: "price")
         newRecord.setValue(stockNumber, forKey: "stock")
         newRecord.setValue(productDescription, forKey: "description")
         newRecord.setValue(productPhoto, forKey: "image")
-        newRecord.setValue(beanTypeSelected, forKey: "bean")
-        newRecord.setValue(roastTypeSelected, forKey: "roast")
+        newRecord.setValue(beanTypeSelected, forKey: "beanType")
+        newRecord.setValue(roastTypeSelected, forKey: "roastType")
         newRecord.setValue(flavourSelected, forKey: "flavour")
 
         //3.Execute save or insert
@@ -111,13 +107,15 @@ struct ProductNameAndPriceView: View {
     @Binding var productTextField: String
     @Binding var priceTextField: String
     
+    @Environment (\.defaultMinListRowHeight) var rowHeight
+
     var body: some View{
         ZStack{
-            RoundedRectangle(cornerRadius: 15).frame(width: UIScreen.main.bounds.width*0.9, height: UIScreen.main.bounds.height*0.15).foregroundColor(SellerConstant.lightBrown).addBorder(Color.black, cornerRadius: 15)
+            RoundedRectangle(cornerRadius: 15).frame(width: UIScreen.main.bounds.width*0.9, height: rowHeight * 2).foregroundColor(SellerConstant.lightBrown).addBorder(Color.black, cornerRadius: 15)
             VStack{
-                TextField("Product Name", text: $productTextField).padding(10).background(SellerConstant.lightBrown)
+                TextField("Product Name", text: $productTextField).padding(10).background(SellerConstant.lightBrown).frame(height: rowHeight / 2)
                 Divider()
-                TextField("Price", text: $priceTextField).padding(10).background(SellerConstant.lightBrown).keyboardType(.numberPad)
+                TextField("Price", text: $priceTextField).padding(10).background(SellerConstant.lightBrown).keyboardType(.numberPad).frame(height: rowHeight / 2)
             }.padding(.horizontal, UIScreen.main.bounds.width*0.075)
         }
     }
@@ -129,12 +127,14 @@ struct ProductDetailView: View {
     @Binding var productDescription: String
     @Binding var productImage: Image
     
+    @Environment (\.defaultMinListRowHeight) var rowHeight
+    
     @State var pickerVisible: Bool = false
 
     var body: some View{
         
         //TODO: Disable Scrolling Behaviour on List
-        RoundedRectangle(cornerRadius: 15).frame(width: UIScreen.main.bounds.width*0.9, height: self.pickerVisible ? UIScreen.main.bounds.height*0.4: UIScreen.main.bounds.height*0.15).foregroundColor(.white)
+        RoundedRectangle(cornerRadius: 15).frame(width: UIScreen.main.bounds.width*0.9, height: self.pickerVisible ? UIScreen.main.bounds.height*0.4: rowHeight * 3).foregroundColor(.white)
             .overlay(
                         List {
                             HStack{
@@ -178,10 +178,12 @@ struct CoffeeTypeView: View{
     @Binding var roastTypeSelected: String
     @Binding var flavourSelected: [String]
     
+    @Environment (\.defaultMinListRowHeight) var rowHeight
+
     var body: some View{
         //TODO: Disable Scrolling Behaviour on List
         VStack{
-            RoundedRectangle(cornerRadius: 15).frame(width: UIScreen.main.bounds.width*0.9, height: UIScreen.main.bounds.height*0.15).foregroundColor(Color.init(red: 251/255, green: 245/255, blue: 235/255)).overlay(
+            RoundedRectangle(cornerRadius: 15).frame(width: UIScreen.main.bounds.width*0.9, height: rowHeight * 3).foregroundColor(Color.init(red: 251/255, green: 245/255, blue: 235/255)).overlay(
                 List {
                     NavigationLink(destination: AddItem_BeanType_View(selections: $beanTypeSelected)){
                         Text("Bean Type")

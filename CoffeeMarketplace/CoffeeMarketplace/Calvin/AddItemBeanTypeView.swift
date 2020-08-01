@@ -11,6 +11,7 @@ import SwiftUI
 struct AddItem_BeanType_View: View {
     
     @Environment(\.presentationMode) var presentation
+    @Environment (\.defaultMinListRowHeight) var rowHeight
     
     @State var beanType: [String] = [
         "Green",
@@ -20,7 +21,7 @@ struct AddItem_BeanType_View: View {
     
     var body: some View{
             VStack{
-                RoundedRectangle(cornerRadius: 15).frame(width: UIScreen.main.bounds.width*0.9, height: UIScreen.main.bounds.height*0.1).foregroundColor(.white).overlay(
+                RoundedRectangle(cornerRadius: 15).frame(width: UIScreen.main.bounds.width*0.9, height: rowHeight * 2).foregroundColor(.white).overlay(
                 List {
                     ForEach(self.beanType, id: \.self) { item in
                         SelectionRow(title: item, isSelected: self.selections.contains(item)) {

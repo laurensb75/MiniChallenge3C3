@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct CoffeeData{
     var name: String
@@ -29,48 +30,174 @@ let testData: [CoffeeData] = [
 ]
 
 struct MyShopView: View {
+    @ObservedObject var ConvertedRecordResult : RecordResultConverted = .shared
+    @ObservedObject var CKRecordResult : RecordResultRaw = .shared
+    
     var body: some View {
         NavigationView{
             ScrollView(.vertical, showsIndicators: false){
-                if testData.isEmpty{
+                if ConvertedRecordResult.results.isEmpty{
                     Text("Add New Product").padding(50)
                 } else {
-                    MyShopItemList(coffeeList: testData)
+                    //MyShopItemList(coffeeList: testData)
+                    MyShopItemList(coffeeList: ConvertedRecordResult.results)
                 }
-            }.navigationBarTitle("Shop", displayMode: .inline).navigationBarItems(trailing: Button(action: {}, label: {NavigationLink(destination: AddItemView()) {
+            }.navigationBarTitle("Shop", displayMode: .inline).navigationBarItems(trailing: Button(action: {}, label: {
+            HStack{
+                NavigationLink(destination: Text("Click the bell")) {
+                Image(systemName: "bell.fill").foregroundColor(SellerConstant.darkBrown).font(Font.custom("", size: 24))
+                }.padding(.trailing, 20)
+                NavigationLink(destination: AddItemView()) {
                 Image(systemName: "plus").foregroundColor(SellerConstant.darkBrown).font(Font.custom("", size: 24))
-                }}))
-        }
-    }
-}
-
-struct MyShopItemList: View{
-    
-    var processedCoffeeList: [[CoffeeData]] = []
-    
-    init(coffeeList: [CoffeeData]) {
-        processedCoffeeList = coffeeList.chunked(into: coffeeList.count/(coffeeList.count/2))
-    }
-    
-    var body: some View{
-        VStack(alignment: .leading){
-            ForEach(processedCoffeeList.indices){i in
-                HStack{
-                    ForEach(0..<self.processedCoffeeList[i].count, id: \.self){j in
-                        MyShopItem(name: self.processedCoffeeList[i][j].name, coffeePrice: "Rp\(self.processedCoffeeList[i][j].price),-", coffeeImage: self.processedCoffeeList[i][j].coffeeImage).padding(5)
-                    }
                 }
+            }})).background(Image("Background"))
+            
+        }
+        .onAppear(){
+            self.fetchAllProduct()
+            Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
+                self.fetchAllProduct()
             }
         }
     }
     
+    func fetchShopItem(){
+        // Setup
+        let pred = NSPredicate(format: "shopID", "someshopID")
+        let sort = NSSortDescriptor(key: "creationDate", ascending: false)
+        
+        let query = CKQuery(recordType: "Product", predicate: pred)
+        query.sortDescriptors = [sort]
+        
+        let operation = CKQueryOperation(query: query)
+        
+        operation.recordFetchedBlock = { record in
+            DispatchQueue.main.async {
+                // Do something to the data fetched
+            }
+        }
+        
+        operation.queryCompletionBlock = {(_, err) in
+            DispatchQueue.main.async {
+                if let err = err {
+                    print(err)
+                    return
+                }
+            }
+        }
+        
+        // Execute
+        CKContainer.default().publicCloudDatabase.add(operation)
+        
+    }
+    
+    func fetchAllProduct(){
+        CKRecordResult.results.removeAll()
+        //fetch data dari cloudkit
+        //1.Tunjuk database yang mau di fetch
+        let database = CKContainer.default().publicCloudDatabase
+        //print("Records Fetched")
+        //2.Menentukan record yang mau di fetch
+        let predicate = NSPredicate(value: true) //Ngambil semua record dari querynya, tidak di filter
+        let query = CKQuery(recordType: "Product", predicate: predicate)
+        
+        //3.Execute query
+        database.perform(query, inZoneWith: nil) { records, error in
+            if let fetchedRecords = records { //kalo misal record yang diambil tidak empty
+                print(fetchedRecords)
+                self.CKRecordResult.results = fetchedRecords
+                print("Fetch Succcess")
+                
+                
+                DispatchQueue.main.async {
+                    print(self.CKRecordResult.results)
+                    self.convertRecords()
+                }
+            }
+            
+        }
+        
+    }
+    
+    func convertRecords(){
+        var productImage : UIImage?
+        ConvertedRecordResult.results.removeAll()
+        
+        for index in 0 ..< CKRecordResult.results.count {
+            let record = CKRecordResult.results[index]
+            
+            if let asset = record.value(forKey: "image") as? CKAsset, let data = try? Data(contentsOf: asset.fileURL!){
+                productImage = UIImage(data: data)
+            }
+            
+            print("Product \(index + 1)")
+            print("Nama: \(record.value(forKey: "name") as! String)")
+            //print(record.recordID)
+            
+            ConvertedRecordResult.results.append(ProductData(name: record.value(forKey: "name") as! String, description: record.value(forKey: "description") as! String, price: record.value(forKey: "price") as! Int, image: productImage!, id: record.recordID))
+            print("Convert Success")
+        }
+    }
+    
+    
+}
+
+struct MyShopItemList: View{
+//    var processedCoffeeList: [[CoffeeData]] = []
+    var processedCoffeeList: [[ProductData]] = []
+    
+//    init(coffeeList: [CoffeeData]) {
+//        processedCoffeeList = coffeeList.chunked(into: coffeeList.count/(coffeeList.count/2))
+//    }
+    
+    init(coffeeList: [ProductData]) {
+        if !coffeeList.isEmpty{
+            processedCoffeeList = coffeeList.chunked(into: coffeeList.count/(coffeeList.count/2))
+        }
+    }
+    
+    var body: some View{
+        VStack(alignment: .leading){
+            ForEach(processedCoffeeList.indices, id: \.self){i in
+                MyShopItemListB(processedCoffeeList: self.processedCoffeeList, indexI: i)
+            }
+        }
+    }
+    
+    //    var body: some View{
+    //        VStack(alignment: .leading){
+    //            ForEach(processedCoffeeList.indices){i in
+    //                HStack{
+    //                    ForEach(0..<self.processedCoffeeList[i].count, id: \.self){j in
+    //                        MyShopItem(name: self.processedCoffeeList[i][j].name, coffeePrice: "Rp\(self.processedCoffeeList[i][j].price),-", coffeeImage: self.processedCoffeeList[i][j].coffeeImage).padding(5)
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    
+}
+
+struct MyShopItemListB: View {
+    var processedCoffeeList: [[ProductData]] = []
+    var indexI : Int = 0
+    
+    var body: some View{
+                HStack{
+                    ForEach(0..<self.processedCoffeeList[indexI].count, id: \.self){j in
+                        MyShopItem(name: self.processedCoffeeList[self.indexI][j].name, coffeePrice: "Rp\(self.processedCoffeeList[self.indexI][j].price),-", coffeeImage: self.processedCoffeeList[self.indexI][j].image!).padding(5)
+                    }
+                    //Text("--END OF LIST--")
+                }
+    }
 }
 
 struct MyShopItem: View{
     
     var name: String
     var coffeePrice: String
-    var coffeeImage: Image
+    //var coffeeImage: Image
+    var coffeeImage: UIImage
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false){
@@ -78,9 +205,9 @@ struct MyShopItem: View{
                 RoundedRectangle(cornerRadius: 15).foregroundColor(SellerConstant.lightBrown).addBorder(Color.black, width: 1, cornerRadius: 15).frame(width: 175, height: 250)
                 
                 VStack(alignment: .leading, spacing: 0) {
-
+                    
                     Rectangle().foregroundColor(Color(red: 216/255, green: 216/255, blue: 216/255)).overlay(
-                    coffeeImage
+                    Image(uiImage: coffeeImage)
                     .resizable()
                     .scaledToFit()
                     .frame(minWidth: nil, idealWidth: nil, maxWidth: UIScreen.main.bounds.width, minHeight: nil, idealHeight: nil, maxHeight: 300, alignment: .center)
@@ -89,7 +216,9 @@ struct MyShopItem: View{
 
                     VStack(alignment: .leading) {
                         Text(name)
+                            .lineLimit(1)
                         Text(coffeePrice)
+                            .lineLimit(1)
                     }
                     .padding(12)
 
