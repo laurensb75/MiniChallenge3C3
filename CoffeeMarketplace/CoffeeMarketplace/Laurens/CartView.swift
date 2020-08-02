@@ -17,14 +17,26 @@ struct CartView: View {
         .init(id: "5", name: "Trending Coffee 5", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 375000, roastLevel: 1, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee"),
     ]
     
+    @ObservedObject var cart : Cart = .shared
     
     var body: some View {
         NavigationView{
             VStack{
-                List(itemInCart) { item in
-                    CartItemIcon(coffeeItem: item, ammount: 1).border(Color.black, width: 1).cornerRadius(/*@START_MENU_TOKEN@*/15.0/*@END_MENU_TOKEN@*/)
+                if cart.productList.isEmpty {
+                    Text("No item")
+                }
+                else {
+                    ForEach(0 ..< cart.productList.count, id: \.self) { index in
+                        CartItemIcon(ammount: self.cart.ammountList[index],product: self.cart.productList[index], indexSelected: index)
+                            .border(Color.black, width: 1)
+                    }
                 }
                 
+//                List(itemInCart) { item in
+//                    CartItemIcon(coffeeItem: item, ammount: 1).border(Color.black, width: 1).cornerRadius(/*@START_MENU_TOKEN@*/15.0/*@END_MENU_TOKEN@*/)
+//                }
+                
+                Spacer()
                 Button(action: {
                     
                 }) {
@@ -42,23 +54,27 @@ struct CartView: View {
 
 
 struct CartItemIcon: View {
-    var coffeeItem: Coffeee = .init(id: "0", name: "Coffee Name", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 0, roastLevel: 1, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee")
+    //var coffeeItem: Coffeee = .init(id: "0", name: "Coffee Name", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 0, roastLevel: 1, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee")
     @State var ammount: Int = 1
     @State var grindState = 0
-    
+    var product : ProductData
+    var indexSelected : Int
+    @ObservedObject var cart : Cart = .shared
     
     var body: some View {
         HStack{
-            Image("Coffee")
+            Image(uiImage: product.image!)
                 .resizable()
                 .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
                 .cornerRadius(10)
                 .padding(.leading)
             VStack {
                 VStack(alignment: .leading){
-                    Text(coffeeItem.name)
+                    Text(product.name)
                         .font(.headline)
-                    Text("Rp.\(coffeeItem.price),-")
+                    
+                    Text("Rp.\(product.price),-")
+                    
                     HStack{
                         Text("Qty")
                         HStack{
@@ -66,6 +82,7 @@ struct CartItemIcon: View {
                             VStack{
                                 Button(action: {
                                     self.ammount += 1
+                                    print("ammount up")
                                 }) {
                                     Image(systemName: "chevron.up")
                                 }
@@ -80,16 +97,18 @@ struct CartItemIcon: View {
                         }.frame(width: 60, height: 40).border(Color.black, width: 1)
                         Spacer()
                         Button(action: {
-                            print("asdfasdf")
+                            self.cart.productList.remove(at: self.indexSelected)
+                            print("item deleted")
                         }) {
                             Image(systemName: "trash").resizable().frame(width: UIScreen.main.bounds.width * 0.075, height: UIScreen.main.bounds.width * 0.075).aspectRatio(contentMode: .fit)
                         }
                     }
+                    
                 }
                 Picker(selection: $grindState, label: Text("Grind State")) {
                     Text("Beans").tag(1)
                     Text("Grinded").tag(2)
-                    }.frame(width: 100.0, height: 50).clipped()
+                }.pickerStyle(SegmentedPickerStyle())
             }
             
             Spacer()
@@ -103,3 +122,52 @@ struct CartView_Previews: PreviewProvider {
         CartView()
     }
 }
+
+
+//HStack{
+//        Image("Coffee")
+//            .resizable()
+//            .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.width * 0.4)
+//            .cornerRadius(10)
+//            .padding(.leading)
+//        VStack {
+//            VStack(alignment: .leading){
+//                Text(coffeeItem.name)
+//                    .font(.headline)
+//                Text("Rp.\(coffeeItem.price),-")
+//                HStack{
+//                    Text("Qty")
+//                    HStack{
+//                        TextField("0", value: $ammount, formatter: NumberFormatter()).padding(.leading, 10.0).keyboardType(UIKeyboardType.decimalPad)
+//                        VStack{
+//                            Button(action: {
+//                                self.ammount += 1
+//                            }) {
+//                                Image(systemName: "chevron.up")
+//                            }
+//                            .padding(.trailing, 5.0)
+//                            Button(action: {
+//                                self.ammount -= (self.ammount<=1 ? 0 : 1)
+//                            }) {
+//                                Image(systemName: "chevron.down")
+//                            }
+//                            .padding(.trailing, 5.0)
+//                        }
+//                    }.frame(width: 60, height: 40).border(Color.black, width: 1)
+//                    Spacer()
+//                    Button(action: {
+//                        print("asdfasdf")
+//                    }) {
+//                        Image(systemName: "trash").resizable().frame(width: UIScreen.main.bounds.width * 0.075, height: UIScreen.main.bounds.width * 0.075).aspectRatio(contentMode: .fit)
+//                    }
+//                }
+//            }
+//            Picker(selection: $grindState, label: Text("Grind State")) {
+//                Text("Beans").tag(1)
+//                Text("Grinded").tag(2)
+//                }.frame(width: 100.0, height: 50).clipped()
+//        }
+//
+//        Spacer()
+//        }.cornerRadius(15).frame(width: UIScreen.main.bounds.width * 0.9, height: 200)
+//}

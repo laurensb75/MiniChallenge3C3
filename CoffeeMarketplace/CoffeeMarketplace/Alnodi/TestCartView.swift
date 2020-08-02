@@ -11,7 +11,7 @@ import CloudKit
 
 struct TestCartView: View {
     
-    @ObservedObject var cart : CartB = .shared
+    @ObservedObject var cart : Cart = .shared
     @ObservedObject var CKRecordResult : RecordResultRaw = .shared
     
     var body: some View {
@@ -30,7 +30,7 @@ struct TestCartView: View {
             Spacer()
         }
         .onAppear(){
-            //self.fetchAllProduct()
+            self.fetchAllProduct()
 //            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 //                self.cart.productList.append(ProductData(name: "Test", description: "Test", price: 1000, stock: 1, beanType: "Green", roastType: "Dark", flavour: ["1", "2"], image: UIImage(named: "test"), id: nil))
 //                print("Test sukses")
@@ -93,7 +93,7 @@ struct cartItem: View{
     var product : ProductData
     var indexSelected : Int
     
-    @ObservedObject var cart : CartB = .shared
+    @ObservedObject var cart : Cart = .shared
     
     var body : some View {
         ZStack{

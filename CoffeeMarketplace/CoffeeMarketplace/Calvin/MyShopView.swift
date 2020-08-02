@@ -55,9 +55,9 @@ struct MyShopView: View {
         }
         .onAppear(){
             self.fetchAllProduct()
-            Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
-                self.fetchAllProduct()
-            }
+//            Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
+//                self.fetchAllProduct()
+//            }
         }
     }
     
@@ -134,8 +134,7 @@ struct MyShopView: View {
             print("Nama: \(record.value(forKey: "name") as! String)")
             //print(record.recordID)
             
-            ConvertedRecordResult.results.append(ProductData(name: record.value(forKey: "name") as! String, description: record.value(forKey: "description") as! String, price: record.value(forKey: "price") as! Int, image: productImage!, id: record.recordID))
-            print("Convert Success")
+            ConvertedRecordResult.results.append(ProductData(name: record.value(forKey: "name") as! String, description: record.value(forKey: "description") as! String, price: record.value(forKey: "price") as! Int, stock: record.value(forKey: "stock") as! Int, beanType: record.value(forKey: "beanType") as! String, roastType: record.value(forKey: "roastType") as! String, flavour: record.value(forKey: "flavour") as! [String], image: productImage!, id: record.recordID))
         }
     }
     
@@ -151,7 +150,7 @@ struct MyShopItemList: View{
 //    }
     
     init(coffeeList: [ProductData]) {
-        if !coffeeList.isEmpty{
+        if !coffeeList.isEmpty && coffeeList.count > 2 {
             processedCoffeeList = coffeeList.chunked(into: coffeeList.count/(coffeeList.count/2))
         }
     }

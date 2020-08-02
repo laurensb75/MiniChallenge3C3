@@ -34,10 +34,12 @@ struct ProductData {
     var id: CKRecord.ID!
 }
 
-class CartB : ObservableObject {
-    static let shared = CartB()
+class Cart : ObservableObject {
+    static let shared = Cart()
     
     @Published var productList : [ProductData] = []
+    @Published var ammountList : [Int] = []
+    
 }
 
 class RecordResultConverted : ObservableObject {
@@ -52,6 +54,12 @@ class RecordResultRaw : ObservableObject {
     @Published var results : [CKRecord] = []
 }
 
-struct Cart {
-    static var productList : [ProductData] = []
+class Counter : ObservableObject {
+    static let shared = Counter()
+    
+    @Published var count : Int = 1
 }
+
+//struct Cart {
+//    static var productList : [ProductData] = []
+//}
