@@ -142,7 +142,7 @@ struct ProductDetailCoffeeFlavourView: View {
                 
             }
         }.padding(.leading, 22.0)
-}
+    }
     
     func adjustFlavour(rawCoffeeFlavours : [String]) -> [String]{
         var adjustedCoffeeFlavours : [String] = []

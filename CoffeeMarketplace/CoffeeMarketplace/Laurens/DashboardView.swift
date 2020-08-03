@@ -101,6 +101,7 @@ struct DashboardView: View {
                     }
                     .foregroundColor(Color.black)
                     .padding(.trailing, 15.0)
+                    .navigationBarTitle("Market", displayMode: .inline)
                     
                     Button(action: {
                         print("Refreshing...")
@@ -118,9 +119,9 @@ struct DashboardView: View {
                 ScrollView(.vertical, showsIndicators: true){
                     CoffeeHorizontalCollectionViewC(productsInCategory: ConvertedRecordResult.results, category: "Test")
                     .padding(5)
-                    CoffeeHorizontalCollectionView(coffeeInCategory: trendingCoffee, category: "Trending")
+                    //CoffeeHorizontalCollectionView(coffeeInCategory: trendingCoffee, category: "Trending")
                         .padding([.leading, .bottom, .trailing], 5)
-                    CoffeeHorizontalCollectionView(coffeeInCategory: newCoffee, category: "New")
+                    //CoffeeHorizontalCollectionView(coffeeInCategory: newCoffee, category: "New")
                         .padding(5)
                     CoffeeHorizontalCollectionView(coffeeInCategory: greenBeansCoffee, category: "Green Beans")
                         .padding(5)
@@ -136,6 +137,9 @@ struct DashboardView: View {
         }
             .onTapGesture {UIApplication.shared.endEditing()}
             .navigationBarTitle("asdfasdf", displayMode: .inline)
+        .onAppear(){
+            self.fetchAllProduct()
+        }
     }
     
     func fetchAllProduct(){
