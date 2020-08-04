@@ -34,31 +34,28 @@ struct MyShopView: View {
     @ObservedObject var CKRecordResult : RecordResultRaw = .shared
     
     var body: some View {
-        NavigationView{
-            ScrollView(.vertical, showsIndicators: false){
-                if ConvertedRecordResult.results.isEmpty{
-                    Text("Add New Product").padding(50)
-                } else {
-                    //MyShopItemList(coffeeList: testData)
-                    MyShopItemList(coffeeList: ConvertedRecordResult.results)
+        
+        ScrollView(.vertical, showsIndicators: false){
+            if ConvertedRecordResult.results.isEmpty{
+                Text("Add New Product").padding(50)
+            } else {
+                //MyShopItemList(coffeeList: testData)
+                MyShopItemList(coffeeList: ConvertedRecordResult.results)
+            }
+        }.navigationBarTitle("Shop", displayMode: .inline).navigationBarItems(trailing: Button(action: {}, label: {
+            HStack{
+                NavigationLink(destination: NotificationView()) {
+                    Image(systemName: "bell.fill").foregroundColor(SellerConstant.darkBrown).font(Font.custom("", size: 24))
+                }.padding(.trailing, 20)
+                NavigationLink(destination: AddItemView()) {
+                    Image(systemName: "plus").foregroundColor(SellerConstant.darkBrown).font(Font.custom("", size: 24))
                 }
-            }.navigationBarTitle("Shop", displayMode: .inline).navigationBarItems(trailing: Button(action: {}, label: {
-                HStack{
-                    NavigationLink(destination: NotificationView()) {
-                        Image(systemName: "bell.fill").foregroundColor(SellerConstant.darkBrown).font(Font.custom("", size: 24))
-                    }.padding(.trailing, 20)
-                    NavigationLink(destination: AddItemView()) {
-                        Image(systemName: "plus").foregroundColor(SellerConstant.darkBrown).font(Font.custom("", size: 24))
-                    }
-                }})).background(Image("Background"))
-            
+            }})).background(Image("Background"))
+            .onAppear(){
+                self.fetchAllProduct()
         }
-        .onAppear(){
-            self.fetchAllProduct()
-            //            Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
-            //                self.fetchAllProduct()
-            //            }
-        }
+        
+        
     }
     
     func fetchShopItem(){

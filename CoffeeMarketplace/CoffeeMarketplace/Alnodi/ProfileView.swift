@@ -36,9 +36,9 @@ struct ProfileLoginB: View {
                     
                     VStack(spacing: 15){
                         
-                        NavigationLink(destination: MC3LoginPage(), isActive: $isShowingLoginView){
-                            EmptyView()
-                        }
+//                        NavigationLink(destination: MC3LoginPage(), isActive: $isShowingLoginView){
+//                            EmptyView()
+//                        }
                         
                         NavigationLink(destination: MC3RegisterPage(), isActive: $isShowingRegisterView){
                             EmptyView()

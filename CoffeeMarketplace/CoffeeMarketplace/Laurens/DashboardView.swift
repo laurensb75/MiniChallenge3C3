@@ -29,7 +29,7 @@ struct DashboardView: View {
         .init(id: "6", name: "New Coffee 1", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 300000, roastLevel: 1, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee"),
         .init(id: "7", name: "New Coffee 2", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 500000, roastLevel: 2, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee"),
         .init(id: "8", name: "New Coffee 3", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 500000, roastLevel: 2, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee"),
-        .init(id: "9", name: "New Coffee 4", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 700000, roastLevel: 1, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee"),
+         .init(id: "9", name: "New Coffee 4", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 700000, roastLevel: 1, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee"),
         .init(id: "10", name: "New Coffee 5", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 500000, roastLevel: 2, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee")
     ]
     
@@ -90,17 +90,6 @@ struct DashboardView: View {
                     }
                         .foregroundColor(Color.black)
                         .padding(.trailing, 15.0)
-                    
-                    Button(action: {
-                        self.isShowingCartView = true
-                    }) {
-                        Image(systemName: "cart.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: UIScreen.main.bounds.width * 0.07)
-                    }
-                    .foregroundColor(Color.black)
-                    .padding(.trailing, 15.0)
                     .navigationBarTitle("Market", displayMode: .inline)
                     
                     Button(action: {
@@ -117,20 +106,20 @@ struct DashboardView: View {
                 }
                 //display item in category
                 ScrollView(.vertical, showsIndicators: true){
-                    CoffeeHorizontalCollectionViewC(productsInCategory: ConvertedRecordResult.results, category: "Test")
+                    CoffeeHorizontalCollectionViewC(productsInCategory: ConvertedRecordResult.results, category: "All Product")
                     .padding(5)
                     //CoffeeHorizontalCollectionView(coffeeInCategory: trendingCoffee, category: "Trending")
-                        .padding([.leading, .bottom, .trailing], 5)
+                        //.padding([.leading, .bottom, .trailing], 5)
                     //CoffeeHorizontalCollectionView(coffeeInCategory: newCoffee, category: "New")
+                        //.padding(5)
+                    CoffeeHorizontalCollectionViewC(productsInCategory: self.getGreenBeanProducts(), category: "Green Beans")
                         .padding(5)
-                    CoffeeHorizontalCollectionView(coffeeInCategory: greenBeansCoffee, category: "Green Beans")
+                    CoffeeHorizontalCollectionViewC(productsInCategory: self.getProductByRoastType(roastType: "Light"), category: "Light Roast")
                         .padding(5)
-                    CoffeeHorizontalCollectionView(coffeeInCategory: lightRoastCoffee, category: "Light Roast")
-                        .padding(5)
-                    CoffeeHorizontalCollectionView(coffeeInCategory: mediumRoastCoffee, category: "Medium Roast")
-                        .padding(5)
-                    CoffeeHorizontalCollectionView(coffeeInCategory: darkRoastCoffee, category: "Dark Roast")
-                        .padding(5)
+                    CoffeeHorizontalCollectionViewC(productsInCategory: self.getProductByRoastType(roastType: "Medium"), category: "Medium Roast")
+                    .padding(5)
+                    CoffeeHorizontalCollectionViewC(productsInCategory: self.getProductByRoastType(roastType: "Dark"), category: "Dark Roast")
+                    .padding(5)
                     
                 }
             }.background(Image("Background").resizable().edgesIgnoringSafeArea(.all).scaledToFill().edgesIgnoringSafeArea(.all))
@@ -181,15 +170,45 @@ struct DashboardView: View {
                 productImage = UIImage(data: data)
             }
             
-            print("Product \(index + 1)")
-            print("Nama: \(record.value(forKey: "name") as! String)")
-            print("Roasttype: \(record.value(forKey: "roastType") as! String)")
+//            print("Product \(index + 1)")
+//            print("Nama: \(record.value(forKey: "name") as! String)")
+//            print("Roasttype: \(record.value(forKey: "roastType") as! String)")
             //print(record.recordID)
             
             ConvertedRecordResult.results.append(ProductData(name: record.value(forKey: "name") as! String, description: record.value(forKey: "description") as! String, price: record.value(forKey: "price") as! Int, stock: record.value(forKey: "stock") as! Int, beanType: record.value(forKey: "beanType") as! String, roastType: record.value(forKey: "roastType") as! String, flavour: record.value(forKey: "flavour") as! [String], image: productImage!, id: record.recordID))
             
         }
         print("Convert Success")
+    }
+    
+    func getGreenBeanProducts() -> [ProductData]{
+        var result : [ProductData] = []
+        
+        for index in 0 ..< ConvertedRecordResult.results.count {
+            let product = ConvertedRecordResult.results[index]
+            
+            if product.beanType == "Green"{
+                result.append(product)
+            }
+        }
+        
+        print("Convert Green Bean Product Success")
+        return result
+    }
+    
+    func getProductByRoastType(roastType: String) -> [ProductData]{
+        var result : [ProductData] = []
+        
+        for index in 0 ..< ConvertedRecordResult.results.count {
+            let product = ConvertedRecordResult.results[index]
+            
+            if product.roastType == roastType{
+                result.append(product)
+            }
+        }
+        
+        print("Convert \(roastType) Product Success")
+        return result
     }
 }
 

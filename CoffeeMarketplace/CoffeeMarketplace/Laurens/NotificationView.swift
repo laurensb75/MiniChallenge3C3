@@ -13,20 +13,19 @@ struct NotificationView: View {
     
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack {
-                    ForEach (0 ..< currentCart.productList.count, id: \.self) { index in
-                        NavigationLink(destination: NotificationDetail()) {
-                            NotificationItemView()
-                        }.buttonStyle(PlainButtonStyle())
-                    }
+        ScrollView {
+            VStack {
+                ForEach (0 ..< currentCart.productList.count, id: \.self) { index in
+                    NavigationLink(destination: NotificationDetail()) {
+                        NotificationItemView()
+                    }.buttonStyle(PlainButtonStyle())
                 }
-                    .padding()
             }
-                .background(Image("Background").scaledToFill().edgesIgnoringSafeArea(.all))
-                .navigationBarTitle("Notification", displayMode: .inline)
+            .padding()
         }
+        .background(Image("Background").scaledToFill().edgesIgnoringSafeArea(.all))
+        .navigationBarTitle("Notification", displayMode: .inline)
+        
     }
 }
 

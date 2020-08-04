@@ -13,6 +13,9 @@ struct MC3LoginPage: View {
     
     @State var newLogin = loginData()
     @State var profilePhoto = UIImage()
+    @Binding var isShowingLoginPage : Bool
+    
+    
     
     var body: some View {
         //NavigationView {
@@ -27,7 +30,7 @@ struct MC3LoginPage: View {
                     EmailPasswordFormText(newLogin: $newLogin)
                 }
                 
-                LoginButton(newLogin: $newLogin)
+                LoginButton(newLogin: $newLogin, isShowingLoginPage: $isShowingLoginPage)
                 Spacer()
             }
             //.frame(alignment: .topLeading)
@@ -45,11 +48,11 @@ struct loginData {
     var password: String = ""
 }
 
-struct MC3LoginPage_Previews: PreviewProvider {
-    static var previews: some View {
-        MC3LoginPage()
-    }
-}
+//struct MC3LoginPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MC3LoginPage()
+//    }
+//}
 
 struct FormBackgroundView: View {
     var body: some View {
@@ -116,10 +119,13 @@ struct EmailPasswordFormText: View {
 struct LoginButton: View {
     @Binding var newLogin: loginData
     @State var isShowingProfileView = false
+    @ObservedObject var userLoggedOn : userData = .shared
+    @Binding var isShowingLoginPage : Bool
+    @ObservedObject var loginState : loginStatus = .shared
     
     var body: some View {
         VStack{
-            NavigationLink(destination: ProfileAfterLoginB(), isActive: $isShowingProfileView){
+            NavigationLink(destination: ProfileAfterLogin(), isActive: $isShowingProfileView){
                 EmptyView()
             }
             
@@ -164,28 +170,29 @@ struct LoginButton: View {
         database.perform(query, inZoneWith: nil) { records, error in
             if let fetchedRecords = records { //kalo misal record yang diambil tidak empty
                 print(fetchedRecords)
-                userLoggedOn.name = fetchedRecords.first?.value(forKey: "name") as! String
+                self.userLoggedOn.name = fetchedRecords.first?.value(forKey: "name") as! String
                 
-                userLoggedOn.email = fetchedRecords.first?.value(forKey: "email") as! String
+                self.userLoggedOn.email = fetchedRecords.first?.value(forKey: "email") as! String
                 
-                userLoggedOn.password = fetchedRecords.first?.value(forKey: "password") as! String
+                self.userLoggedOn.password = fetchedRecords.first?.value(forKey: "password") as! String
                 
-                userLoggedOn.phone = fetchedRecords.first?.value(forKey: "phoneNumber") as! String
+                self.userLoggedOn.phoneNumber = fetchedRecords.first?.value(forKey: "phoneNumber") as! String
                 
                 if let asset = fetchedRecords.first?.value(forKey: "profilePhoto") as? CKAsset, let data = try? Data(contentsOf: asset.fileURL!){
-                    userLoggedOn.profilePhoto = UIImage(data: data)
+                    self.userLoggedOn.profilePhoto = UIImage(data: data)!
                 }
                 
-                print("Record ID:")
                 //print(fetchedRecords.first?.recordID)
-                userLoggedOn.id = fetchedRecords.first?.recordID
-                print(userLoggedOn.id)
+                self.userLoggedOn.id
+                    = fetchedRecords.first?.recordID
                 
                 DispatchQueue.main.async {
-                    
+                    print("After Login: \(self.userLoggedOn.name)")
                 }
             }
-            self.isShowingProfileView = true
+            self.isShowingLoginPage = false
+            self.loginState.hasLogin = true
+            //self.isShowingProfileView = true
         }
     }
 }

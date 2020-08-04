@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     var body: some View {
         TabView{
             DashboardView()
@@ -23,7 +24,7 @@ struct ContentView: View {
                     Text("Cart")
                 }
             
-            MyShopView()
+            ProfileTest()
                 .tabItem {
                     Image(systemName: "person")
                     Text("Profile")

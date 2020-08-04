@@ -52,7 +52,7 @@ struct MC3RegisterPage: View {
                     .navigationBarTitle("Create an Account", displayMode: .inline)
                     .sheet(isPresented: $isShowingImagePicker,
                            onDismiss: loadImage) {
-                            ImagePicker(image: self.$newUser.profilePhoto)
+                            ImagePicker(image: self.$photoPreview)
                     }
                 //.navigationBarTitle("")
                 //.navigationBarHidden(true)
@@ -62,17 +62,18 @@ struct MC3RegisterPage: View {
     
     func loadImage(){
         photoPreview = Image(uiImage: newData.profilePhoto!)
+        newUser.profilePhoto = newData.profilePhoto!
     }
 }
 
 
-struct userData {
-    var name: String = ""
-    var email: String = ""
-    var password: String = ""
-    var phoneNumber: String = ""
-    var profilePhoto = Image("test")
-}
+//struct userData {
+//    var name: String = ""
+//    var email: String = ""
+//    var password: String = ""
+//    var phoneNumber: String = ""
+//    var profilePhoto = Image("test")
+//}
 
 //struct newData {
 //    static var profilePhoto = UIImage(named: "test")

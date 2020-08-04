@@ -36,6 +36,7 @@
 		536760B424CEAFCE005470DD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536760B324CEAFCE005470DD /* CloudKit.framework */; };
 		53C4348724CEC79F00F582F0 /* ProfileAfterLoginB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C4348624CEC79F00F582F0 /* ProfileAfterLoginB.swift */; };
 		53E1253A24D7DC68006EF750 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1253924D7DC68006EF750 /* NotificationView.swift */; };
+		53E1253D24D7F8E0006EF750 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1253C24D7F8E0006EF750 /* Account.swift */; };
 		5A1856BB24C0691100F935FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BA24C0691100F935FC /* AppDelegate.swift */; };
 		5A1856BD24C0691100F935FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BC24C0691100F935FC /* SceneDelegate.swift */; };
 		5A1856C024C0691100F935FC /* CoffeeMarketplace.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BE24C0691100F935FC /* CoffeeMarketplace.xcdatamodeld */; };
@@ -83,6 +84,7 @@
 		536760B324CEAFCE005470DD /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		53C4348624CEC79F00F582F0 /* ProfileAfterLoginB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAfterLoginB.swift; sourceTree = "<group>"; };
 		53E1253924D7DC68006EF750 /* NotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		53E1253C24D7F8E0006EF750 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		5A1856B724C0691100F935FC /* CoffeeMarketplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoffeeMarketplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A1856BA24C0691100F935FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A1856BC24C0691100F935FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +162,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		53E1253B24D7F8D0006EF750 /* Gilbert */ = {
+			isa = PBXGroup;
+			children = (
+				53E1253C24D7F8E0006EF750 /* Account.swift */,
+				1D65FDC724C85482002732A3 /* Profile.swift */,
+				1D65FDC624C85482002732A3 /* ProfileAfterLogin.swift */,
+			);
+			path = Gilbert;
+			sourceTree = "<group>";
+		};
 		5A1856AE24C0691100F935FC = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +192,7 @@
 		5A1856B924C0691100F935FC /* CoffeeMarketplace */ = {
 			isa = PBXGroup;
 			children = (
+				53E1253B24D7F8D0006EF750 /* Gilbert */,
 				532C3D9B24D4572B00AD5E37 /* Calvin */,
 				536760B124CEAFCA005470DD /* CoffeeMarketplace.entitlements */,
 				5AF9ABE724D5FA7800467BDD /* Laurens */,
@@ -187,8 +200,6 @@
 				5A1856BA24C0691100F935FC /* AppDelegate.swift */,
 				5A1856BC24C0691100F935FC /* SceneDelegate.swift */,
 				5A1856C124C0691100F935FC /* ContentView.swift */,
-				1D65FDC724C85482002732A3 /* Profile.swift */,
-				1D65FDC624C85482002732A3 /* ProfileAfterLogin.swift */,
 				5A1856C324C0691300F935FC /* Assets.xcassets */,
 				5A1856C824C0691300F935FC /* LaunchScreen.storyboard */,
 				5A1856CB24C0691300F935FC /* Info.plist */,
@@ -297,6 +308,7 @@
 				1D65FDC924C85482002732A3 /* Profile.swift in Sources */,
 				535BD75A24D0191500204454 /* ProfileAccountDetail.swift in Sources */,
 				532C3DA824D4572B00AD5E37 /* SellerConstants.swift in Sources */,
+				53E1253D24D7F8E0006EF750 /* Account.swift in Sources */,
 				5AF9ABF324D5FA7800467BDD /* SearchBar.swift in Sources */,
 				5A1856BB24C0691100F935FC /* AppDelegate.swift in Sources */,
 				1D65FDC824C85482002732A3 /* ProfileAfterLogin.swift in Sources */,
