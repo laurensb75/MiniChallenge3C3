@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AddItem_ProductImage_View: View {
     
-    @Binding var currentImage: Image
+    @Binding var currentImage: UIImage
     @State var ea: Bool = false
     
     var body: some View {
@@ -18,7 +18,8 @@ struct AddItem_ProductImage_View: View {
         VStack{
             RoundedRectangle(cornerRadius: 15).frame(width: UIScreen.main.bounds.width*0.9, height: UIScreen.main.bounds.height*0.25).foregroundColor(SellerConstant.lightBrown).addBorder(Color.black, cornerRadius: 15).padding()
                 .overlay(
-                    currentImage.resizable().frame(width: UIScreen.main.bounds.width*0.85, height: UIScreen.main.bounds.height*0.225).scaledToFit().cornerRadius(15)
+                    
+                    Image(uiImage: currentImage).resizable().scaledToFit().cornerRadius(15).frame(width: UIScreen.main.bounds.width*0.85, height: UIScreen.main.bounds.height*0.225)
             ).background(Text("No Image"))
             Spacer()
             
@@ -34,14 +35,14 @@ struct ImagePicker: UIViewControllerRepresentable {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @Binding var image: Image
+    @Binding var image: UIImage
     
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
         
         @Binding var presentationMode: PresentationMode
-        @Binding var image: Image
+        @Binding var image: UIImage
         
-        init(presentationMode: Binding<PresentationMode>, image: Binding<Image>) {
+        init(presentationMode: Binding<PresentationMode>, image: Binding<UIImage>) {
             _presentationMode = presentationMode
             _image = image
         }
@@ -49,7 +50,7 @@ struct ImagePicker: UIViewControllerRepresentable {
         func imagePickerController(_ picker: UIImagePickerController,
                                    didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             let uiImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-            image = Image(uiImage: uiImage)
+            image = uiImage//Image(uiImage: uiImage)
             newData.profilePhoto = uiImage
             presentationMode.dismiss()
             

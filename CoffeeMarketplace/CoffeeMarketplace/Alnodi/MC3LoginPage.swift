@@ -86,7 +86,6 @@ struct EmailPasswordFormText: View {
     
     
     var body: some View {
-        //var lineColor = Color(red: <#T##Double#>, green: <#T##Double#>, blue: <#T##Double#>)
         
         VStack(alignment: .leading){
             Text("Email")
@@ -123,6 +122,8 @@ struct LoginButton: View {
     @Binding var isShowingLoginPage : Bool
     @ObservedObject var loginState : loginStatus = .shared
     
+    
+    
     var body: some View {
         VStack{
             NavigationLink(destination: ProfileAfterLogin(), isActive: $isShowingProfileView){
@@ -142,16 +143,6 @@ struct LoginButton: View {
             .cornerRadius(10)
             .padding(.top, 15)
             
-                            //Test
-            //                NavigationLink(destination: MC3RegisterPage()){
-            //                    Text("To Register")
-            //                        .foregroundColor(Color(red: 1.0, green: 1.0, blue: 1.0))
-            //                        .padding()
-            //                        .frame(width: UIScreen.main.bounds.width - 60)
-            //                }
-            //                .background(Color(red: 0.511, green: 0.298, blue: 0.001))
-            //                .cornerRadius(10)
-            //                .padding(.top, 15)
         }
         
     }
@@ -195,6 +186,40 @@ struct LoginButton: View {
             //self.isShowingProfileView = true
         }
     }
+    
+//    func fetchUserStoreData(){
+//        let database = CKContainer.default().publicCloudDatabase
+//        let reference = CKRecord.Reference(recordID: userLoggedOn.id, action: .deleteSelf)
+//        let predicate = NSPredicate(format: "owner == %@", reference)
+//        let query = CKQuery(recordType: "Store", predicate: predicate)
+//
+//        database.perform(query, inZoneWith: nil) { records, error in
+//            if let error = error {
+//                print(error.localizedDescription)
+//            }
+//            else {
+//                if let records = records {
+//                    self.parseShopResult(records: records)
+//                }
+//            }
+//        }
+//    }
+//
+//    func parseShopResult(records: [CKRecord]) {
+//
+//        UserStore.name = records.first?.value(forKey: "name") as! String
+//        UserStore.address = records.first?.value(forKey: "address") as! String
+//
+//        if let asset = records.first?.value(forKey: "ownerValidID") as? CKAsset, let data = try? Data(contentsOf: asset.fileURL!){
+//            self.UserStore.ownerValidID = UIImage(data: data)!
+//        }
+//
+//        if let asset2 = records.first?.value(forKey: "logo") as? CKAsset, let data2 = try? Data(contentsOf: asset2.fileURL!){
+//            self.UserStore.logo = UIImage(data: data2)!
+//        }
+//
+//        UserStore.owner = records.first?.value(forKey: "owner") as? CKRecord.ID
+//    }
 }
 
 

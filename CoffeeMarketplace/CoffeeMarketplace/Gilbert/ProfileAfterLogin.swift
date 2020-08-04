@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct ProfileAfterLogin: View {
     var body: some View {
@@ -20,8 +21,11 @@ struct ProfileAfterLoginPage: View{
     @ObservedObject var userLoggedOn : userData = .shared
     @State var isShowingAccountDetailView = false
     @State var isShowingMyShopView = false
+    @State var isShowingOpenShopView = false
     @State var isSignedOut = false
+    
     @ObservedObject var loginState : loginStatus = .shared
+    @ObservedObject var UserStore : ShopData = .shared
     
     
     var body: some View{
@@ -64,20 +68,42 @@ struct ProfileAfterLoginPage: View{
                     }
                 }
                 
-                NavigationLink(destination: MyShopView(), isActive: $isShowingMyShopView){
-                    Button(action: {
-                        // your action here
-                        self.isShowingMyShopView = true
-                    }) {
-                        Text("My Shop")
-                            .foregroundColor(Color.white)
-                            .frame(minWidth: 0, maxWidth: 300)
-                            .padding()
-                            .background(Color.init(.brown))
-                            .font(.title)
+                
+                
+                if UserStore.name != "Shop Name"{
+                    NavigationLink(destination: MyShopView(), isActive: $isShowingMyShopView){
+                        Button(action: {
+                            // your action here
+                            self.isShowingMyShopView = true
+                        }) {
+                            Text("My Shop")
+                                .foregroundColor(Color.white)
+                                .frame(minWidth: 0, maxWidth: 300)
+                                .padding()
+                                .background(Color.init(.brown))
+                                .font(.title)
+                                
+                                .cornerRadius(15)
                             
-                            .cornerRadius(15)
-                        
+                        }
+                    }
+                }
+                else {
+                    NavigationLink(destination: OpenNewShopView(), isActive: $isShowingOpenShopView){
+                        Button(action: {
+                            // your action here
+                            self.isShowingOpenShopView = true
+                        }) {
+                            Text("Open Shop")
+                                .foregroundColor(Color.white)
+                                .frame(minWidth: 0, maxWidth: 300)
+                                .padding()
+                                .background(Color.init(.brown))
+                                .font(.title)
+                                
+                                .cornerRadius(15)
+                            
+                        }
                     }
                 }
                 
@@ -104,7 +130,11 @@ struct ProfileAfterLoginPage: View{
             
         }
         .background(Image("Background2"))
-
+        .onAppear(){
+            print("fetching user store data...")
+            print("User Store Name : \(self.UserStore.name)")
+            self.fetchUserStoreData()
+        }
     }
     
     func signOut(){
@@ -114,6 +144,50 @@ struct ProfileAfterLoginPage: View{
         userLoggedOn.password = ""
         userLoggedOn.profilePhoto = UIImage(systemName: "person.fill")!
         userLoggedOn.phoneNumber = ""
+        
+        UserStore.name = "Shop Name"
+        UserStore.address = ""
+        UserStore.id = nil
+        UserStore.owner = nil
+        UserStore.ownerValidID = UIImage(systemName: "person.fill")!
+        UserStore.logo = UIImage(systemName: "person.fill")!
+    }
+    
+    func fetchUserStoreData(){
+        let database = CKContainer.default().publicCloudDatabase
+        let reference = CKRecord.Reference(recordID: userLoggedOn.id, action: .deleteSelf)
+        let predicate = NSPredicate(format: "owner == %@", reference)
+        let query = CKQuery(recordType: "Store", predicate: predicate)
+        
+        database.perform(query, inZoneWith: nil) { records, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                if let records = records {
+                    print(records.first)
+                    if !records.isEmpty {
+                        self.parseShopResult(records: records)
+                    }
+                }
+            }
+        }
+    }
+    
+    func parseShopResult(records: [CKRecord]) {
+        
+        UserStore.name = records.first?.value(forKey: "name") as! String
+        UserStore.address = records.first?.value(forKey: "address") as! String
+        
+        if let asset = records.first?.value(forKey: "ownerValidID") as? CKAsset, let data = try? Data(contentsOf: asset.fileURL!){
+            self.UserStore.ownerValidID = UIImage(data: data)!
+        }
+        
+        if let asset2 = records.first?.value(forKey: "logo") as? CKAsset, let data2 = try? Data(contentsOf: asset2.fileURL!){
+            self.UserStore.logo = UIImage(data: data2)!
+        }
+        
+        UserStore.owner = records.first?.value(forKey: "owner") as? CKRecord.ID
     }
 }
 

@@ -71,7 +71,7 @@ struct newProductData {
     var name : String = ""
     var description : String = ""
     var price : Int = 0
-    var image = Image("test")
+    var image : UIImage = UIImage(named: "test")!
 }
 
 struct AddProductButton : View {

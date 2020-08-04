@@ -9,14 +9,14 @@
 import SwiftUI
 import CloudKit
 
-struct userLoggedOn{
-    static var id: CKRecord.ID!
-    static var name: String = ""
-    static var email: String = ""
-    static var password: String = ""
-    static var phone: String = ""
-    static var profilePhoto = UIImage(systemName: "person.fill")
-}
+//struct userLoggedOn{
+//    static var id: CKRecord.ID!
+//    static var name: String = ""
+//    static var email: String = ""
+//    static var password: String = ""
+//    static var phone: String = ""
+//    static var profilePhoto = UIImage(systemName: "person.fill")
+//} 
 
 class userData : ObservableObject {
     var id : CKRecord.ID!
@@ -56,6 +56,18 @@ struct ProductData {
     var image = UIImage(named: "test")
     var id: CKRecord.ID!
 }
+
+class ShopData : ObservableObject {
+    var id : CKRecord.ID!
+    var owner : CKRecord.ID!
+    var name : String = "Shop Name"
+    var address : String = "Shop Address"
+    var ownerValidID : UIImage = UIImage(systemName: "person.fill")!
+    var logo : UIImage = UIImage(systemName: "person.fill")!
+    
+    static let shared = ShopData()
+}
+
 
 class Cart : ObservableObject {
     static let shared = Cart()

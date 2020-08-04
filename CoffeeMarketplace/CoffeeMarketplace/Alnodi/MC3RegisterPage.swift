@@ -14,7 +14,7 @@ import CloudKit
 struct MC3RegisterPage: View {
     
     @State var newUser = userData()
-    @State var photoPreview = Image(systemName: "person.circle")
+    @State var photoPreview : UIImage = UIImage(systemName: "person.fill")!
     @State var isShowingImagePicker = false
     //@State var inputImage = Image("test")
     
@@ -31,7 +31,7 @@ struct MC3RegisterPage: View {
                         RegisterFormText(newUser: $newUser)
                     }
                     
-                    photoPreview
+                Image(uiImage: photoPreview)
                         .resizable()
                         .frame(width: 200, height: 200)
                         .scaledToFit()
@@ -61,7 +61,7 @@ struct MC3RegisterPage: View {
         
     
     func loadImage(){
-        photoPreview = Image(uiImage: newData.profilePhoto!)
+        photoPreview = newData.profilePhoto!
         newUser.profilePhoto = newData.profilePhoto!
     }
 }

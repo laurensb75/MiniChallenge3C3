@@ -17,19 +17,20 @@ struct ContentView: View {
                     Image(systemName: "house")
                     Text("Market")
                 }
-            
+
             CartView()
                 .tabItem {
                     Image(systemName: "cart")
                     Text("Cart")
                 }
-            
+
             ProfileTest()
                 .tabItem {
                     Image(systemName: "person")
                     Text("Profile")
                 }
         }
+        //OpenNewShopView()
     }
 }
 

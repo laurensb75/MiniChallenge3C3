@@ -16,7 +16,7 @@ struct AddItemView: View {
     
     @State var stockNumber: Int = 1
     @State var productDescription: String = ""
-    @State var productImage: Image = Image(systemName: "placeholder")
+    @State var productImage: UIImage = UIImage(systemName: "plus.circle")!
     
     @State var beanTypeSelected: String = ""
     @State var roastTypeSelected: String = ""
@@ -125,7 +125,7 @@ struct ProductDetailView: View {
     
     @Binding var stockNum: Int
     @Binding var productDescription: String
-    @Binding var productImage: Image
+    @Binding var productImage: UIImage
     
     @Environment (\.defaultMinListRowHeight) var rowHeight
     

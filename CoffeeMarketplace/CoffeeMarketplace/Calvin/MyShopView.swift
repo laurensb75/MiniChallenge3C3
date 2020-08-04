@@ -32,6 +32,7 @@ let testData: [CoffeeData] = [
 struct MyShopView: View {
     @ObservedObject var ConvertedRecordResult : RecordResultConverted = .shared
     @ObservedObject var CKRecordResult : RecordResultRaw = .shared
+    @ObservedObject var userStore : ShopData = .shared
     
     var body: some View {
         
@@ -42,7 +43,7 @@ struct MyShopView: View {
                 //MyShopItemList(coffeeList: testData)
                 MyShopItemList(coffeeList: ConvertedRecordResult.results)
             }
-        }.navigationBarTitle("Shop", displayMode: .inline).navigationBarItems(trailing: Button(action: {}, label: {
+        }.navigationBarTitle("\(userStore.name)", displayMode: .inline).navigationBarItems(trailing: Button(action: {}, label: {
             HStack{
                 NavigationLink(destination: NotificationView()) {
                     Image(systemName: "bell.fill").foregroundColor(SellerConstant.darkBrown).font(Font.custom("", size: 24))
