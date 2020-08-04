@@ -125,7 +125,7 @@ struct DashboardView: View {
             }.background(Image("Background").resizable().edgesIgnoringSafeArea(.all).scaledToFill().edgesIgnoringSafeArea(.all))
         }
             .onTapGesture {UIApplication.shared.endEditing()}
-            .navigationBarTitle("asdfasdf", displayMode: .inline)
+            .navigationBarTitle("Market", displayMode: .inline)
         .onAppear(){
             self.fetchAllProduct()
         }

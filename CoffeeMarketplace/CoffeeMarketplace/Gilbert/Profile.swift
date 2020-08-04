@@ -24,8 +24,6 @@ struct ProfileTest: View {
                 ProfileBeforeLogin()
                 .navigationBarTitle("Profile", displayMode: .inline)
             }
-            
-            
         }
     }
 }

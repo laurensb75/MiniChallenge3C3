@@ -67,44 +67,25 @@ struct ProfileAfterLoginPage: View{
                         
                     }
                 }
-                
-                
-                
-                if UserStore.name != "Shop Name"{
-                    NavigationLink(destination: MyShopView(), isActive: $isShowingMyShopView){
-                        Button(action: {
-                            // your action here
-                            self.isShowingMyShopView = true
-                        }) {
-                            Text("My Shop")
-                                .foregroundColor(Color.white)
-                                .frame(minWidth: 0, maxWidth: 300)
-                                .padding()
-                                .background(Color.init(.brown))
-                                .font(.title)
-                                
-                                .cornerRadius(15)
-                            
-                        }
+            
+                Button(action: {
+                    // your action here
+                    if(self.UserStore.name != "Shop Name"){
+                        self.isShowingMyShopView = true
                     }
-                }
-                else {
-                    NavigationLink(destination: OpenNewShopView(), isActive: $isShowingOpenShopView){
-                        Button(action: {
-                            // your action here
-                            self.isShowingOpenShopView = true
-                        }) {
-                            Text("Open Shop")
-                                .foregroundColor(Color.white)
-                                .frame(minWidth: 0, maxWidth: 300)
-                                .padding()
-                                .background(Color.init(.brown))
-                                .font(.title)
-                                
-                                .cornerRadius(15)
-                            
-                        }
+                    else{
+                        self.isShowingOpenShopView = true
                     }
+                }) {
+                    Text(self.UserStore.name != "Shop Name" ? "My Shop" : "Open Shop")
+                        .foregroundColor(Color.white)
+                        .frame(minWidth: 0, maxWidth: 300)
+                        .padding()
+                        .background(Color.init(.brown))
+                        .font(.title)
+                        
+                        .cornerRadius(15)
+                    
                 }
                 
                 
@@ -128,12 +109,20 @@ struct ProfileAfterLoginPage: View{
                 }
             }
             
+            NavigationLink(destination: MyShopView(), isActive: $isShowingMyShopView){
+                EmptyView()
+            }
+            
+            NavigationLink(destination: OpenNewShopView(), isActive: $isShowingOpenShopView){
+                EmptyView()
+            }
+            
         }
         .background(Image("Background2"))
         .onAppear(){
-            print("fetching user store data...")
+            //print("fetching user store data...")
             print("User Store Name : \(self.UserStore.name)")
-            self.fetchUserStoreData()
+            //self.fetchUserStoreData()
         }
     }
     
@@ -153,42 +142,42 @@ struct ProfileAfterLoginPage: View{
         UserStore.logo = UIImage(systemName: "person.fill")!
     }
     
-    func fetchUserStoreData(){
-        let database = CKContainer.default().publicCloudDatabase
-        let reference = CKRecord.Reference(recordID: userLoggedOn.id, action: .deleteSelf)
-        let predicate = NSPredicate(format: "owner == %@", reference)
-        let query = CKQuery(recordType: "Store", predicate: predicate)
-        
-        database.perform(query, inZoneWith: nil) { records, error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            else {
-                if let records = records {
-                    print(records.first)
-                    if !records.isEmpty {
-                        self.parseShopResult(records: records)
-                    }
-                }
-            }
-        }
-    }
-    
-    func parseShopResult(records: [CKRecord]) {
-        
-        UserStore.name = records.first?.value(forKey: "name") as! String
-        UserStore.address = records.first?.value(forKey: "address") as! String
-        
-        if let asset = records.first?.value(forKey: "ownerValidID") as? CKAsset, let data = try? Data(contentsOf: asset.fileURL!){
-            self.UserStore.ownerValidID = UIImage(data: data)!
-        }
-        
-        if let asset2 = records.first?.value(forKey: "logo") as? CKAsset, let data2 = try? Data(contentsOf: asset2.fileURL!){
-            self.UserStore.logo = UIImage(data: data2)!
-        }
-        
-        UserStore.owner = records.first?.value(forKey: "owner") as? CKRecord.ID
-    }
+//    func fetchUserStoreData(){
+//        let database = CKContainer.default().publicCloudDatabase
+//        let reference = CKRecord.Reference(recordID: userLoggedOn.id, action: .deleteSelf)
+//        let predicate = NSPredicate(format: "owner == %@", reference)
+//        let query = CKQuery(recordType: "Store", predicate: predicate)
+//
+//        database.perform(query, inZoneWith: nil) { records, error in
+//            if let error = error {
+//                print(error.localizedDescription)
+//            }
+//            else {
+//                if let records = records {
+//                    print(records.first)
+//                    if !records.isEmpty {
+//                        self.parseShopResult(records: records)
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    func parseShopResult(records: [CKRecord]) {
+//
+//        UserStore.name = records.first?.value(forKey: "name") as! String
+//        UserStore.address = records.first?.value(forKey: "address") as! String
+//
+//        if let asset = records.first?.value(forKey: "ownerValidID") as? CKAsset, let data = try? Data(contentsOf: asset.fileURL!){
+//            self.UserStore.ownerValidID = UIImage(data: data)!
+//        }
+//
+//        if let asset2 = records.first?.value(forKey: "logo") as? CKAsset, let data2 = try? Data(contentsOf: asset2.fileURL!){
+//            self.UserStore.logo = UIImage(data: data2)!
+//        }
+//
+//        UserStore.owner = records.first?.value(forKey: "owner") as? CKRecord.ID
+//    }
 }
 
 struct ProfileAfterLogin_Previews: PreviewProvider {

@@ -116,12 +116,14 @@ struct EmailPasswordFormText: View {
 }
 
 struct LoginButton: View {
-    @Binding var newLogin: loginData
     @State var isShowingProfileView = false
-    @ObservedObject var userLoggedOn : userData = .shared
-    @Binding var isShowingLoginPage : Bool
-    @ObservedObject var loginState : loginStatus = .shared
     
+    @Binding var newLogin: loginData
+    @Binding var isShowingLoginPage : Bool
+    
+    @ObservedObject var userLoggedOn : userData = .shared
+    @ObservedObject var loginState : loginStatus = .shared
+    @ObservedObject var UserStore : ShopData = .shared
     
     
     var body: some View {
@@ -177,49 +179,62 @@ struct LoginButton: View {
                 self.userLoggedOn.id
                     = fetchedRecords.first?.recordID
                 
+                self.fetchUserStoreData()
                 DispatchQueue.main.async {
                     print("After Login: \(self.userLoggedOn.name)")
+
                 }
             }
-            self.isShowingLoginPage = false
-            self.loginState.hasLogin = true
+            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//                print("Masuk")
+//                self.isShowingLoginPage = false
+//            }
+//            self.loginState.hasLogin = true
             //self.isShowingProfileView = true
         }
     }
     
-//    func fetchUserStoreData(){
-//        let database = CKContainer.default().publicCloudDatabase
-//        let reference = CKRecord.Reference(recordID: userLoggedOn.id, action: .deleteSelf)
-//        let predicate = NSPredicate(format: "owner == %@", reference)
-//        let query = CKQuery(recordType: "Store", predicate: predicate)
-//
-//        database.perform(query, inZoneWith: nil) { records, error in
-//            if let error = error {
-//                print(error.localizedDescription)
-//            }
-//            else {
-//                if let records = records {
-//                    self.parseShopResult(records: records)
-//                }
-//            }
-//        }
-//    }
-//
-//    func parseShopResult(records: [CKRecord]) {
-//
-//        UserStore.name = records.first?.value(forKey: "name") as! String
-//        UserStore.address = records.first?.value(forKey: "address") as! String
-//
-//        if let asset = records.first?.value(forKey: "ownerValidID") as? CKAsset, let data = try? Data(contentsOf: asset.fileURL!){
-//            self.UserStore.ownerValidID = UIImage(data: data)!
-//        }
-//
-//        if let asset2 = records.first?.value(forKey: "logo") as? CKAsset, let data2 = try? Data(contentsOf: asset2.fileURL!){
-//            self.UserStore.logo = UIImage(data: data2)!
-//        }
-//
-//        UserStore.owner = records.first?.value(forKey: "owner") as? CKRecord.ID
-//    }
+    func fetchUserStoreData(){
+        let database = CKContainer.default().publicCloudDatabase
+        let reference = CKRecord.Reference(recordID: userLoggedOn.id, action: .deleteSelf)
+        let predicate = NSPredicate(format: "owner == %@", reference)
+        let query = CKQuery(recordType: "Store", predicate: predicate)
+        
+        database.perform(query, inZoneWith: nil) { records, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                if let records = records {
+                    print(records.first)
+                    if !records.isEmpty {
+                        self.parseShopResult(records: records)
+                    }
+                    self.isShowingLoginPage = false
+                    self.loginState.hasLogin = true
+                }
+            }
+        }
+    }
+    
+    func parseShopResult(records: [CKRecord]) {
+        
+        UserStore.name = records.first?.value(forKey: "name") as! String
+        UserStore.address = records.first?.value(forKey: "address") as! String
+        
+        if let asset = records.first?.value(forKey: "ownerValidID") as? CKAsset, let data = try? Data(contentsOf: asset.fileURL!){
+            self.UserStore.ownerValidID = UIImage(data: data)!
+        }
+        
+        if let asset2 = records.first?.value(forKey: "logo") as? CKAsset, let data2 = try? Data(contentsOf: asset2.fileURL!){
+            self.UserStore.logo = UIImage(data: data2)!
+        }
+        
+        UserStore.owner = records.first?.value(forKey: "owner") as? CKRecord.ID
+        
+        
+    }
 }
 
 
