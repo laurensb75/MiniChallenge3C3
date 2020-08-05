@@ -59,27 +59,31 @@ struct ProductData {
 }
 
 class ShopData : ObservableObject {
-    var id : CKRecord.ID!
-    var owner : CKRecord.ID!
-    var name : String = "Shop Name"
-    var address : String = "Shop Address"
-    var ownerValidID : UIImage = UIImage(systemName: "person.fill")!
-    var logo : UIImage = UIImage(systemName: "person.fill")!
+    @Published var id : CKRecord.ID!
+    @Published var owner : CKRecord.ID!
+    @Published var name : String = "Shop Name"
+    @Published var address : String = "Shop Address"
+    @Published var ownerValidID : UIImage = UIImage(systemName: "person.fill")!
+    @Published var logo : UIImage = UIImage(systemName: "person.fill")!
     
     static let shared = ShopData()
 }
 
-class TransactionData {
-    var id : CKRecord.ID!
+class TransactionData : ObservableObject {
+    //var id : CKRecord.ID!
     var buyer : CKRecord.ID!
+    var productsPurchased : [CKRecord.ID] = []
+    //var grindStates : [Int] = []
+    var quantities : [Int] = []
+    var subtotals : [Int] = []
 }
 
 
 class Cart : ObservableObject {
     static let shared = Cart()
     
-    @Published var productList : [ProductData] = [.init(), .init()]
-    @Published var ammountList : [Int] = [1, 2]
+    @Published var productList : [ProductData] = []//[.init(), .init()]
+    @Published var ammountList : [Int] = []//[1, 2]
     
 }
 

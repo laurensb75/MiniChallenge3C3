@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct CartView: View {
     let itemInCart: [Coffeee] = [
@@ -18,6 +19,7 @@ struct CartView: View {
     ]
     
     @ObservedObject var cart : Cart = .shared
+    @ObservedObject var userLoggedOn : userData = .shared
     
     var body: some View {
         NavigationView{
@@ -27,7 +29,7 @@ struct CartView: View {
                 }
                 else {
                     ForEach(0 ..< cart.productList.count, id: \.self) { index in
-                        CartItemIcon(ammount: self.cart.ammountList[index],product: self.cart.productList[index], indexSelected: index)
+                        CartItemIcon(ammount: self.$cart.ammountList[index],product: self.cart.productList[index], indexSelected: index)
                             .border(Color.black, width: 1)
                     }
                 }
@@ -38,7 +40,7 @@ struct CartView: View {
                 
                 Spacer()
                 Button(action: {
-                    
+                    self.checkout()
                 }) {
                     Text("Checkout")
                         .foregroundColor(Color.black)
@@ -50,12 +52,50 @@ struct CartView: View {
             .navigationBarTitle("Cart", displayMode: .automatic)
         }
     }
+    
+    func checkout(){
+        var productReferences : [CKRecord.Reference] = []
+        var subtotals : [Int] = []
+        
+        let database = CKContainer.default().publicCloudDatabase
+        
+        let newRecord = CKRecord(recordType: "Transaction")
+        let buyerReference = CKRecord.Reference(recordID: userLoggedOn.id, action: .deleteSelf)
+        
+        
+        for index in 0 ..< cart.productList.count {
+            //Create reference per product purchased
+            let productReference = CKRecord.Reference(recordID: cart.productList[index].id, action: .deleteSelf)
+            productReferences.append(productReference)
+            
+            //Create Subtotal per product purchased
+            let subtotal = cart.productList[index].price * cart.ammountList[index]
+            
+            subtotals.append(subtotal)
+        }
+        
+        
+        
+        newRecord.setValue(buyerReference, forKey: "buyer")
+        newRecord.setValue(productReferences, forKey: "productsPurchased")
+        newRecord.setValue(cart.ammountList, forKey: "quantities")
+        newRecord.setValue(subtotals, forKey: "subtotals")
+        
+        database.save(newRecord) { (record, error) in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+            else{
+                print(record!)
+            }
+        }
+    }
 }
 
 
 struct CartItemIcon: View {
     //var coffeeItem: Coffeee = .init(id: "0", name: "Coffee Name", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 0, roastLevel: 1, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee")
-    @State var ammount: Int = 1
+    @Binding var ammount: Int
     @State var grindState = 0
     var product : ProductData
     var indexSelected : Int
