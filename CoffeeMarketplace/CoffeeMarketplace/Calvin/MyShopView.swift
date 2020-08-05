@@ -96,8 +96,10 @@ struct MyShopView: View {
         let database = CKContainer.default().publicCloudDatabase
         //print("Records Fetched")
         //2.Menentukan record yang mau di fetch
-        let predicate = NSPredicate(value: true) //Ngambil semua record dari querynya, tidak di filter
+        let reference = CKRecord.Reference(recordID: userStore.id, action: .deleteSelf)
+        let predicate = NSPredicate(format: "seller == %@", reference)
         let query = CKQuery(recordType: "Product", predicate: predicate)
+        
         
         //3.Execute query
         database.perform(query, inZoneWith: nil) { records, error in

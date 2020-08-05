@@ -55,6 +55,7 @@ struct ProductData {
     var flavour : [String] = ["FruityFlavour", "SpicesFlavour", "GreenVegetativeFlavour", "NuttyCocoaFlavour", "ChemicalFlavour", "SweetFlavour", "FloralFlavour", "SourFermentedFlavour", "PaperyMustyFlavour"]
     var image = UIImage(named: "test")
     var id: CKRecord.ID!
+    var seller : CKRecord.ID!
 }
 
 class ShopData : ObservableObject {
@@ -66,6 +67,11 @@ class ShopData : ObservableObject {
     var logo : UIImage = UIImage(systemName: "person.fill")!
     
     static let shared = ShopData()
+}
+
+class TransactionData {
+    var id : CKRecord.ID!
+    var buyer : CKRecord.ID!
 }
 
 

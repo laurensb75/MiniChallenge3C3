@@ -25,6 +25,7 @@ struct OpenNewShopView: View {
     var imagePlaceholder = Image(systemName: "plus.circle")
     
     @ObservedObject var userLoggedOn : userData = .shared
+    @ObservedObject var UserStore : ShopData = .shared
     
     var body: some View {
         ScrollView(.vertical){
@@ -209,6 +210,14 @@ struct OpenNewShopView: View {
             }
             
             print(record)
+           
+            
+            self.UserStore.id = newRecord.recordID
+            self.UserStore.name = self.newShopName
+            self.UserStore.address = self.newShopAddress
+            self.UserStore.owner = self.userLoggedOn.id
+            self.UserStore.ownerValidID = self.newShopOwnerID
+            self.UserStore.logo = self.newShopLogo
             
             DispatchQueue.main.async {
                 //Update UI
@@ -216,6 +225,8 @@ struct OpenNewShopView: View {
             
         }
     }
+    
+
 
 }
 

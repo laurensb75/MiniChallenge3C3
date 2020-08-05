@@ -24,6 +24,8 @@ struct AddItemView: View {
     
     @State private var showingAlert = false
     
+    @ObservedObject var UserStore : ShopData = .shared
+    
     var body: some View {
             VStack{
                 ProductNameAndPriceView(productTextField: $productName, priceTextField: $productPrice).padding(.vertical, 20)
@@ -73,7 +75,7 @@ struct AddItemView: View {
         }
         let productPhoto = CKAsset(fileURL: url!)
         
-        
+        let sellerReference = CKRecord.Reference(recordID: UserStore.id, action: .deleteSelf)
 
         //2.Set property
         newRecord.setValue(productName, forKey: "name")
@@ -84,6 +86,7 @@ struct AddItemView: View {
         newRecord.setValue(beanTypeSelected, forKey: "beanType")
         newRecord.setValue(roastTypeSelected, forKey: "roastType")
         newRecord.setValue(flavourSelected, forKey: "flavour")
+        newRecord.setValue(sellerReference, forKey: "seller")
 
         //3.Execute save or insert
         let database = CKContainer.default().publicCloudDatabase

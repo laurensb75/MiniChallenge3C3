@@ -220,6 +220,7 @@ struct LoginButton: View {
     
     func parseShopResult(records: [CKRecord]) {
         
+        UserStore.id = records.first?.recordID
         UserStore.name = records.first?.value(forKey: "name") as! String
         UserStore.address = records.first?.value(forKey: "address") as! String
         
