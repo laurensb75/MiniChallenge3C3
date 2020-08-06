@@ -151,7 +151,7 @@ struct MyShopItemList: View{
     
     init(coffeeList: [ProductData]) {
         if !coffeeList.isEmpty && coffeeList.count > 2 {
-            processedCoffeeList = coffeeList.chunked(into: coffeeList.count/(coffeeList.count/2))
+            processedCoffeeList = coffeeList.chunked(into: 2)
         }
     }
     
