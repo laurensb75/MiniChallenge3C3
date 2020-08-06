@@ -163,27 +163,34 @@ struct LoginButton: View {
         database.perform(query, inZoneWith: nil) { records, error in
             if let fetchedRecords = records { //kalo misal record yang diambil tidak empty
                 print(fetchedRecords)
-                self.userLoggedOn.name = fetchedRecords.first?.value(forKey: "name") as! String
                 
-                self.userLoggedOn.email = fetchedRecords.first?.value(forKey: "email") as! String
-                
-                self.userLoggedOn.password = fetchedRecords.first?.value(forKey: "password") as! String
-                
-                self.userLoggedOn.phoneNumber = fetchedRecords.first?.value(forKey: "phoneNumber") as! String
-                
-                if let asset = fetchedRecords.first?.value(forKey: "profilePhoto") as? CKAsset, let data = try? Data(contentsOf: asset.fileURL!){
-                    self.userLoggedOn.profilePhoto = UIImage(data: data)!
-                }
-                
-                //print(fetchedRecords.first?.recordID)
-                self.userLoggedOn.id
-                    = fetchedRecords.first?.recordID
-                
-                self.fetchUserStoreData()
-                DispatchQueue.main.async {
-                    print("After Login: \(self.userLoggedOn.name)")
+                if !fetchedRecords.isEmpty {
+                    self.userLoggedOn.name = fetchedRecords.first?.value(forKey: "name") as! String
+                    
+                    self.userLoggedOn.email = fetchedRecords.first?.value(forKey: "email") as! String
+                    
+                    self.userLoggedOn.password = fetchedRecords.first?.value(forKey: "password") as! String
+                    
+                    self.userLoggedOn.phoneNumber = fetchedRecords.first?.value(forKey: "phoneNumber") as! String
+                    
+                    if let asset = fetchedRecords.first?.value(forKey: "profilePhoto") as? CKAsset, let data = try? Data(contentsOf: asset.fileURL!){
+                        self.userLoggedOn.profilePhoto = UIImage(data: data)!
+                    }
+                    
+                    //print(fetchedRecords.first?.recordID)
+                    self.userLoggedOn.id
+                        = fetchedRecords.first?.recordID
+                    
+                    self.fetchUserStoreData()
+                    DispatchQueue.main.async {
+                        print("After Login: \(self.userLoggedOn.name)")
 
+                    }
                 }
+                else {
+                    print("No Login Data Found")
+                }
+                
             }
             
 //            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {

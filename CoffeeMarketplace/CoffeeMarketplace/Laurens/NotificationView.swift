@@ -7,45 +7,219 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct NotificationView: View {
-    var currentCart: Cart = .init()
-    
+    @ObservedObject var userStore : ShopData = .shared
+    @ObservedObject var notificationDataList : NotificationData = .shared
+    var defaultNotificationProduct = ProductData(name: "*Product Name*", description: "*description*", price: 1000, stock: 3, beanType: "Green", roastType: "Light", flavour: ["Sweet", "Nutty"], image: UIImage(named: "Coffee")!, id: nil, seller: nil)
+    var defaultNotificationBuyer = buyerData(id: nil, name: "*Buyer Name*", email: "*email*", password: "*Password*", phoneNumber: "*PhoneNumber*", profilePhoto: UIImage(systemName: "person.fill")!)
+    var defaultNotificationQuantity = 1
     
     var body: some View {
-        ScrollView {
+        ScrollView(.vertical) {
             VStack {
-                ForEach (0 ..< currentCart.productList.count, id: \.self) { index in
-                    NavigationLink(destination: NotificationDetail()) {
-                        NotificationItemView()
-                    }.buttonStyle(PlainButtonStyle())
+                
+                if notificationDataList.productsPurchased.isEmpty{
+                    NotificationItemView(productPurchased: defaultNotificationProduct, buyer: defaultNotificationBuyer, quantity: defaultNotificationQuantity)
                 }
+                else if notificationDataList.productsPurchased.count == notificationDataList.buyers.count && notificationDataList.productsPurchased.count == notificationDataList.quantities.count {
+                    ForEach (0 ..< notificationDataList.productsPurchased.count, id: \.self) { index in
+                        NavigationLink(destination: NotificationDetail(productPurchased: self.notificationDataList.productsPurchased[index], buyer: self.notificationDataList.buyers[index], quantity: self.notificationDataList.quantities[index])) {
+                            NotificationItemView(productPurchased: self.notificationDataList.productsPurchased[index], buyer: self.notificationDataList.buyers[index], quantity: self.notificationDataList.quantities[index])
+                        }.buttonStyle(PlainButtonStyle())
+                    }
+                }
+                
             }
             .padding()
+            .frame(width: UIScreen.main.bounds.width)
         }
         .background(Image("Background").scaledToFill().edgesIgnoringSafeArea(.all))
         .navigationBarTitle("Notification", displayMode: .inline)
+        .onAppear(){
+            self.fetchNotification()
+            print("Data Count :  \(self.notificationDataList.productsPurchased.count)")
+        }
+        .navigationBarItems(trailing:
+            Button(action: {
+                print("Refreshing...")
+                self.fetchNotification()
+            }) {
+                Image(systemName: "arrow.clockwise")
+            }
+            .foregroundColor(Color.black)
+            .padding(.leading, 15.0)
+        )
+    }
+    
+    func fetchNotification(){
+        
+        self.notificationDataList.productsPurchased.removeAll()
+        self.notificationDataList.buyers.removeAll()
+        self.notificationDataList.quantities.removeAll()
+        
+        let database = CKContainer.default().publicCloudDatabase
+        
+        let reference = CKRecord.Reference(recordID: userStore.id, action: .deleteSelf)
+        
+        let predicate = NSPredicate(format: "sellers CONTAINS %@", reference)
+        
+        let query = CKQuery(recordType: "Transaction", predicate: predicate)
+        
+        database.perform(query, inZoneWith: nil) { (results, error) in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+            
+            
+            if let results = results {
+                print(results)
+                self.filterTransactionByStore(results: results)
+            }
+        }
+    }
+    
+    func filterTransactionByStore(results : [CKRecord]){
+        var productList : [CKRecord.Reference] = []
+        var QuantityList : [Int] = []
+        var buyerList : [CKRecord.Reference] = []
+        
+        for index in 0 ..< results.count {
+            let record = results[index]
+            
+            let recordSellerList = record.value(forKey: "sellers") as! [CKRecord.Reference]
+            
+            let productPurchasedList = record.value(forKey: "productsPurchased") as! [CKRecord.Reference]
+            
+            let quantities = record.value(forKey: "quantities") as! [Int]
+            
+            
+            
+            for index2 in 0 ..< recordSellerList.count {
+                let seller = recordSellerList[index2]
+                
+                if seller.recordID == userStore.id {
+                    productList.append(productPurchasedList[index2])
+                    QuantityList.append(quantities[index2])
+                    buyerList.append(record.value(forKey: "buyer") as! CKRecord.Reference)
+                }
+            }
+            
+            
+        }
+        
+        loadFilteredTransaction(productList: productList, quantityList: QuantityList, buyerList: buyerList)
+        
         
     }
-}
+    
+    func loadFilteredTransaction(productList: [CKRecord.Reference], quantityList: [Int], buyerList: [CKRecord.Reference]){
+        var productImage : UIImage?
+        var buyerImage : UIImage?
+        let database = CKContainer.default().publicCloudDatabase
+        
+        for index in 0 ..< productList.count {
+            let productRecord = productList[index]
+            let buyerRecord = buyerList[index]
+            
+            //Masukin product ke list notif
+            database.fetch(withRecordID: productRecord.recordID) { (result, error) in
+                if let err = error {
+                    print(err.localizedDescription)
+                }
+                if let result = result {
+                    if let asset = result.value(forKey: "image") as? CKAsset, let data = try? Data(contentsOf: asset.fileURL!){
+                        productImage = UIImage(data: data)
+                    }
+                    
+                    let product = ProductData(name: result.value(forKey: "name") as! String, description: result.value(forKey: "description") as! String, price: result.value(forKey: "price") as! Int, stock: result.value(forKey: "stock") as! Int, beanType: result.value(forKey: "beanType") as! String, roastType: result.value(forKey: "roastType") as! String, flavour: result.value(forKey: "flavour") as! [String], image: productImage!, id: result.recordID, seller: result.value(forKey: "seller") as! CKRecord.Reference)
+                    
+                    self.notificationDataList.productsPurchased.append(product)
+                    
+                    //Masukin ammount per product
+                    self.notificationDataList.quantities.append(quantityList[index])
+                }
+            }
+            
+            //Masukin buyer ke list notif
+            database.fetch(withRecordID: buyerRecord.recordID) { (result, error) in
+                if let err = error {
+                    print(err.localizedDescription)
+                }
+                
+                if let result = result {
+                    if let asset = result.value(forKey: "profilePhoto") as? CKAsset, let data = try? Data(contentsOf: asset.fileURL!){
+                        buyerImage = UIImage(data: data)
+                    }
+                    
+                    let buyer = buyerData(id: result.recordID, name: result.value(forKey: "name") as! String, email: result.value(forKey: "email") as! String, password: result.value(forKey: "password") as! String, phoneNumber: result.value(forKey: "phoneNumber") as! String, profilePhoto: buyerImage!)
+                    
+                    self.notificationDataList.buyers.append(buyer)
+                    
+                }
+            }
+            
+            
+            
+            
+        }
+        
+        
+    }
+    
+    
+        
+//        let predicate = NSPredicate(format: "email = %@ AND password = %@", argumentArray: [newLogin.email, newLogin.password])
+        
+        
+//        // Setup
+//        let pred = NSPredicate(format: "shopID", "someshopID")
+//        let sort = NSSortDescriptor(key: "creationDate", ascending: false)
+//
+//        let query = CKQuery(recordType: "Product", predicate: pred)
+//        query.sortDescriptors = [sort]
+//
+//        let operation = CKQueryOperation(query: query)
+//
+//        operation.recordFetchedBlock = { record in
+//            DispatchQueue.main.async {
+//                // Do something to the data fetched
+//            }
+//        }
+//
+//        operation.queryCompletionBlock = {(_, err) in
+//            DispatchQueue.main.async {
+//                if let err = err {
+//                    print(err)
+//                    return
+//                }
+//            }
+//        }
+//
+//        // Execute
+//        CKContainer.default().publicCloudDatabase.add(operation)
+        
+    }
+
+
 
     
 struct NotificationItemView: View {
-    var selectedCoffee: ProductData = .init()
-    var selectedBuyer: UserData = .init()
-    var selectedItemQuantity: Int = 1
-    
+    var productPurchased : ProductData
+    var buyer : buyerData
+    var quantity : Int
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("There is a buyer!")
+                Text("Buyer : \(buyer.name)")
                     .font(.title)
                     .padding([.leading, .bottom], 5.0)
-                Text("\(selectedCoffee.name)")
+                Text("\(productPurchased.name)")
                     .font(.headline)
                     .padding([.leading, .bottom], 5.0)
-                Text("Quantity: \(selectedItemQuantity), Total price: Rp.\(selectedCoffee.price * selectedItemQuantity),-")
+                Text("Quantity: \(quantity), Total price: Rp.\(productPurchased.price * quantity),-")
                     .font(.body)
                     .padding([.leading, .bottom], 5.0)
             }
@@ -57,7 +231,7 @@ struct NotificationItemView: View {
                 .frame(width: 50.0, height: 50.0)
                 .foregroundColor(Color.blue)
                 .onTapGesture() {
-                    UIApplication.shared.open(URL(string: "https://wa.me/\(self.selectedBuyer.number)?text=I'm%20interested%20in%20buying%20your%20coffee%20for%20sale")!)
+                    UIApplication.shared.open(URL(string: "https://wa.me/\(self.buyer.phoneNumber)?text=I'm%20interested%20in%20buying%20your%20coffee%20for%20sale")!)
                 }
 //            Button(action: {
 //                openURL(URL(string: "https://wa.me/15551234567?text=I'm%20interested%20in%20your%20car%20for%20sale")!)
@@ -81,16 +255,16 @@ struct NotificationItemView: View {
 }
 
 struct NotificationDetail: View {
-    var selectedCoffee: ProductData = .init()
-    var selectedBuyer: UserData = .init()
-    var selectedItemQuantity: Int = 1
+    var productPurchased : ProductData
+    var buyer : buyerData
+    var quantity : Int
     var selectedTransactionProgress = 1
     
     var body: some View {
         VStack {
             //coffee brief detail
             HStack {
-                Image(uiImage: selectedCoffee.image!)
+                Image(uiImage: productPurchased.image!)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 125.0, height: 125.0)
@@ -98,11 +272,11 @@ struct NotificationDetail: View {
                     .cornerRadius(10.0)
                     .padding()
                 VStack(alignment: .leading) {
-                    Text("\(selectedCoffee.name)")
+                    Text("\(productPurchased.name)")
                         .font(.title)
-                    Text("Quantity  :  \(selectedItemQuantity)")
+                    Text("Quantity  :  \(quantity)")
                         .font(.body)
-                    Text("Price        :  \(selectedCoffee.price)")
+                    Text("Price        :  \(productPurchased.price)")
                         .font(.body)
                     Text("Transaction ID")
                         .font(.footnote)
@@ -122,9 +296,9 @@ struct NotificationDetail: View {
             //buyer contact
             HStack {
                 VStack(alignment: .leading) {
-                    Text("\(selectedBuyer.name)")
+                    Text("\(buyer.name)")
                         .font(.title)
-                    Text("\(selectedBuyer.number)")
+                    Text("\(buyer.phoneNumber)")
                         .font(.body)
                 }
                 .padding([.top, .leading, .bottom])
@@ -135,7 +309,7 @@ struct NotificationDetail: View {
                     .frame(width: 100.0, height: 100.0)
                     .foregroundColor(Color.blue)
                     .onTapGesture() {
-                        UIApplication.shared.open(URL(string: "https://wa.me/\(self.selectedBuyer.number)?text=I'm%20interested%20in%20buying%20your%20coffee%20for%20sale")!)
+                        UIApplication.shared.open(URL(string: "https://wa.me/\(self.buyer.phoneNumber)?text=I'm%20interested%20in%20buying%20your%20coffee%20for%20sale")!)
                     }
             }
                 .background(Color.white)

@@ -29,6 +29,15 @@ class userData : ObservableObject {
     static let shared = userData()
 }
 
+struct buyerData {
+    var id : CKRecord.ID!
+    var name : String = ""
+    var email : String = ""
+    var password: String = ""
+    var phoneNumber : String = ""
+    var profilePhoto : UIImage = UIImage(systemName: "person.fill")!
+}
+
 struct newData {
     static var profilePhoto = UIImage(named: "test")
 }
@@ -55,7 +64,7 @@ struct ProductData {
     var flavour : [String] = ["FruityFlavour", "SpicesFlavour", "GreenVegetativeFlavour", "NuttyCocoaFlavour", "ChemicalFlavour", "SweetFlavour", "FloralFlavour", "SourFermentedFlavour", "PaperyMustyFlavour"]
     var image = UIImage(named: "test")
     var id: CKRecord.ID!
-    var seller : CKRecord.ID!
+    var seller : CKRecord.Reference!
 }
 
 class ShopData : ObservableObject {
@@ -109,6 +118,15 @@ class loginStatus : ObservableObject {
     static let shared = loginStatus()
     
     @Published var hasLogin : Bool = false
+}
+
+class NotificationData : ObservableObject {
+    
+    @Published var productsPurchased : [ProductData] = []
+    @Published var buyers : [buyerData]  = []
+    @Published var quantities : [Int] = []
+    
+    static let shared = NotificationData()
 }
 
 //struct Cart {

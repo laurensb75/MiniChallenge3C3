@@ -92,17 +92,6 @@ struct DashboardView: View {
                         .padding(.trailing, 15.0)
                     .navigationBarTitle("Market", displayMode: .inline)
                     
-                    Button(action: {
-                        print("Refreshing...")
-                        self.fetchAllProduct()
-                    }) {
-                        Image(systemName: "arrow.clockwise")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: UIScreen.main.bounds.width * 0.07)
-                    }
-                    .foregroundColor(Color.black)
-                    .padding(.trailing, 15.0)
                 }
                 //display item in category
                 ScrollView(.vertical, showsIndicators: true){
@@ -123,12 +112,27 @@ struct DashboardView: View {
                     
                 }
             }.background(Image("Background").resizable().edgesIgnoringSafeArea(.all).scaledToFill().edgesIgnoringSafeArea(.all))
+            .navigationBarItems(trailing:
+                Button(action: {
+                    print("Refreshing...")
+                    self.fetchAllProduct()
+                }) {
+                    Image(systemName: "arrow.clockwise")
+                        //.resizable()
+                        //.aspectRatio(contentMode: .fit)
+                        //.frame(width: UIScreen.main.bounds.width * 0.05, height: UIScreen.main.bounds.width * 0.05)
+                }
+                .foregroundColor(Color.black)
+                .padding(.leading, 15.0)
+            )
         }
-            .onTapGesture {UIApplication.shared.endEditing()}
-            .navigationBarTitle("Market", displayMode: .inline)
+        .onTapGesture {UIApplication.shared.endEditing()}
+        .navigationBarTitle("Market", displayMode: .inline)
         .onAppear(){
             self.fetchAllProduct()
         }
+        
+            
     }
     
     func fetchAllProduct(){
@@ -165,6 +169,7 @@ struct DashboardView: View {
         
         for index in 0 ..< CKRecordResult.results.count {
             let record = CKRecordResult.results[index]
+            print(record.value(forKey: "seller"))
             
             if let asset = record.value(forKey: "image") as? CKAsset, let data = try? Data(contentsOf: asset.fileURL!){
                 productImage = UIImage(data: data)
@@ -175,7 +180,9 @@ struct DashboardView: View {
 //            print("Roasttype: \(record.value(forKey: "roastType") as! String)")
             //print(record.recordID)
             
-            ConvertedRecordResult.results.append(ProductData(name: record.value(forKey: "name") as! String, description: record.value(forKey: "description") as! String, price: record.value(forKey: "price") as! Int, stock: record.value(forKey: "stock") as! Int, beanType: record.value(forKey: "beanType") as! String, roastType: record.value(forKey: "roastType") as! String, flavour: record.value(forKey: "flavour") as! [String], image: productImage!, id: record.recordID))
+            ConvertedRecordResult.results.append(ProductData(name: record.value(forKey: "name") as! String, description: record.value(forKey: "description") as! String, price: record.value(forKey: "price") as! Int, stock: record.value(forKey: "stock") as! Int, beanType: record.value(forKey: "beanType") as! String, roastType: record.value(forKey: "roastType") as! String, flavour: record.value(forKey: "flavour") as! [String], image: productImage!, id: record.recordID, seller: record.value(forKey: "seller") as? CKRecord.Reference))
+            
+            print(ProductData(name: record.value(forKey: "name") as! String, description: record.value(forKey: "description") as! String, price: record.value(forKey: "price") as! Int, stock: record.value(forKey: "stock") as! Int, beanType: record.value(forKey: "beanType") as! String, roastType: record.value(forKey: "roastType") as! String, flavour: record.value(forKey: "flavour") as! [String], image: productImage!, id: record.recordID, seller: record.value(forKey: "seller") as? CKRecord.Reference))
             
         }
         print("Convert Success")
