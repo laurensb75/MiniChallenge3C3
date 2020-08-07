@@ -182,6 +182,7 @@ struct LoginButton: View {
                         = fetchedRecords.first?.recordID
                     
                     self.fetchUserStoreData()
+                    self.loginState.hasLogin = true
                     DispatchQueue.main.async {
                         print("After Login: \(self.userLoggedOn.name)")
 

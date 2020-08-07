@@ -51,54 +51,104 @@ struct CartView: View {
     
         let database = CKContainer.default().publicCloudDatabase
     
-        let newRecord = CKRecord(recordType: "Transaction")
+        
         let buyerReference = CKRecord.Reference(recordID: userLoggedOn.id, action: .deleteSelf)
     
     
+//        for index in 0 ..< cart.productList.count {
+//            //Create reference per product purchased
+//            let productReference = CKRecord.Reference(recordID: cart.productList[index].id, action: .deleteSelf)
+//            productReferences.append(productReference)
+//
+//            //get seller per product
+//
+//
+//            database.fetch(withRecordID: cart.productList[index].seller.recordID) { (result, error) in
+//                if let err = error {
+//                    print(err.localizedDescription)
+//                }
+//
+//
+//                if let result = result {
+//
+//
+//                    sellerReference = CKRecord.Reference(recordID: result.recordID, action: .deleteSelf)
+//                    print("REFERENCES : ")
+//                    print(sellerReference)
+//                    sellerReferences.append(sellerReference!)
+//                }
+//
+//            }
+//        }
+        
+        //MARK: Transaction Creation Algorythm 2
+        
+        var sellersInvolvedList : [CKRecord.Reference] = []
+        var productsPurchased : [CKRecord.Reference] = []
+        var quantities : [Int] = []
+        
         for index in 0 ..< cart.productList.count {
-            //Create reference per product purchased
-            let productReference = CKRecord.Reference(recordID: cart.productList[index].id, action: .deleteSelf)
-            productReferences.append(productReference)
-    
-            //get seller per product
-    
-    
-            database.fetch(withRecordID: cart.productList[index].seller.recordID) { (result, error) in
-                if let err = error {
-                    print(err.localizedDescription)
-                }
-    
-    
-                if let result = result {
-    
-    
-                    sellerReference = CKRecord.Reference(recordID: result.recordID, action: .deleteSelf)
-                    print("REFERENCES : ")
-                    print(sellerReference)
-                    sellerReferences.append(sellerReference!)
-                }
-    
+            let sellerReference = cart.productList[index].seller!
+            
+            print(!sellersInvolvedList.contains(sellerReference))
+            if !sellersInvolvedList.contains(sellerReference){
+                sellersInvolvedList.append(sellerReference)
+                //print("seller involved:")
+                print("seller involved: \(sellersInvolvedList.count)")
             }
         }
-    
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+        
+        for index in 0 ..< sellersInvolvedList.count {
+            let sellerReference = sellersInvolvedList[index]
+            productsPurchased.removeAll()
+            quantities.removeAll()
+            let newRecord = CKRecord(recordType: "Transaction")
+            
+            for index2 in 0 ..< cart.productList.count {
+                if cart.productList[index2].seller == sellerReference {
+                    productsPurchased.append(CKRecord.Reference(recordID: cart.productList[index2].id, action: .deleteSelf))
+                    quantities.append(cart.ammountList[index2])
+                }
+            }
+            
+            print("masuk")
+            
             newRecord.setValue(buyerReference, forKey: "buyer")
-            newRecord.setValue(productReferences, forKey: "productsPurchased")
-            newRecord.setValue(sellerReferences, forKey: "sellers")
-            newRecord.setValue(self.cart.ammountList, forKey: "quantities")
-    
-            print("SELLER REFERENCES BEFORE SAVE: ")
-            print(sellerReferences)
-    
+            newRecord.setValue(productsPurchased, forKey: "productsPurchased")
+            newRecord.setValue(sellerReference, forKey: "seller")
+            newRecord.setValue(quantities, forKey: "quantities")
+            newRecord.setValue(1, forKey: "progressStatus")
+            
+            
             database.save(newRecord) { (record, error) in
-                if let err = error {
+                if let err = error{
                     print(err.localizedDescription)
                 }
-                else{
-                    print(record!)
+                if let record = record {
+                    print(record)
                 }
             }
+            
         }
+    
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+//            newRecord.setValue(buyerReference, forKey: "buyer")
+//            newRecord.setValue(productReferences, forKey: "productsPurchased")
+//            newRecord.setValue(sellerReferences, forKey: "sellers")
+//            newRecord.setValue(self.cart.ammountList, forKey: "quantities")
+//
+////            print("SELLER REFERENCES BEFORE SAVE: ")
+////            print(sellerReferences)
+//
+//            database.save(newRecord) { (record, error) in
+//                if let err = error {
+//                    print(err.localizedDescription)
+//                }
+//                else{
+//                    print(record!)
+//                }
+//            }
+//        }
     
     }
     

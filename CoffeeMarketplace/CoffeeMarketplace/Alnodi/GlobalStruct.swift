@@ -29,7 +29,7 @@ class userData : ObservableObject {
     static let shared = userData()
 }
 
-struct buyerData {
+struct BuyerData {
     var id : CKRecord.ID!
     var name : String = ""
     var email : String = ""
@@ -65,6 +65,19 @@ struct ProductData {
     var image = UIImage(named: "test")
     var id: CKRecord.ID!
     var seller : CKRecord.Reference!
+}
+
+struct ProductPurchasedData {
+    var name : String = "Coffee name"
+    var description : String = "Coffee description"
+    var price : Int = 100000
+    var stock : Int = 10
+    var beanType : String = "Roasted"
+    var roastType : String = "Dark Roast"
+    var flavour : [String] = ["FruityFlavour", "SpicesFlavour", "GreenVegetativeFlavour", "NuttyCocoaFlavour", "ChemicalFlavour", "SweetFlavour", "FloralFlavour", "SourFermentedFlavour", "PaperyMustyFlavour"]
+    var image = UIImage(named: "test")
+    var id: CKRecord.ID!
+    var buyer : CKRecord.Reference!
 }
 
 class ShopData : ObservableObject {
@@ -120,13 +133,23 @@ class loginStatus : ObservableObject {
     @Published var hasLogin : Bool = false
 }
 
-class NotificationData : ObservableObject {
+struct NotificationData {
+    var transactionID : CKRecord.ID!
+    var buyer : BuyerData
+    var productsPurchased : [ProductPurchasedData]
+    var quantities : [Int]
+    var progressStatus : Int
+}
+
+
+class NotificationList : ObservableObject {
     
-    @Published var productsPurchased : [ProductData] = []
-    @Published var buyers : [buyerData]  = []
-    @Published var quantities : [Int] = []
+//    @Published var productsPurchased : [ProductData] = []
+//    @Published var buyers : [BuyerData]  = []
+//    @Published var quantities : [Int] = []
+    @Published var list : [NotificationData] = []
     
-    static let shared = NotificationData()
+    static let shared = NotificationList()
 }
 
 //struct Cart {
