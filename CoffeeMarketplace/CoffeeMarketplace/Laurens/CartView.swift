@@ -31,7 +31,7 @@ struct CartView: View {
                 .padding(.top)
                 Spacer()
                 Button(action: {
-                    self.checkout()
+                    
                 }) {
                     Text("Checkout")
                         .foregroundColor(Color.black)
@@ -216,7 +216,14 @@ struct CartItemIcon: View {
             }
             
             Spacer()
-        }.frame(width: UIScreen.main.bounds.width * 0.9, height: 200).background(Color.white).overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.black, lineWidth: 1)).cornerRadius(20)
+        }
+            .frame(width: UIScreen.main.bounds.width * 0.9, height: 200)
+            .background(Color.white)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.black, lineWidth: 1)
+            )
+            .cornerRadius(20)
     }
 }
 

@@ -3,7 +3,7 @@
 //  CoffeeMarketplace
 //
 //  Created by Laurens Bryan Cahyana on 16/07/20.
-//  Copyright © 2020 laurens bryan. All rights reserved.
+//  Copyright ©️ 2020 laurens bryan. All rights reserved.
 //
 
 import SwiftUI
@@ -15,7 +15,7 @@ struct CoffeeIcon: View {
         ZStack(alignment: .bottomLeading){
             Image(coffeeToDisplay.image)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .aspectRatio(contentMode: .fill)
                 .frame(
                     width: UIScreen.main.bounds.width * 0.45,
                     height: UIScreen.main.bounds.height * 0.15,
@@ -29,7 +29,7 @@ struct CoffeeIcon: View {
                     .padding(.leading,5)
                     .font(.system(size: 20))
 //                Spacer()
-                Text("Rp.\(coffeeToDisplay.price)")
+                Text("Rp. \(coffeeToDisplay.price)")
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.trailing)
                     .padding(.trailing,5)
@@ -50,7 +50,7 @@ struct CoffeeIconC: View {
         ZStack(alignment: .bottomLeading){
             Image(uiImage: productToDisplay.image!)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+//                .aspectRatio(contentMode: .fill)
                 .frame(
                     width: UIScreen.main.bounds.width * 0.45,
                     height: UIScreen.main.bounds.height * 0.15,
@@ -61,12 +61,14 @@ struct CoffeeIconC: View {
                 Text(productToDisplay.name)
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.center)
+                    .lineLimit(1)
                     .padding(.leading,5)
                     .font(.system(size: 20))
 //                Spacer()
-                Text("Rp.\(productToDisplay.price)")
+                Text("Rp. \(productToDisplay.price)")
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.trailing)
+                    .lineLimit(1)
                     .padding(.trailing,5)
             }
                 .frame(width: UIScreen.main.bounds.width * 0.45)
