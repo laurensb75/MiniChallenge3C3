@@ -15,7 +15,7 @@ struct TestProductDetailView: View {
     @State var isShowingUpdateProductView = false
     @Binding var productListConverted : [ProductData]
     
-    @ObservedObject var cart : CartB = .shared
+    @ObservedObject var cart : Cart = .shared
     
     var body: some View {
         VStack{
@@ -50,7 +50,7 @@ struct TestProductDetailView: View {
             
             Button(action: {
                 //self.isShowingUpdateProductView = true
-                Cart.productList.append(self.selectedProduct)
+                //Cart.productList.append(self.selectedProduct)
                 self.cart.productList.append(self.selectedProduct)
                 print("Added to cart")
             }) {

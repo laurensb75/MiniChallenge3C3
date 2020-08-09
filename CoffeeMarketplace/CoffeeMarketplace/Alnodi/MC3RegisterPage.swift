@@ -14,7 +14,7 @@ import CloudKit
 struct MC3RegisterPage: View {
     
     @State var newUser = userData()
-    @State var photoPreview = Image(systemName: "person.circle")
+    @State var photoPreview : UIImage = UIImage(systemName: "person.fill")!
     @State var isShowingImagePicker = false
     //@State var inputImage = Image("test")
     
@@ -31,7 +31,7 @@ struct MC3RegisterPage: View {
                         RegisterFormText(newUser: $newUser)
                     }
                     
-                    photoPreview
+                Image(uiImage: photoPreview)
                         .resizable()
                         .frame(width: 200, height: 200)
                         .scaledToFit()
@@ -52,7 +52,7 @@ struct MC3RegisterPage: View {
                     .navigationBarTitle("Create an Account", displayMode: .inline)
                     .sheet(isPresented: $isShowingImagePicker,
                            onDismiss: loadImage) {
-                            ImagePicker(image: self.$newUser.profilePhoto)
+                            ImagePicker(image: self.$photoPreview)
                     }
                 //.navigationBarTitle("")
                 //.navigationBarHidden(true)
@@ -61,18 +61,19 @@ struct MC3RegisterPage: View {
         
     
     func loadImage(){
-        photoPreview = Image(uiImage: newData.profilePhoto!)
+        photoPreview = newData.profilePhoto!
+        newUser.profilePhoto = newData.profilePhoto!
     }
 }
 
 
-struct userData {
-    var name: String = ""
-    var email: String = ""
-    var password: String = ""
-    var phoneNumber: String = ""
-    var profilePhoto = Image("test")
-}
+//struct userData {
+//    var name: String = ""
+//    var email: String = ""
+//    var password: String = ""
+//    var phoneNumber: String = ""
+//    var profilePhoto = Image("test")
+//}
 
 //struct newData {
 //    static var profilePhoto = UIImage(named: "test")

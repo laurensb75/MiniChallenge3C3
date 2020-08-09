@@ -16,13 +16,15 @@ struct AddItemView: View {
     
     @State var stockNumber: Int = 1
     @State var productDescription: String = ""
-    @State var productImage: Image = Image(systemName: "placeholder")
+    @State var productImage: UIImage = UIImage(systemName: "plus.circle")!
     
     @State var beanTypeSelected: String = ""
     @State var roastTypeSelected: String = ""
     @State var flavourSelected: [String] = []
     
     @State private var showingAlert = false
+    
+    @ObservedObject var UserStore : ShopData = .shared
     
     var body: some View {
             VStack{
@@ -73,7 +75,7 @@ struct AddItemView: View {
         }
         let productPhoto = CKAsset(fileURL: url!)
         
-        
+        let sellerReference = CKRecord.Reference(recordID: UserStore.id, action: .deleteSelf)
 
         //2.Set property
         newRecord.setValue(productName, forKey: "name")
@@ -84,6 +86,7 @@ struct AddItemView: View {
         newRecord.setValue(beanTypeSelected, forKey: "beanType")
         newRecord.setValue(roastTypeSelected, forKey: "roastType")
         newRecord.setValue(flavourSelected, forKey: "flavour")
+        newRecord.setValue(sellerReference, forKey: "seller")
 
         //3.Execute save or insert
         let database = CKContainer.default().publicCloudDatabase
@@ -125,7 +128,7 @@ struct ProductDetailView: View {
     
     @Binding var stockNum: Int
     @Binding var productDescription: String
-    @Binding var productImage: Image
+    @Binding var productImage: UIImage
     
     @Environment (\.defaultMinListRowHeight) var rowHeight
     

@@ -9,9 +9,11 @@
 import SwiftUI
 
 struct ProfileAccountDetail: View {
+    @ObservedObject var userLoggedOn : userData = .shared
+    
     var body: some View {
         VStack{
-            Image.init(uiImage: userLoggedOn.profilePhoto!)
+            Image.init(uiImage: userLoggedOn.profilePhoto)
             .resizable()
             .scaledToFit()
             .frame(height:100)
@@ -20,7 +22,7 @@ struct ProfileAccountDetail: View {
             Text("Name: \(userLoggedOn.name)")
             Text("Email: \(userLoggedOn.email)")
             Text("Password: \(userLoggedOn.password)")
-            Text("PhoneNumber: \(userLoggedOn.phone)")
+            Text("PhoneNumber: \(userLoggedOn.phoneNumber)")
         }
     }
 }

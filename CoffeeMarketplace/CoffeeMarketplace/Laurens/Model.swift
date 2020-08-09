@@ -16,9 +16,9 @@ struct Coffeee: Identifiable {
     var image: String
 }
 
+
 struct Review {
     var sender: String
     var rating: Int
     var description: String
-    
 }

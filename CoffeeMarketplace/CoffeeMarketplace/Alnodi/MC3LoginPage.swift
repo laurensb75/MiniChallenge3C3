@@ -13,6 +13,9 @@ struct MC3LoginPage: View {
     
     @State var newLogin = loginData()
     @State var profilePhoto = UIImage()
+    @Binding var isShowingLoginPage : Bool
+    
+    
     
     var body: some View {
         //NavigationView {
@@ -27,7 +30,7 @@ struct MC3LoginPage: View {
                     EmailPasswordFormText(newLogin: $newLogin)
                 }
                 
-                LoginButton(newLogin: $newLogin)
+                LoginButton(newLogin: $newLogin, isShowingLoginPage: $isShowingLoginPage)
                 Spacer()
             }
             //.frame(alignment: .topLeading)
@@ -45,11 +48,11 @@ struct loginData {
     var password: String = ""
 }
 
-struct MC3LoginPage_Previews: PreviewProvider {
-    static var previews: some View {
-        MC3LoginPage()
-    }
-}
+//struct MC3LoginPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MC3LoginPage()
+//    }
+//}
 
 struct FormBackgroundView: View {
     var body: some View {
@@ -83,7 +86,6 @@ struct EmailPasswordFormText: View {
     
     
     var body: some View {
-        //var lineColor = Color(red: <#T##Double#>, green: <#T##Double#>, blue: <#T##Double#>)
         
         VStack(alignment: .leading){
             Text("Email")
@@ -114,12 +116,19 @@ struct EmailPasswordFormText: View {
 }
 
 struct LoginButton: View {
-    @Binding var newLogin: loginData
     @State var isShowingProfileView = false
+    
+    @Binding var newLogin: loginData
+    @Binding var isShowingLoginPage : Bool
+    
+    @ObservedObject var userLoggedOn : userData = .shared
+    @ObservedObject var loginState : loginStatus = .shared
+    @ObservedObject var UserStore : ShopData = .shared
+    
     
     var body: some View {
         VStack{
-            NavigationLink(destination: ProfileAfterLoginB(), isActive: $isShowingProfileView){
+            NavigationLink(destination: ProfileAfterLogin(), isActive: $isShowingProfileView){
                 EmptyView()
             }
             
@@ -136,16 +145,6 @@ struct LoginButton: View {
             .cornerRadius(10)
             .padding(.top, 15)
             
-                            //Test
-            //                NavigationLink(destination: MC3RegisterPage()){
-            //                    Text("To Register")
-            //                        .foregroundColor(Color(red: 1.0, green: 1.0, blue: 1.0))
-            //                        .padding()
-            //                        .frame(width: UIScreen.main.bounds.width - 60)
-            //                }
-            //                .background(Color(red: 0.511, green: 0.298, blue: 0.001))
-            //                .cornerRadius(10)
-            //                .padding(.top, 15)
         }
         
     }
@@ -164,29 +163,86 @@ struct LoginButton: View {
         database.perform(query, inZoneWith: nil) { records, error in
             if let fetchedRecords = records { //kalo misal record yang diambil tidak empty
                 print(fetchedRecords)
-                userLoggedOn.name = fetchedRecords.first?.value(forKey: "name") as! String
                 
-                userLoggedOn.email = fetchedRecords.first?.value(forKey: "email") as! String
-                
-                userLoggedOn.password = fetchedRecords.first?.value(forKey: "password") as! String
-                
-                userLoggedOn.phone = fetchedRecords.first?.value(forKey: "phoneNumber") as! String
-                
-                if let asset = fetchedRecords.first?.value(forKey: "profilePhoto") as? CKAsset, let data = try? Data(contentsOf: asset.fileURL!){
-                    userLoggedOn.profilePhoto = UIImage(data: data)
+                if !fetchedRecords.isEmpty {
+                    self.userLoggedOn.name = fetchedRecords.first?.value(forKey: "name") as! String
+                    
+                    self.userLoggedOn.email = fetchedRecords.first?.value(forKey: "email") as! String
+                    
+                    self.userLoggedOn.password = fetchedRecords.first?.value(forKey: "password") as! String
+                    
+                    self.userLoggedOn.phoneNumber = fetchedRecords.first?.value(forKey: "phoneNumber") as! String
+                    
+                    if let asset = fetchedRecords.first?.value(forKey: "profilePhoto") as? CKAsset, let data = try? Data(contentsOf: asset.fileURL!){
+                        self.userLoggedOn.profilePhoto = UIImage(data: data)!
+                    }
+                    
+                    //print(fetchedRecords.first?.recordID)
+                    self.userLoggedOn.id
+                        = fetchedRecords.first?.recordID
+                    
+                    self.fetchUserStoreData()
+                    self.loginState.hasLogin = true
+                    DispatchQueue.main.async {
+                        print("After Login: \(self.userLoggedOn.name)")
+
+                    }
+                }
+                else {
+                    print("No Login Data Found")
                 }
                 
-                print("Record ID:")
-                //print(fetchedRecords.first?.recordID)
-                userLoggedOn.id = fetchedRecords.first?.recordID
-                print(userLoggedOn.id)
-                
-                DispatchQueue.main.async {
-                    
+            }
+            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//                print("Masuk")
+//                self.isShowingLoginPage = false
+//            }
+//            self.loginState.hasLogin = true
+            //self.isShowingProfileView = true
+        }
+    }
+    
+    func fetchUserStoreData(){
+        let database = CKContainer.default().publicCloudDatabase
+        let reference = CKRecord.Reference(recordID: userLoggedOn.id, action: .deleteSelf)
+        let predicate = NSPredicate(format: "owner == %@", reference)
+        let query = CKQuery(recordType: "Store", predicate: predicate)
+        
+        database.perform(query, inZoneWith: nil) { records, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                if let records = records {
+                    print(records.first)
+                    if !records.isEmpty {
+                        self.parseShopResult(records: records)
+                    }
+                    self.isShowingLoginPage = false
+                    self.loginState.hasLogin = true
                 }
             }
-            self.isShowingProfileView = true
         }
+    }
+    
+    func parseShopResult(records: [CKRecord]) {
+        
+        UserStore.id = records.first?.recordID
+        UserStore.name = records.first?.value(forKey: "name") as! String
+        UserStore.address = records.first?.value(forKey: "address") as! String
+        
+        if let asset = records.first?.value(forKey: "ownerValidID") as? CKAsset, let data = try? Data(contentsOf: asset.fileURL!){
+            self.UserStore.ownerValidID = UIImage(data: data)!
+        }
+        
+        if let asset2 = records.first?.value(forKey: "logo") as? CKAsset, let data2 = try? Data(contentsOf: asset2.fileURL!){
+            self.UserStore.logo = UIImage(data: data2)!
+        }
+        
+        UserStore.owner = records.first?.value(forKey: "owner") as? CKRecord.ID
+        
+        
     }
 }
 

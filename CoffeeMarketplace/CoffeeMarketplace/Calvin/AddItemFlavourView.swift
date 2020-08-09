@@ -10,7 +10,9 @@ import SwiftUI
 
 struct AddItem_Flavour_View: View {
     
-    @State var flavourType: [String] = ["Roasted", "Spices", "Nutty/Cocoa", "Sweet", "Floral", "Fruity", "Sour/Fermented", "Green/Vegetative", "Papery/Musty", "Chemical/Industrial"]
+    @State var flavourType: [String] = ["Fruity", "Spices", "Green/Vegetative", "Nutty/Cocoa", "Chemical/Industrial", "Sweet", "Floral", "Sour/Fermented", "Papery/Musty", "Roasted"]
+    
+//    @State var flavourType: [String] = ["Roasted", "Spices", "Nutty/Cocoa", "Sweet", "Floral", "Fruity", "Sour/Fermented", "Green/Vegetative", "Papery/Musty", "Chemical/Industrial"]
     @Binding var selections: [String]
     
     @Environment (\.defaultMinListRowHeight) var rowHeight

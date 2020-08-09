@@ -32,33 +32,31 @@ let testData: [CoffeeData] = [
 struct MyShopView: View {
     @ObservedObject var ConvertedRecordResult : RecordResultConverted = .shared
     @ObservedObject var CKRecordResult : RecordResultRaw = .shared
+    @ObservedObject var userStore : ShopData = .shared
     
     var body: some View {
-        NavigationView{
-            ScrollView(.vertical, showsIndicators: false){
-                if ConvertedRecordResult.results.isEmpty{
-                    Text("Add New Product").padding(50)
-                } else {
-                    //MyShopItemList(coffeeList: testData)
-                    MyShopItemList(coffeeList: ConvertedRecordResult.results)
-                }
-            }.navigationBarTitle("Shop", displayMode: .inline).navigationBarItems(trailing: Button(action: {}, label: {
+        
+        ScrollView(.vertical, showsIndicators: false){
+            if ConvertedRecordResult.results.isEmpty{
+                Text("Add New Product").padding(50)
+            } else {
+                //MyShopItemList(coffeeList: testData)
+                MyShopItemList(coffeeList: ConvertedRecordResult.results)
+            }
+        }.navigationBarTitle("\(userStore.name)", displayMode: .inline).navigationBarItems(trailing: Button(action: {}, label: {
             HStack{
-                NavigationLink(destination: Text("Click the bell")) {
-                Image(systemName: "bell.fill").foregroundColor(SellerConstant.darkBrown).font(Font.custom("", size: 24))
+                NavigationLink(destination: NotificationView()) {
+                    Image(systemName: "bell.fill").foregroundColor(SellerConstant.darkBrown).font(Font.custom("", size: 24))
                 }.padding(.trailing, 20)
                 NavigationLink(destination: AddItemView()) {
-                Image(systemName: "plus").foregroundColor(SellerConstant.darkBrown).font(Font.custom("", size: 24))
+                    Image(systemName: "plus").foregroundColor(SellerConstant.darkBrown).font(Font.custom("", size: 24))
                 }
             }})).background(Image("Background"))
-            
-        }
-        .onAppear(){
-            self.fetchAllProduct()
-            Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
+            .onAppear(){
                 self.fetchAllProduct()
-            }
         }
+        
+        
     }
     
     func fetchShopItem(){
@@ -98,8 +96,10 @@ struct MyShopView: View {
         let database = CKContainer.default().publicCloudDatabase
         //print("Records Fetched")
         //2.Menentukan record yang mau di fetch
-        let predicate = NSPredicate(value: true) //Ngambil semua record dari querynya, tidak di filter
+        let reference = CKRecord.Reference(recordID: userStore.id, action: .deleteSelf)
+        let predicate = NSPredicate(format: "seller == %@", reference)
         let query = CKQuery(recordType: "Product", predicate: predicate)
+        
         
         //3.Execute query
         database.perform(query, inZoneWith: nil) { records, error in
@@ -134,8 +134,7 @@ struct MyShopView: View {
             print("Nama: \(record.value(forKey: "name") as! String)")
             //print(record.recordID)
             
-            ConvertedRecordResult.results.append(ProductData(name: record.value(forKey: "name") as! String, description: record.value(forKey: "description") as! String, price: record.value(forKey: "price") as! Int, image: productImage!, id: record.recordID))
-            print("Convert Success")
+            ConvertedRecordResult.results.append(ProductData(name: record.value(forKey: "name") as! String, description: record.value(forKey: "description") as! String, price: record.value(forKey: "price") as! Int, stock: record.value(forKey: "stock") as! Int, beanType: record.value(forKey: "beanType") as! String, roastType: record.value(forKey: "roastType") as! String, flavour: record.value(forKey: "flavour") as! [String], image: productImage!, id: record.recordID, seller: record.value(forKey: "seller") as? CKRecord.Reference))
         }
     }
     
@@ -143,15 +142,15 @@ struct MyShopView: View {
 }
 
 struct MyShopItemList: View{
-//    var processedCoffeeList: [[CoffeeData]] = []
+    //    var processedCoffeeList: [[CoffeeData]] = []
     var processedCoffeeList: [[ProductData]] = []
-    
-//    init(coffeeList: [CoffeeData]) {
-//        processedCoffeeList = coffeeList.chunked(into: coffeeList.count/(coffeeList.count/2))
-//    }
+    @State var selectedProduct : ProductData = .init()
+    //    init(coffeeList: [CoffeeData]) {
+    //        processedCoffeeList = coffeeList.chunked(into: coffeeList.count/(coffeeList.count/2))
+    //    }
     
     init(coffeeList: [ProductData]) {
-        if !coffeeList.isEmpty{
+        if !coffeeList.isEmpty && coffeeList.count > 2 {
             processedCoffeeList = coffeeList.chunked(into: coffeeList.count/(coffeeList.count/2))
         }
     }
@@ -159,36 +158,35 @@ struct MyShopItemList: View{
     var body: some View{
         VStack(alignment: .leading){
             ForEach(processedCoffeeList.indices, id: \.self){i in
-                MyShopItemListB(processedCoffeeList: self.processedCoffeeList, indexI: i)
+                MyShopItemListB(processedCoffeeList: self.processedCoffeeList, indexI: i, selectedProduct: self.$selectedProduct)
             }
         }
     }
     
-    //    var body: some View{
-    //        VStack(alignment: .leading){
-    //            ForEach(processedCoffeeList.indices){i in
-    //                HStack{
-    //                    ForEach(0..<self.processedCoffeeList[i].count, id: \.self){j in
-    //                        MyShopItem(name: self.processedCoffeeList[i][j].name, coffeePrice: "Rp\(self.processedCoffeeList[i][j].price),-", coffeeImage: self.processedCoffeeList[i][j].coffeeImage).padding(5)
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
+    
     
 }
 
 struct MyShopItemListB: View {
     var processedCoffeeList: [[ProductData]] = []
     var indexI : Int = 0
+    @Binding var selectedProduct : ProductData
+    @State var isShowingProductDetailView = false
     
     var body: some View{
-                HStack{
-                    ForEach(0..<self.processedCoffeeList[indexI].count, id: \.self){j in
-                        MyShopItem(name: self.processedCoffeeList[self.indexI][j].name, coffeePrice: "Rp\(self.processedCoffeeList[self.indexI][j].price),-", coffeeImage: self.processedCoffeeList[self.indexI][j].image!).padding(5)
-                    }
-                    //Text("--END OF LIST--")
+        HStack{
+            NavigationLink(destination: ProductDetail( selectedProduct: selectedProduct), isActive: $isShowingProductDetailView){
+                EmptyView()
+            }
+            
+            ForEach(0..<self.processedCoffeeList[indexI].count, id: \.self){j in
+                MyShopItem(name: self.processedCoffeeList[self.indexI][j].name, coffeePrice: "Rp\(self.processedCoffeeList[self.indexI][j].price),-", coffeeImage: self.processedCoffeeList[self.indexI][j].image!).padding(5)
+                    .onTapGesture {
+                        self.selectedProduct = self.processedCoffeeList[self.indexI][j]
+                        self.isShowingProductDetailView = true
                 }
+            }
+        }
     }
 }
 
@@ -207,13 +205,13 @@ struct MyShopItem: View{
                 VStack(alignment: .leading, spacing: 0) {
                     
                     Rectangle().foregroundColor(Color(red: 216/255, green: 216/255, blue: 216/255)).overlay(
-                    Image(uiImage: coffeeImage)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(minWidth: nil, idealWidth: nil, maxWidth: UIScreen.main.bounds.width, minHeight: nil, idealHeight: nil, maxHeight: 300, alignment: .center)
-                    .clipped())
+                        Image(uiImage: coffeeImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(minWidth: nil, idealWidth: nil, maxWidth: UIScreen.main.bounds.width, minHeight: nil, idealHeight: nil, maxHeight: 300, alignment: .center)
+                            .clipped())
                     
-
+                    
                     VStack(alignment: .leading) {
                         Text(name)
                             .lineLimit(1)
@@ -221,7 +219,7 @@ struct MyShopItem: View{
                             .lineLimit(1)
                     }
                     .padding(12)
-
+                    
                 }
                 .background(Color.white)
                 .cornerRadius(15)
@@ -252,3 +250,16 @@ extension Array {
         }
     }
 }
+
+
+//    var body: some View{
+//        VStack(alignment: .leading){
+//            ForEach(processedCoffeeList.indices){i in
+//                HStack{
+//                    ForEach(0..<self.processedCoffeeList[i].count, id: \.self){j in
+//                        MyShopItem(name: self.processedCoffeeList[i][j].name, coffeePrice: "Rp\(self.processedCoffeeList[i][j].price),-", coffeeImage: self.processedCoffeeList[i][j].coffeeImage).padding(5)
+//                    }
+//                }
+//            }
+//        }
+//    }

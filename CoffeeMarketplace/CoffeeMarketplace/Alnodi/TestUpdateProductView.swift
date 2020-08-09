@@ -13,7 +13,7 @@ struct TestUpdateProductView: View {
     //    @State var updatedProductData = newProductData(name: "*Nama barang sebelumnya*", description: "*Ini deskripsi sebelumnya*", price: 10000, image: Image(systemName: "camera.circle"))
     @Binding var updatedProductData : ProductData
     @State var isShowingImagePicker = false
-    @State var photoPreview = Image(systemName: "camera.circle")
+    @State var photoPreview : UIImage = UIImage(systemName: "person.fill")!
     
     var body: some View {
         VStack{
@@ -25,7 +25,7 @@ struct TestUpdateProductView: View {
                     .clipShape(Circle())
             }
             else{
-                photoPreview
+                Image(uiImage: photoPreview)
                     .resizable()
                     .frame(width: 150, height: 150)
                     .clipShape(Circle())
