@@ -77,7 +77,7 @@ struct DashboardView: View {
                 }
                 
                 HStack{
-                    SearchBar(text: $searchText)
+                    SearchBar(text: $searchText).onTapGesture {UIApplication.shared.endEditing()}
                         .frame(height: UIScreen.main.bounds.height * 0.05)
                         .padding(.leading, 5)
                     Button(action: {
@@ -134,7 +134,6 @@ struct DashboardView: View {
                 }
             )
         }
-            .onTapGesture {UIApplication.shared.endEditing()}
             .navigationBarTitle("Market", displayMode: .inline)
             
             .onAppear(){

@@ -70,16 +70,15 @@ struct Account: View {
                 }
             }
                 
-            .background(Color.init(.white))
-            .frame(width: UIScreen.main.bounds.width * 0.9)
-            .cornerRadius(10)
-            .padding(10)
-            
+                .background(Color.init(.white))
+                .frame(width: UIScreen.main.bounds.width * 0.9)
+                .cornerRadius(10)
+                .padding(10)
         }
-        .navigationBarTitle("My Account", displayMode: .inline)
-        .background(Image("Background"))
-        .edgesIgnoringSafeArea(.all)
-        .onTapGesture {UIApplication.shared.endEditing()}
+            .onTapGesture {UIApplication.shared.endEditing()}
+            .navigationBarTitle("My Account", displayMode: .inline)
+            .background(Image("Background"))
+            .edgesIgnoringSafeArea(.all)
     }
     
 }

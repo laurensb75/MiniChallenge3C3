@@ -49,6 +49,7 @@ struct AddItem_ProductDescription_View: View {
                     
                 })
             )
+            .onTapGesture {UIApplication.shared.endEditing()}
     }
 }
 

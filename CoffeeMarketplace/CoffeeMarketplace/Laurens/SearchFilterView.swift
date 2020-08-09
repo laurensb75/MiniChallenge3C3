@@ -58,7 +58,7 @@ struct SearchFilterView: View {
                 }
                 
             }
-        }.background(Image("Background").resizable().edgesIgnoringSafeArea(.all).scaledToFill().edgesIgnoringSafeArea(.all))
+        }.background(Image("Background").resizable().edgesIgnoringSafeArea(.all).scaledToFill().edgesIgnoringSafeArea(.all)).onTapGesture {UIApplication.shared.endEditing()}
         
     }
 }

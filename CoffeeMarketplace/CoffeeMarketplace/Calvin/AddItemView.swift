@@ -28,14 +28,16 @@ struct AddItemView: View {
     
     var body: some View {
             VStack{
-                ProductNameAndPriceView(productTextField: $productName, priceTextField: $productPrice).padding(.vertical, 20)
+                ProductNameAndPriceView(productTextField: $productName, priceTextField: $productPrice).padding(.vertical, 20).onTapGesture {UIApplication.shared.endEditing()}
                 
                 ProductDetailView(stockNum: $stockNumber, productDescription: $productDescription, productImage: $productImage)
                 
                 CoffeeTypeView(beanTypeSelected: $beanTypeSelected, roastTypeSelected: $roastTypeSelected, flavourSelected: $flavourSelected).padding(.vertical, 20)
                 
                 Spacer()
-            }.onTapGesture {UIApplication.shared.endEditing()}.background(SellerConstant.mainBackground).navigationBarTitle("Add Item", displayMode: .inline).navigationBarItems(trailing: Button (action: {
+            }
+                .background(SellerConstant.mainBackground).navigationBarTitle("Add Item", displayMode: .inline)
+                .navigationBarItems(trailing: Button (action: {
                 self.saveProductToCloudKit()
             }) {
                 Text("Add")
