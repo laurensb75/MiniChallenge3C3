@@ -77,8 +77,9 @@ struct Account: View {
             
         }
         .navigationBarTitle("My Account", displayMode: .inline)
-        .background(Image("Background2"))
+        .background(Image("Background"))
         .edgesIgnoringSafeArea(.all)
+        .onTapGesture {UIApplication.shared.endEditing()}
     }
     
 }

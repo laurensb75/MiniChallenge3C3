@@ -56,8 +56,8 @@ struct MC3RegisterPage: View {
                     }
                 //.navigationBarTitle("")
                 //.navigationBarHidden(true)
-            }
-        }
+    }.onTapGesture {UIApplication.shared.endEditing()}
+}
         
     
     func loadImage(){

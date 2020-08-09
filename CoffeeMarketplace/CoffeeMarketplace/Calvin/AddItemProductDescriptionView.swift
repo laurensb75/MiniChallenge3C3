@@ -34,10 +34,21 @@ struct AddItem_ProductDescription_View: View {
 
             Spacer()
 
-        }.background(SellerConstant.mainBackground).navigationBarTitle("Product Description").navigationBarItems(trailing: Button(action: {}, label: {
-            NavigationLink(destination: AddItem_ProductDescriptionGuideline_View()) {
-            Image(systemName: "info.circle").foregroundColor(SellerConstant.darkBrown).font(Font.custom("", size: 24))
-            }}))
+        }
+            .onTapGesture {UIApplication.shared.endEditing()}
+            .background(SellerConstant.mainBackground)
+            .navigationBarTitle("Product Description")
+            .navigationBarItems(
+                trailing: Button(action: {},
+                label: {
+                    NavigationLink(destination: AddItem_ProductDescriptionGuideline_View()) {
+                        Image(systemName: "info.circle")
+                            .foregroundColor(SellerConstant.darkBrown)
+                            .font(Font.custom("", size: 24))
+                    }
+                    
+                })
+            )
     }
 }
 

@@ -71,7 +71,7 @@ struct ProfileBeforeLogin: View {
                 }
                 
             }
-        }.background(Image("Background2")
+        }.background(Image("Background")
             .resizable()
             .scaledToFill())
         

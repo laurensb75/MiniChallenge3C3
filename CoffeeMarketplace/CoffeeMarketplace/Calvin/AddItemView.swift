@@ -35,7 +35,7 @@ struct AddItemView: View {
                 CoffeeTypeView(beanTypeSelected: $beanTypeSelected, roastTypeSelected: $roastTypeSelected, flavourSelected: $flavourSelected).padding(.vertical, 20)
                 
                 Spacer()
-            }.background(SellerConstant.mainBackground).navigationBarTitle("Add Item", displayMode: .inline).navigationBarItems(trailing: Button (action: {
+            }.onTapGesture {UIApplication.shared.endEditing()}.background(SellerConstant.mainBackground).navigationBarTitle("Add Item", displayMode: .inline).navigationBarItems(trailing: Button (action: {
                 self.saveProductToCloudKit()
             }) {
                 Text("Add")

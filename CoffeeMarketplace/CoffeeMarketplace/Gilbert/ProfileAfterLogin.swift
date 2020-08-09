@@ -36,33 +36,37 @@ struct ProfileAfterLoginPage: View{
                 .clipShape(Circle())
                 
             Text("Welcome, \(userLoggedOn.name)")
+                .font(.title)
             
             VStack(spacing: 12){
                 Button(action: {
                     // your action here
                 }) {
-                    Text("History Transaction")
-                        .foregroundColor(Color.white)
-                        .frame(minWidth: 0, maxWidth: 300)
-                        .padding()
-                        .background(Color.init(.brown))
-                        .font(.title)
-                        
+                    HStack{
+                        Text("History Transaction")
+                            .font(.title)
+                            .foregroundColor(Color.black)
+                            .padding(.leading)
+                        Spacer()
+                    }
+                        .frame(width: UIScreen.main.bounds.width * 0.875, height: 50)
+                        .background(Color.white).opacity(0.7)
                         .cornerRadius(15)
-                    
                 }
                 NavigationLink(destination: Account(), isActive: $isShowingAccountDetailView){
                     Button(action: {
                         // your action here
                         self.isShowingAccountDetailView = true
                     }) {
-                        Text("Account")
-                            .foregroundColor(Color.white)
-                            .frame(minWidth: 0, maxWidth: 300)
-                            .padding()
-                            .background(Color.init(.brown))
-                            .font(.title)
-                            
+                        HStack{
+                            Text("Account")
+                                .font(.title)
+                                .foregroundColor(Color.black)
+                                .padding(.leading)
+                            Spacer()
+                        }
+                            .frame(width: UIScreen.main.bounds.width * 0.875, height: 50)
+                            .background(Color.white).opacity(0.7)
                             .cornerRadius(15)
                         
                     }
@@ -77,15 +81,17 @@ struct ProfileAfterLoginPage: View{
                         self.isShowingOpenShopView = true
                     }
                 }) {
-                    Text(self.UserStore.name != "Shop Name" ? "My Shop" : "Open Shop")
-                        .foregroundColor(Color.white)
-                        .frame(minWidth: 0, maxWidth: 300)
-                        .padding()
-                        .background(Color.init(.brown))
-                        .font(.title)
-                        
-                        .cornerRadius(15)
                     
+                    HStack{
+                            Text(self.UserStore.name != "Shop Name" ? "My Shop" : "Open Shop")
+                                .font(.title)
+                                .foregroundColor(Color.black)
+                                .padding(.leading)
+                            Spacer()
+                        }
+                            .frame(width: UIScreen.main.bounds.width * 0.875, height: 50)
+                            .background(Color.white).opacity(0.7)
+                            .cornerRadius(15)
                 }
                 
                 
@@ -96,13 +102,15 @@ struct ProfileAfterLoginPage: View{
                         self.loginState.hasLogin = false
                         self.signOut()
                     }) {
-                        Text("Sign Out")
-                            .foregroundColor(Color.white)
-                            .frame(minWidth: 0, maxWidth: 300)
-                            .padding()
-                            .background(Color.init(.brown))
-                            .font(.title)
-                            
+                        HStack{
+                            Text("Sign Out")
+                                .font(.title)
+                                .foregroundColor(Color.black)
+                                .padding(.leading)
+                            Spacer()
+                        }
+                            .frame(width: UIScreen.main.bounds.width * 0.875, height: 50)
+                            .background(Color.white).opacity(0.7)
                             .cornerRadius(15)
                         
                     }
@@ -118,7 +126,7 @@ struct ProfileAfterLoginPage: View{
             }
             
         }
-        .background(Image("Background2"))
+        .background(Image("Background"))
         .onAppear(){
             //print("fetching user store data...")
             print("User Store Name : \(self.UserStore.name)")

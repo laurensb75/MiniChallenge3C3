@@ -34,10 +34,11 @@ struct MC3LoginPage: View {
                 Spacer()
             }
             //.frame(alignment: .topLeading)
-            .background(Image("Background"))
+                .background(Image("Background"))
             //.navigationBarHidden(true)
-            .navigationBarTitle("Login", displayMode: .inline)
+                .navigationBarTitle("Login", displayMode: .inline)
         //}
+                .onTapGesture {UIApplication.shared.endEditing()}
         
         
     }
@@ -111,7 +112,8 @@ struct EmailPasswordFormText: View {
             
             ForgotPasswordBtn()
         }
-        .padding(.horizontal, 25.0)
+            .onTapGesture {UIApplication.shared.endEditing()}
+            .padding(.horizontal, 25.0)
     }
 }
 
