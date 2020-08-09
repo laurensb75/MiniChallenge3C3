@@ -492,7 +492,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.MC3G6C3.CoffeeMarketplace;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mc3g6c3.coffeemarketplace;
 				PRODUCT_NAME = "Coffee's Bag";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -513,7 +513,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.MC3G6C3.CoffeeMarketplace;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mc3g6c3.coffeemarketplace;
 				PRODUCT_NAME = "Coffee's Bag";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
