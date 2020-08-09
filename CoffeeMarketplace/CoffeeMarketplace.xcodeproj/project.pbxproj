@@ -87,7 +87,7 @@
 		53E1253924D7DC68006EF750 /* NotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		53E1253C24D7F8E0006EF750 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		53E1253E24D9AAAE006EF750 /* OpenNewShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenNewShopView.swift; sourceTree = "<group>"; };
-		5A1856B724C0691100F935FC /* CoffeeMarketplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoffeeMarketplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A1856B724C0691100F935FC /* Coffee's Bag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Coffee's Bag.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A1856BA24C0691100F935FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A1856BC24C0691100F935FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5A1856BF24C0691100F935FC /* CoffeeMarketplace.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoffeeMarketplace.xcdatamodel; sourceTree = "<group>"; };
@@ -187,7 +187,7 @@
 		5A1856B824C0691100F935FC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5A1856B724C0691100F935FC /* CoffeeMarketplace.app */,
+				5A1856B724C0691100F935FC /* Coffee's Bag.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -252,7 +252,7 @@
 			);
 			name = CoffeeMarketplace;
 			productName = CoffeeMarketplace;
-			productReference = 5A1856B724C0691100F935FC /* CoffeeMarketplace.app */;
+			productReference = 5A1856B724C0691100F935FC /* Coffee's Bag.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -493,7 +493,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.MC3G6C3.CoffeeMarketplace;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Coffee's Bag";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -514,7 +514,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.MC3G6C3.CoffeeMarketplace;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Coffee's Bag";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
