@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-<<<<<<< HEAD
 import CloudKit
 
 struct NotificationView: View {
@@ -244,41 +243,10 @@ struct NotificationItemView: View {
     var quantity : [Int]
     
     @State var totalQty = 0
-=======
-
-struct NotificationView: View {
-    var currentCart: Cart = .init()
-    
-    
-    var body: some View {
-        ScrollView {
-            VStack {
-                ForEach (0 ..< currentCart.productList.count, id: \.self) { index in
-                    NavigationLink(destination: NotificationDetail()) {
-                        NotificationItemView()
-                    }.buttonStyle(PlainButtonStyle())
-                }
-            }
-            .padding()
-        }
-        .background(Image("Background").scaledToFill().edgesIgnoringSafeArea(.all))
-        .navigationBarTitle("Notification", displayMode: .inline)
-        
-    }
-}
-
-    
-struct NotificationItemView: View {
-    var selectedCoffee: ProductData = .init()
-    var selectedBuyer: UserData = .init()
-    var selectedItemQuantity: Int = 1
-    
->>>>>>> origin/calvin
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-<<<<<<< HEAD
                 Text("Buyer : \(buyer.name)")
                     .font(.title)
                     .padding([.leading, .bottom], 5.0)
@@ -299,17 +267,6 @@ struct NotificationItemView: View {
 //                    .padding([.leading, .bottom], 5.0)
                 
 //                Text("Total Item: \(totalQty), Total price: Rp.\(productPurchased.price * quantity),-")
-=======
-                Text("There is a buyer!")
-                    .font(.title)
-                    .padding([.leading, .bottom], 5.0)
-                Text("\(selectedCoffee.name)")
-                    .font(.headline)
-                    .padding([.leading, .bottom], 5.0)
-                Text("Quantity: \(selectedItemQuantity), Total price: Rp.\(selectedCoffee.price * selectedItemQuantity),-")
-                    .font(.body)
-                    .padding([.leading, .bottom], 5.0)
->>>>>>> origin/calvin
             }
                 .padding([.top, .leading, .bottom], 5.0)
             Spacer()
@@ -319,11 +276,7 @@ struct NotificationItemView: View {
                 .frame(width: 50.0, height: 50.0)
                 .foregroundColor(Color.blue)
                 .onTapGesture() {
-<<<<<<< HEAD
                     UIApplication.shared.open(URL(string: "https://wa.me/\(self.buyer.phoneNumber)?text=I'm%20interested%20in%20buying%20your%20coffee%20for%20sale")!)
-=======
-                    UIApplication.shared.open(URL(string: "https://wa.me/\(self.selectedBuyer.number)?text=I'm%20interested%20in%20buying%20your%20coffee%20for%20sale")!)
->>>>>>> origin/calvin
                 }
 //            Button(action: {
 //                openURL(URL(string: "https://wa.me/15551234567?text=I'm%20interested%20in%20your%20car%20for%20sale")!)
@@ -343,7 +296,6 @@ struct NotificationItemView: View {
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(Color.black, lineWidth: 1)
             )
-<<<<<<< HEAD
             .onAppear(){
                 self.calculateTotalQuantity()
         }
@@ -353,13 +305,10 @@ struct NotificationItemView: View {
         for index in 0 ..< quantity.count {
             totalQty += quantity[index]
         }
-=======
->>>>>>> origin/calvin
     }
 }
 
 struct NotificationDetail: View {
-<<<<<<< HEAD
     var productPurchased : [ProductPurchasedData]
     var buyer : BuyerData
     var quantity : [Int]
@@ -389,120 +338,6 @@ struct NotificationDetail: View {
                         .onTapGesture() {
                             UIApplication.shared.open(URL(string: "https://wa.me/\(self.buyer.phoneNumber)?text=I'm%20interested%20in%20buying%20your%20coffee%20for%20sale")!)
                         }
-=======
-    var selectedCoffee: ProductData = .init()
-    var selectedBuyer: UserData = .init()
-    var selectedItemQuantity: Int = 1
-    var selectedTransactionProgress = 1
-    
-    var body: some View {
-        VStack {
-            //coffee brief detail
-            HStack {
-                Image(uiImage: selectedCoffee.image!)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 125.0, height: 125.0)
-                    .clipped()
-                    .cornerRadius(10.0)
-                    .padding()
-                VStack(alignment: .leading) {
-                    Text("\(selectedCoffee.name)")
-                        .font(.title)
-                    Text("Quantity  :  \(selectedItemQuantity)")
-                        .font(.body)
-                    Text("Price        :  \(selectedCoffee.price)")
-                        .font(.body)
-                    Text("Transaction ID")
-                        .font(.footnote)
-                    
-                }
-                .padding(.trailing, 5.0)
-                Spacer()
-            }
-                .background(Color.white)
-                .cornerRadius(20.0)
-                .frame(width: UIScreen.main.bounds.width * 0.9)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.black, lineWidth: 1)
-                )
-            
-            //buyer contact
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("\(selectedBuyer.name)")
-                        .font(.title)
-                    Text("\(selectedBuyer.number)")
-                        .font(.body)
-                }
-                .padding([.top, .leading, .bottom])
-                Spacer()
-                Image("WhatsappIcon")
-                    .resizable()
-                    .padding()
-                    .frame(width: 100.0, height: 100.0)
-                    .foregroundColor(Color.blue)
-                    .onTapGesture() {
-                        UIApplication.shared.open(URL(string: "https://wa.me/\(self.selectedBuyer.number)?text=I'm%20interested%20in%20buying%20your%20coffee%20for%20sale")!)
-                    }
-            }
-                .background(Color.white)
-                .cornerRadius(20.0)
-                .frame(width: UIScreen.main.bounds.width * 0.9)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.black, lineWidth: 1)
-                )
-            
-            //transaction process
-            VStack {
-                HStack {
-                    VStack {
-                        Text("Transaction Process")
-                            .font(.title)
-                        HStack{
-                            Text("Ordered")
-                            Spacer()
-                            Image(systemName: (selectedTransactionProgress >= 1) ? "checkmark" : "")
-                                .foregroundColor(/*@START_MENU_TOKEN@*/.green/*@END_MENU_TOKEN@*/)
-                                .padding(.trailing)
-                        }
-                        .padding()
-                        HStack{
-                            Text("Confirmed")
-                            Spacer()
-                            Image(systemName: (selectedTransactionProgress >= 2) ? "checkmark" : "")
-                            .foregroundColor(/*@START_MENU_TOKEN@*/.green/*@END_MENU_TOKEN@*/)
-                            .padding(.trailing)
-                        }
-                        .padding()
-                        HStack{
-                            Text("Sent")
-                            Spacer()
-                            Image(systemName: (selectedTransactionProgress >= 3) ? "checkmark" : "")
-                            .foregroundColor(/*@START_MENU_TOKEN@*/.green/*@END_MENU_TOKEN@*/)
-                            .padding(.trailing)
-                        }
-                        .padding()
-                        HStack{
-                            Text("Arrived")
-                            Spacer()
-                            Image(systemName: (selectedTransactionProgress >= 4) ? "checkmark" : "")
-                            .foregroundColor(/*@START_MENU_TOKEN@*/.green/*@END_MENU_TOKEN@*/)
-                            .padding(.trailing)
-                        }
-                        .padding()
-                        HStack{
-                            Text("Done")
-                            Spacer()
-                            Image(systemName: (selectedTransactionProgress >= 5) ? "checkmark" : "")
-                            .foregroundColor(/*@START_MENU_TOKEN@*/.green/*@END_MENU_TOKEN@*/)
-                            .padding(.trailing)
-                        }
-                        .padding()
-                    }
->>>>>>> origin/calvin
                 }
                     .background(Color.white)
                     .cornerRadius(20.0)
@@ -512,7 +347,6 @@ struct NotificationDetail: View {
                             .stroke(Color.black, lineWidth: 1)
                     )
                 
-<<<<<<< HEAD
                 //coffee brief detail
                 VStack {
                     ForEach (0 ..< productPurchased.count) { index in
@@ -678,40 +512,6 @@ struct NotificationDetail: View {
                 }
             }
         }
-=======
-                //spacing befor button
-                Spacer()
-                
-                //buttons
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                    Text("Confirm Order Payment")
-                        .foregroundColor(Color.white)
-                }
-                    .frame(width: UIScreen.main.bounds.width * 0.9, height: 25)
-                    .background(Color.blue)
-                    .cornerRadius(12.5)
-                    .padding(.top)
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                    Text("Item sent")
-                        .foregroundColor(Color.white)
-                }
-                    .frame(width: UIScreen.main.bounds.width * 0.9, height: 25)
-                    .background(Color.blue)
-                    .cornerRadius(12.5)
-                .padding(.top)
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                    Text("Item Arrived")
-                        .foregroundColor(Color.white)
-                }
-                    .frame(width: UIScreen.main.bounds.width * 0.9, height: 25)
-                    .background(Color.blue)
-                    .cornerRadius(12.5)
-                    .padding(.top)
-            }
-        }
-        .padding(.top)
-            .background(Image("Background").edgesIgnoringSafeArea(.all))
->>>>>>> origin/calvin
     }
 }
 
@@ -741,7 +541,6 @@ struct UserData {
     var name: String = "User Name"
     var number: String = "62811221655"
 }
-<<<<<<< HEAD
 
 
 //func filterTransactionByStore(results : [CKRecord]){
@@ -831,5 +630,3 @@ struct UserData {
 //
 //
 //}
-=======
->>>>>>> origin/calvin

@@ -7,31 +7,16 @@
 //
 
 import SwiftUI
-<<<<<<< HEAD
 import CloudKit
 
 struct CartView: View {
     
     @ObservedObject var cart : Cart = .shared
     @ObservedObject var userLoggedOn : userData = .shared
-=======
-
-struct CartView: View {
-    let itemInCart: [Coffeee] = [
-        .init(id: "1", name: "Trending Coffee 1", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 100000, roastLevel: 1, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee"),
-        .init(id: "2", name: "Trending Coffee 2", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 110000, roastLevel: 3, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee"),
-        .init(id: "3", name: "Trending Coffee 3", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 150000, roastLevel: 3, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee"),
-        .init(id: "4", name: "Trending Coffee 4", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 125000, roastLevel: 2, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee"),
-        .init(id: "5", name: "Trending Coffee 5", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 375000, roastLevel: 1, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee"),
-    ]
-    
-    @ObservedObject var cart : Cart = .shared
->>>>>>> origin/calvin
     
     var body: some View {
         NavigationView{
             VStack{
-<<<<<<< HEAD
                 ScrollView{
                     if cart.productList.isEmpty {
                         Text("No item")
@@ -46,33 +31,13 @@ struct CartView: View {
                 .padding(.top)
                 Spacer()
                 Button(action: {
-                    self.checkout()
-=======
-                if cart.productList.isEmpty {
-                    Text("No item")
-                }
-                else {
-                    ForEach(0 ..< cart.productList.count, id: \.self) { index in
-                        CartItemIcon(ammount: self.cart.ammountList[index],product: self.cart.productList[index], indexSelected: index)
-                            .border(Color.black, width: 1)
-                    }
-                }
-                
-//                List(itemInCart) { item in
-//                    CartItemIcon(coffeeItem: item, ammount: 1).border(Color.black, width: 1).cornerRadius(/*@START_MENU_TOKEN@*/15.0/*@END_MENU_TOKEN@*/)
-//                }
-                
-                Spacer()
-                Button(action: {
                     
->>>>>>> origin/calvin
                 }) {
                     Text("Checkout")
                         .foregroundColor(Color.black)
                 }
                     .frame(width: UIScreen.main.bounds.width * 0.6, height: 45)
                     .background(Color.init(.brown))
-<<<<<<< HEAD
                 .cornerRadius(10.0).padding(.bottom, 16.0)
             }.background(Image("Background").scaledToFill().edgesIgnoringSafeArea(.all))
                 .navigationBarTitle("Cart",displayMode: .inline)
@@ -187,21 +152,10 @@ struct CartView: View {
     
     }
     
-=======
-                    .cornerRadius(10.0)
-            }
-            .navigationBarTitle("Cart", displayMode: .automatic)
-        }
-    }
->>>>>>> origin/calvin
 }
 
 
 struct CartItemIcon: View {
-<<<<<<< HEAD
-=======
-    //var coffeeItem: Coffeee = .init(id: "0", name: "Coffee Name", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 0, roastLevel: 1, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee")
->>>>>>> origin/calvin
     @State var ammount: Int = 1
     @State var grindState = 0
     var product : ProductData
@@ -217,7 +171,6 @@ struct CartItemIcon: View {
                 .padding(.leading)
             VStack {
                 VStack(alignment: .leading){
-<<<<<<< HEAD
                     HStack{
                         Text(product.name)
                             .font(.headline)
@@ -229,11 +182,6 @@ struct CartItemIcon: View {
                             Image(systemName: "trash.fill").resizable().frame(width: UIScreen.main.bounds.width * 0.045, height: UIScreen.main.bounds.width * 0.05).aspectRatio(contentMode: .fit).foregroundColor(Color.black)
                         }
                     }
-=======
-                    Text(product.name)
-                        .font(.headline)
-                    
->>>>>>> origin/calvin
                     Text("Rp.\(product.price),-")
                     
                     HStack{
@@ -257,16 +205,7 @@ struct CartItemIcon: View {
                             }
                         }.frame(width: 60, height: 40).border(Color.black, width: 1)
                         Spacer()
-<<<<<<< HEAD
                         
-=======
-                        Button(action: {
-                            self.cart.productList.remove(at: self.indexSelected)
-                            print("item deleted")
-                        }) {
-                            Image(systemName: "trash").resizable().frame(width: UIScreen.main.bounds.width * 0.075, height: UIScreen.main.bounds.width * 0.075).aspectRatio(contentMode: .fit)
-                        }
->>>>>>> origin/calvin
                     }
                     
                 }
@@ -277,11 +216,14 @@ struct CartItemIcon: View {
             }
             
             Spacer()
-<<<<<<< HEAD
-        }.frame(width: UIScreen.main.bounds.width * 0.9, height: 200).background(Color.white).overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.black, lineWidth: 1)).cornerRadius(20)
-=======
-            }.cornerRadius(15).frame(width: UIScreen.main.bounds.width * 0.9, height: 200)
->>>>>>> origin/calvin
+        }
+            .frame(width: UIScreen.main.bounds.width * 0.9, height: 200)
+            .background(Color.white)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.black, lineWidth: 1)
+            )
+            .cornerRadius(20)
     }
 }
 
@@ -340,9 +282,6 @@ struct CartView_Previews: PreviewProvider {
 //        Spacer()
 //        }.cornerRadius(15).frame(width: UIScreen.main.bounds.width * 0.9, height: 200)
 //}
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> origin/calvin

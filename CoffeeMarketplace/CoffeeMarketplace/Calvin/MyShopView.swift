@@ -181,7 +181,12 @@ struct MyShopItemListB: View {
             }
             
             ForEach(0..<self.processedCoffeeList[indexI].count, id: \.self){j in
-                MyShopItem(name: self.processedCoffeeList[self.indexI][j].name, coffeePrice: "Rp\(self.processedCoffeeList[self.indexI][j].price),-", coffeeImage: self.processedCoffeeList[self.indexI][j].image!).padding(5)
+                MyShopItem(
+                    name: self.processedCoffeeList[self.indexI][j].name,
+                    coffeePrice: self.processedCoffeeList[self.indexI][j].price,
+                    coffeeImage: self.processedCoffeeList[self.indexI][j].image!
+                )
+                    .padding(5)
                     .onTapGesture {
                         self.selectedProduct = self.processedCoffeeList[self.indexI][j]
                         self.isShowingProductDetailView = true
@@ -194,7 +199,7 @@ struct MyShopItemListB: View {
 struct MyShopItem: View{
     
     var name: String
-    var coffeePrice: String
+    var coffeePrice: Int
     //var coffeeImage: Image
     var coffeeImage: UIImage
     
@@ -216,7 +221,7 @@ struct MyShopItem: View{
                     VStack(alignment: .leading) {
                         Text(name)
                             .lineLimit(1)
-                        Text(coffeePrice)
+                        Text("Rp. \(coffeePrice),-")
                             .lineLimit(1)
                     }
                     .padding(12)

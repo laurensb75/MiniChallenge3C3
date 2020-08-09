@@ -3,7 +3,7 @@
 //  CoffeeMarketplace
 //
 //  Created by Laurens Bryan Cahyana on 22/07/20.
-//  Copyright © 2020 laurens bryan. All rights reserved.
+//  Copyright ©️ 2020 laurens bryan. All rights reserved.
 //
 
 import SwiftUI
@@ -12,7 +12,7 @@ struct ProductDetail: View {
     
     var selectedCoffee: Coffeee = .init(id: "0", name: "Coffee Name", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 0, roastLevel: 1, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee")
     
-    var selectedProduct = ProductData(name: "Coffee Name", description: "This is coffee description", price: 0, stock: 1, beanType: "green", roastType: "Dark", flavour: ["1", "2"], image: UIImage(named: "Coffee"), id: nil, seller: nil)
+    var selectedProduct = ProductData(name: "Coffee Name", description: "This is coffee description", price: 0, stock: 1, beanType: "green", roastType: "Dark", flavour: ["1", "2"], image: UIImage(named: "Coffee"), id: nil)
     
     var roastImg : [String] = ["Green Beans", "LightRoast", "MediumRoast", "DarkRoast"]
     
@@ -22,6 +22,7 @@ struct ProductDetail: View {
         Review(sender: "Ccccc", rating: 1, description: "asdfasdfadfasdf")
     ]
     
+    @State var averageRating: Int = 4
     
     
     var body: some View {
@@ -30,7 +31,7 @@ struct ProductDetail: View {
                 //Coffee image
                 Image(uiImage: selectedProduct.image!) //Image(selectedCoffee.image)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .aspectRatio(contentMode: .fill)
                     .frame(
                         width: UIScreen.main.bounds.width * 1,
                         height: UIScreen.main.bounds.height * 0.3,
@@ -45,7 +46,7 @@ struct ProductDetail: View {
                         .fontWeight(.bold)
                         .multilineTextAlignment(.leading)
                         .padding([.top, .leading], 15.0)
-                    Text("Rp.\(selectedProduct.price)") //Text("Rp.\(selectedCoffee.price)")
+                    Text("Rp. \(selectedProduct.price)") //Text("Rp.\(selectedCoffee.price)")
                         .font(.body)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.leading)
@@ -74,6 +75,19 @@ struct ProductDetail: View {
                 
                 ProductDetailCoffeeFlavourView(ReceivedCoffeeFlavour: selectedProduct.flavour)
                 
+                
+                //rating overall + favourite button
+                HStack{
+                    Rating(rating: $averageRating)
+                    Spacer()
+                    Button(action: {
+                        
+                    }) {
+                        Image(systemName: "heart").resizable().foregroundColor(Color.red).frame(width: 30, height: 30)
+                    }
+                }.padding(.horizontal, 25.0)
+                
+                
                 //Coffee Description
                 //ProductDetailCoffeeDescription(selectedCoffeeDescription: selectedCoffee.description)
                 
@@ -85,7 +99,7 @@ struct ProductDetail: View {
             AddToCartBtnView(ammount: 0, selectedProduct: selectedProduct)
         }.background(Image("Background").resizable().edgesIgnoringSafeArea(.all).scaledToFill().edgesIgnoringSafeArea(.all))
             .onAppear(){
-                print("nama produk: \(self.selectedProduct.name) \nseller id: \(self.selectedProduct.seller)")
+                print("nama produk: \(self.selectedProduct.name) \nroastType: \(self.selectedProduct.roastType)")
         }
         .navigationBarTitle("Detail", displayMode: .inline)
     }
