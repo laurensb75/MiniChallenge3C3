@@ -107,7 +107,7 @@ struct DashboardView: View {
                 //display item in category
                 ScrollView(.vertical, showsIndicators: true){
                     CoffeeHorizontalCollectionViewC(productsInCategory: ConvertedRecordResult.results, category: "All Product")
-                    .padding(5)
+                        .padding(5)
                     //CoffeeHorizontalCollectionView(coffeeInCategory: trendingCoffee, category: "Trending")
                         //.padding([.leading, .bottom, .trailing], 5)
                     //CoffeeHorizontalCollectionView(coffeeInCategory: newCoffee, category: "New")
@@ -117,9 +117,9 @@ struct DashboardView: View {
                     CoffeeHorizontalCollectionViewC(productsInCategory: self.getProductByRoastType(roastType: "Light"), category: "Light Roast")
                         .padding(5)
                     CoffeeHorizontalCollectionViewC(productsInCategory: self.getProductByRoastType(roastType: "Medium"), category: "Medium Roast")
-                    .padding(5)
+                        .padding(5)
                     CoffeeHorizontalCollectionViewC(productsInCategory: self.getProductByRoastType(roastType: "Dark"), category: "Dark Roast")
-                    .padding(5)
+                        .padding(5)
                     
                 }
             }.background(Image("Background").resizable().edgesIgnoringSafeArea(.all).scaledToFill().edgesIgnoringSafeArea(.all))

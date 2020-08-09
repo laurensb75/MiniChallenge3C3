@@ -97,6 +97,7 @@ struct ProductDetail: View {
                 ReviewGenerator(commentsArray: comments)
             }
             AddToCartBtnView(ammount: 0, selectedProduct: selectedProduct)
+                .padding(.bottom)
         }.background(Image("Background").resizable().edgesIgnoringSafeArea(.all).scaledToFill().edgesIgnoringSafeArea(.all))
             .onAppear(){
                 print("nama produk: \(self.selectedProduct.name) \nroastType: \(self.selectedProduct.roastType)")

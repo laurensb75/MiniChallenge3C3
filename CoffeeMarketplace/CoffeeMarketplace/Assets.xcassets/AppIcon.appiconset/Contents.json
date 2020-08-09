@@ -31,11 +31,13 @@
       "size" : "40x40"
     },
     {
+      "filename" : "Logo 2x2.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
     },
     {
+      "filename" : "Logo 3x3.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "60x60"
