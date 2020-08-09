@@ -41,7 +41,7 @@ struct MyShopView: View {
                 Text("Add New Product").padding(50)
             } else {
                 //MyShopItemList(coffeeList: testData)
-                MyShopItemList(coffeeList: ConvertedRecordResult.results)
+                MyShopItemList(coffeeList: ConvertedRecordResult.results).padding(.top, 20)
             }
         }.navigationBarTitle("\(userStore.name)", displayMode: .inline).navigationBarItems(trailing: Button(action: {}, label: {
             HStack{
@@ -151,7 +151,8 @@ struct MyShopItemList: View{
     
     init(coffeeList: [ProductData]) {
         if !coffeeList.isEmpty && coffeeList.count > 2 {
-            processedCoffeeList = coffeeList.chunked(into: coffeeList.count/(coffeeList.count/2))
+            let itemPerRow = UIScreen.main.bounds.width / 175
+            processedCoffeeList = coffeeList.chunked(into: Int(itemPerRow))
         }
     }
     
@@ -204,12 +205,12 @@ struct MyShopItem: View{
                 
                 VStack(alignment: .leading, spacing: 0) {
                     
-                    Rectangle().foregroundColor(Color(red: 216/255, green: 216/255, blue: 216/255)).overlay(
-                        Image(uiImage: coffeeImage)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(minWidth: nil, idealWidth: nil, maxWidth: UIScreen.main.bounds.width, minHeight: nil, idealHeight: nil, maxHeight: 300, alignment: .center)
-                            .clipped())
+                    Rectangle()
+                        .foregroundColor(Color(red: 216/255, green: 216/255, blue: 216/255))
+                        .overlay(
+                            Image(uiImage: coffeeImage)
+                                .resizable()
+                        )
                     
                     
                     VStack(alignment: .leading) {
@@ -224,8 +225,7 @@ struct MyShopItem: View{
                 .background(Color.white)
                 .cornerRadius(15)
                 .addBorder(Color.black, width: 0.5, cornerRadius: 15)
-                .frame(width: 150, height: 200)
-                
+                .frame(width: 150, height: 220)
             }
         }
     }
