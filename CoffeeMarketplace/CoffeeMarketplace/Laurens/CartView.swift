@@ -32,6 +32,9 @@ struct CartView: View {
                 Spacer()
                 Button(action: {
                     self.checkout()
+                    print("success")
+                    self.cart.ammountList.removeAll()
+                    self.cart.productList.removeAll()
                 }) {
                     Text("Checkout")
                         .foregroundColor(Color.black)

@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct ProductDetail: View {
+    @Environment(\.presentationMode) var presentation
+    
     
     var selectedCoffee: Coffeee = .init(id: "0", name: "Coffee Name", description: "akdfhlaks dfalskdf askjf alksdfas dlfas dfasdk fahlskd fasfasdlfa a sdf alksdj fahlks dflajs alskjh a lahsdf asjkdf as kfd", price: 0, roastLevel: 1, flavour: [true,true,true,true,true,true,true,true,true], image: "Coffee")
     
@@ -388,6 +390,7 @@ struct Rating: View {
 
 
 struct AddToCartBtnView: View {
+    @Environment(\.presentationMode) var presentation
     @State var ammount: Int = 1
     
     @ObservedObject var cart : Cart = .shared
@@ -398,6 +401,7 @@ struct AddToCartBtnView: View {
             Button(action: {
                 self.cart.productList.append(self.selectedProduct)
                 self.cart.ammountList.append(self.ammount)
+                self.presentation.wrappedValue.dismiss()
                 print("Added to cart")
             }) {
                 Text("Add to Cart")

@@ -15,6 +15,9 @@ enum ModalView {
 }
 
 struct OpenNewShopView: View {
+    @Environment(\.presentationMode) var presentation
+    
+    
     @State var newShopName : String = ""
     @State var newShopAddress : String = ""
     @State var newShopOwnerID : UIImage = UIImage(systemName: "plus.circle")!
@@ -35,18 +38,52 @@ struct OpenNewShopView: View {
                     .foregroundColor(SellerConstant.lightBrown)
                     .border(Color.black, width: 1)
                 
-                VStack(alignment: .leading){
+                VStack(){
+                    HStack{
+                    Text("Shop logo")
+                        .font(.system(size: 24, weight: .bold))
+                        .padding(.leading,7.5)
+                        Spacer()
+                    }
+                        if newShopLogo == UIImage(systemName: "plus.circle"){
+                            imagePlaceholder
+                                .resizable()
+                                .frame(width: 120, height: 120)
+                                .foregroundColor(.secondary)
+                                .onTapGesture {
+                                    self.imagePickerState = .storeLogo
+                                    self.isShowingImagePicker = true
+                            }
+                        }
+                        else{
+                            Image(uiImage: newShopLogo)
+                                .resizable()
+                                .frame(width: 120, height: 120)
+                                .foregroundColor(.secondary)
+                                .clipShape(Circle())
+                                .onTapGesture {
+                                    self.imagePickerState = .storeLogo
+                                    self.isShowingImagePicker = true
+                            }
+                        
+                    }
+                    HStack{
                     Text("Shop Name")
                         .font(.system(size: 24, weight: .bold))
-                    
+                        .padding(.leading,7.5)
+                        Spacer()
+                    }
                     TextField("Shop Name", text: $newShopName)
                         .padding(.horizontal, 10.0)
                     HorizontalLine(color: .gray)
                         .padding(.horizontal, 10.0)
                     
+                    HStack{
                     Text("Shop Address")
                         .font(.system(size: 24, weight: .bold))
-                    
+                        .padding(.leading,7.5)
+                        Spacer()
+                    }
                     
                     ZStack{
                         TextView(text: $newShopAddress)
@@ -61,9 +98,12 @@ struct OpenNewShopView: View {
                     }
                     .frame(width: UIScreen.main.bounds.width * 0.9)
                     
+                    HStack{
                     Text("Owner Valid ID")
                         .font(.system(size: 24, weight: .bold))
-                    
+                        .padding(.leading,7.5)
+                        Spacer()
+                    }
                     VStack{
                         if newShopOwnerID == UIImage(systemName: "plus.circle"){
                             imagePlaceholder
@@ -90,31 +130,31 @@ struct OpenNewShopView: View {
                     }
                     .frame(width: UIScreen.main.bounds.width * 0.9)
                     
-                    Text("Store Logo")
-                        .font(.system(size: 24, weight: .bold))
-                    
+//                    Text("Store Logo")
+//                        .font(.system(size: 24, weight: .bold))
+//
                     VStack{
-                        if newShopLogo == UIImage(systemName: "plus.circle"){
-                            imagePlaceholder
-                                .resizable()
-                                .frame(width: 120, height: 120)
-                                .foregroundColor(.secondary)
-                                .onTapGesture {
-                                    self.imagePickerState = .storeLogo
-                                    self.isShowingImagePicker = true
-                            }
-                        }
-                        else{
-                            Image(uiImage: newShopLogo)
-                                .resizable()
-                                .frame(width: 120, height: 120)
-                                .foregroundColor(.secondary)
-                                .clipShape(Circle())
-                                .onTapGesture {
-                                    self.imagePickerState = .storeLogo
-                                    self.isShowingImagePicker = true
-                            }
-                        }
+//                        if newShopLogo == UIImage(systemName: "plus.circle"){
+//                            imagePlaceholder
+//                                .resizable()
+//                                .frame(width: 120, height: 120)
+//                                .foregroundColor(.secondary)
+//                                .onTapGesture {
+//                                    self.imagePickerState = .storeLogo
+//                                    self.isShowingImagePicker = true
+//                            }
+//                        }
+//                        else{
+//                            Image(uiImage: newShopLogo)
+//                                .resizable()
+//                                .frame(width: 120, height: 120)
+//                                .foregroundColor(.secondary)
+//                                .clipShape(Circle())
+//                                .onTapGesture {
+//                                    self.imagePickerState = .storeLogo
+//                                    self.isShowingImagePicker = true
+//                            }
+//                        }
                         
                         Rectangle()
                             .frame(height: 20)
@@ -122,6 +162,7 @@ struct OpenNewShopView: View {
                         
                         Button (action: {
                             self.saveNewShopDataToCloud()
+                            self.presentation.wrappedValue.dismiss()
                         }) {
                             Text("Open")
                                 .foregroundColor(Color(red: 1.0, green: 1.0, blue: 1.0))

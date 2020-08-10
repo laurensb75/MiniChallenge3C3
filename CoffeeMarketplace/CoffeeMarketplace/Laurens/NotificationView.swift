@@ -52,6 +52,7 @@ struct NotificationView: View {
         }
         .navigationBarItems(trailing:
             Button(action: {
+                self.notificationDataList.list.removeAll()
                 print("Refreshing...")
                 self.fetchNotification()
                 

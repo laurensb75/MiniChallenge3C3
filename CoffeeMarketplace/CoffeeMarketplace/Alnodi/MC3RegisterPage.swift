@@ -12,6 +12,7 @@ import CloudKit
 //var newUser : userData?
 
 struct MC3RegisterPage: View {
+    @Environment(\.presentationMode) var presentation
     
     @State var newUser = userData()
     @State var photoPreview : UIImage = UIImage(systemName: "person.fill")!
@@ -31,7 +32,7 @@ struct MC3RegisterPage: View {
                         RegisterFormText(newUser: $newUser)
                     }
                     
-                Image(uiImage: photoPreview)
+                    Image(uiImage: photoPreview)
                         .resizable()
                         .frame(width: 200, height: 200)
                         .scaledToFit()
@@ -56,7 +57,7 @@ struct MC3RegisterPage: View {
                     }
                 //.navigationBarTitle("")
                 //.navigationBarHidden(true)
-    }
+    }.onTapGesture {UIApplication.shared.endEditing()}
 }
         
     
@@ -133,11 +134,13 @@ struct RegisterFormText: View {
 }
 
 struct RegisterButton: View {
+    @Environment(\.presentationMode) var presentation
     @Binding var newUser: userData
     
     var body: some View {
         Button (action: {
             self.saveDataToCloudKit()
+            self.presentation.wrappedValue.dismiss()
         }) {
             Text("Register")
                 .padding()
