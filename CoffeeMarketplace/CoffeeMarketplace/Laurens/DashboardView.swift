@@ -186,7 +186,7 @@ struct DashboardView: View {
 //            print("Roasttype: \(record.value(forKey: "roastType") as! String)")
             //print(record.recordID)
             
-            ConvertedRecordResult.results.append(ProductData(name: record.value(forKey: "name") as! String, description: record.value(forKey: "description") as! String, price: record.value(forKey: "price") as! Int, stock: record.value(forKey: "stock") as! Int, beanType: record.value(forKey: "beanType") as! String, roastType: record.value(forKey: "roastType") as! String, flavour: record.value(forKey: "flavour") as! [String], image: productImage!, id: record.recordID))
+            ConvertedRecordResult.results.append(ProductData(name: record.value(forKey: "name") as! String, description: record.value(forKey: "description") as! String, price: record.value(forKey: "price") as! Int, stock: record.value(forKey: "stock") as! Int, beanType: record.value(forKey: "beanType") as! String, roastType: record.value(forKey: "roastType") as! String, flavour: record.value(forKey: "flavour") as! [String], image: productImage!, id: record.recordID, seller: record.value(forKey: "seller") as? CKRecord.Reference))
             
         }
         print("Convert Success")
