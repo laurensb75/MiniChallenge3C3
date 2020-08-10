@@ -22,39 +22,38 @@ struct MC3RegisterPage: View {
     var body: some View {
         ScrollView{
             VStack{
-                    //Untuk pemisah antara nav title dengan konten dibawahnya
-                    Rectangle()
-                        .frame(height: 75)
-                        .foregroundColor(Color.clear)
-                    
-                    ZStack{
-                        RegisterFormBackgroundView()
-                        RegisterFormText(newUser: $newUser)
+                Image(uiImage: photoPreview)
+                    .resizable()
+                    .frame(width: 200, height: 200)
+                    .scaledToFit()
+                    .clipShape(Circle())
+                    .padding(.top, 20)
+
+                
+                Text("Tap here to select a picture")
+                    .foregroundColor(.blue)
+                    .padding()
+                    .onTapGesture {
+                        self.isShowingImagePicker = true
                     }
-                    
-                    Image(uiImage: photoPreview)
-                        .resizable()
-                        .frame(width: 200, height: 200)
-                        .scaledToFit()
-                        .clipShape(Circle())
-                    
-                    Text("Tap here to select a picture")
-                        .foregroundColor(.blue)
-                        .padding()
-                        .onTapGesture {
-                            self.isShowingImagePicker = true
-                    }
-                    
-                    RegisterButton(newUser: $newUser)
-                    Spacer()
+                
+                ZStack{
+                    RegisterFormBackgroundView()
+                    RegisterFormText(newUser: $newUser)
                 }
-                    //.background(Image("Background2"))
-                    .background(Image("Background"))
-                    .navigationBarTitle("Create an Account", displayMode: .inline)
-                    .sheet(isPresented: $isShowingImagePicker,
-                           onDismiss: loadImage) {
+                
+                
+                
+                RegisterButton(newUser: $newUser)
+                Spacer()
+            }
+                //.background(Image("Background2"))
+                .background(Image("Background"))
+                .navigationBarTitle("Create an Account", displayMode: .inline)
+                .sheet(isPresented: $isShowingImagePicker,
+                       onDismiss: loadImage) {
                             ImagePicker(image: self.$photoPreview)
-                    }
+                        }
                 //.navigationBarTitle("")
                 //.navigationBarHidden(true)
     }.onTapGesture {UIApplication.shared.endEditing()}
