@@ -77,7 +77,7 @@ struct DashboardView: View {
                 }
                 
                 HStack{
-                    SearchBar(text: $searchText).onTapGesture {UIApplication.shared.endEditing()}
+                    SearchBar(text: $searchText)
                         .frame(height: UIScreen.main.bounds.height * 0.05)
                         .padding(.leading, 5)
                     Button(action: {

@@ -28,7 +28,7 @@ struct AddItemView: View {
     
     var body: some View {
             VStack{
-                ProductNameAndPriceView(productTextField: $productName, priceTextField: $productPrice).padding(.vertical, 20).onTapGesture {UIApplication.shared.endEditing()}
+                ProductNameAndPriceView(productTextField: $productName, priceTextField: $productPrice).padding(.vertical, 20)
                 
                 ProductDetailView(stockNum: $stockNumber, productDescription: $productDescription, productImage: $productImage)
                 

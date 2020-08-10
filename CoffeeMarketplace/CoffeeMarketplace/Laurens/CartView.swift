@@ -31,7 +31,7 @@ struct CartView: View {
                 .padding(.top)
                 Spacer()
                 Button(action: {
-                    
+                    self.checkout()
                 }) {
                     Text("Checkout")
                         .foregroundColor(Color.black)

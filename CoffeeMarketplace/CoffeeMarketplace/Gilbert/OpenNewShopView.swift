@@ -138,7 +138,6 @@ struct OpenNewShopView: View {
                 }
                 .padding(.horizontal, 25.0)
             }
-            .onTapGesture {UIApplication.shared.endEditing()}
             .background(Image("Background"))
             .sheet(isPresented: $isShowingImagePicker, onDismiss: {
                 self.isShowingImagePicker = false

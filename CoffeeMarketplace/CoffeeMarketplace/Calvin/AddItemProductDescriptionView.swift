@@ -35,7 +35,6 @@ struct AddItem_ProductDescription_View: View {
             Spacer()
 
         }
-            .onTapGesture {UIApplication.shared.endEditing()}
             .background(SellerConstant.mainBackground)
             .navigationBarTitle("Product Description")
             .navigationBarItems(
@@ -49,7 +48,6 @@ struct AddItem_ProductDescription_View: View {
                     
                 })
             )
-            .onTapGesture {UIApplication.shared.endEditing()}
     }
 }
 
