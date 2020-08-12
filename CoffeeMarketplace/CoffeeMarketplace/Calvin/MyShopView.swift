@@ -153,6 +153,8 @@ struct MyShopItemList: View{
         if !coffeeList.isEmpty && coffeeList.count > 2 {
             let itemPerRow = UIScreen.main.bounds.width / 175
             processedCoffeeList = coffeeList.chunked(into: Int(itemPerRow))
+        } else {
+             processedCoffeeList.append(coffeeList)
         }
     }
     
@@ -162,6 +164,7 @@ struct MyShopItemList: View{
                 MyShopItemListB(processedCoffeeList: self.processedCoffeeList, indexI: i, selectedProduct: self.$selectedProduct)
             }
         }
+            .frame(width: UIScreen.main.bounds.width * 1)
     }
     
     

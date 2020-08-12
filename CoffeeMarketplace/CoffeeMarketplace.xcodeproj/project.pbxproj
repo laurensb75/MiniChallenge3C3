@@ -38,6 +38,7 @@
 		53E1253A24D7DC68006EF750 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1253924D7DC68006EF750 /* NotificationView.swift */; };
 		53E1253D24D7F8E0006EF750 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1253C24D7F8E0006EF750 /* Account.swift */; };
 		53E1253F24D9AAAE006EF750 /* OpenNewShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1253E24D9AAAE006EF750 /* OpenNewShopView.swift */; };
+		5A16420F24E3E8EC00278948 /* FavouriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A16420E24E3E8EC00278948 /* FavouriteView.swift */; };
 		5A1856BB24C0691100F935FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BA24C0691100F935FC /* AppDelegate.swift */; };
 		5A1856BD24C0691100F935FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BC24C0691100F935FC /* SceneDelegate.swift */; };
 		5A1856C024C0691100F935FC /* CoffeeMarketplace.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5A1856BE24C0691100F935FC /* CoffeeMarketplace.xcdatamodeld */; };
@@ -87,6 +88,7 @@
 		53E1253924D7DC68006EF750 /* NotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		53E1253C24D7F8E0006EF750 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		53E1253E24D9AAAE006EF750 /* OpenNewShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenNewShopView.swift; sourceTree = "<group>"; };
+		5A16420E24E3E8EC00278948 /* FavouriteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteView.swift; sourceTree = "<group>"; };
 		5A1856B724C0691100F935FC /* Coffee's Bag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Coffee's Bag.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A1856BA24C0691100F935FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A1856BC24C0691100F935FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -197,13 +199,13 @@
 			children = (
 				53E1253B24D7F8D0006EF750 /* Gilbert */,
 				532C3D9B24D4572B00AD5E37 /* Calvin */,
-				536760B124CEAFCA005470DD /* CoffeeMarketplace.entitlements */,
 				5AF9ABE724D5FA7800467BDD /* Laurens */,
 				5313741824C8159C00BC95E3 /* Alnodi */,
 				5A1856BA24C0691100F935FC /* AppDelegate.swift */,
 				5A1856BC24C0691100F935FC /* SceneDelegate.swift */,
 				5A1856C124C0691100F935FC /* ContentView.swift */,
 				5A1856C324C0691300F935FC /* Assets.xcassets */,
+				536760B124CEAFCA005470DD /* CoffeeMarketplace.entitlements */,
 				5A1856C824C0691300F935FC /* LaunchScreen.storyboard */,
 				5A1856CB24C0691300F935FC /* Info.plist */,
 				5A1856BE24C0691100F935FC /* CoffeeMarketplace.xcdatamodeld */,
@@ -223,6 +225,7 @@
 		5AF9ABE724D5FA7800467BDD /* Laurens */ = {
 			isa = PBXGroup;
 			children = (
+				5A16420E24E3E8EC00278948 /* FavouriteView.swift */,
 				53E1253924D7DC68006EF750 /* NotificationView.swift */,
 				5AF9ABE824D5FA7800467BDD /* DashboardView.swift */,
 				5AF9ABE924D5FA7800467BDD /* Model.swift */,
@@ -346,6 +349,7 @@
 				5AF9ABF224D5FA7800467BDD /* ProductDetail.swift in Sources */,
 				5AF9ABF024D5FA7800467BDD /* Model.swift in Sources */,
 				532C3DAF24D4572B00AD5E37 /* AddItemBeanTypeView.swift in Sources */,
+				5A16420F24E3E8EC00278948 /* FavouriteView.swift in Sources */,
 				535BD75C24D0440000204454 /* GlobalStruct.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
