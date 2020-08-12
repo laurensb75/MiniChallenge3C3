@@ -15,14 +15,35 @@ struct AddItem_ProductImage_View: View {
     
     var body: some View {
         
+//        VStack{
+//            RoundedRectangle(cornerRadius: 15).frame(width: UIScreen.main.bounds.width*0.9, height: UIScreen.main.bounds.height*0.25).foregroundColor(SellerConstant.lightBrown).addBorder(Color.black, cornerRadius: 15).padding()
+//                .overlay(
+//
+//                    Image(uiImage: currentImage).resizable().scaledToFit().cornerRadius(15).frame(width: UIScreen.main.bounds.width*0.85, height: UIScreen.main.bounds.height*0.225)
+//            ).background(Text("No Image"))
+//            Spacer()
+//
+//        }.background(SellerConstant.mainBackground).onTapGesture {
+//            self.ea = !self.ea
+//        }.sheet(isPresented: $ea){
+//            ImagePicker(image: self.$currentImage)
+//        }.navigationBarTitle("Product Image")
+        //
         VStack{
-            RoundedRectangle(cornerRadius: 15).frame(width: UIScreen.main.bounds.width*0.9, height: UIScreen.main.bounds.height*0.25).foregroundColor(SellerConstant.lightBrown).addBorder(Color.black, cornerRadius: 15).padding()
-                .overlay(
-                    
+            ZStack{
+                RoundedRectangle(cornerRadius: 15).frame(width: UIScreen.main.bounds.width*0.9, height: UIScreen.main.bounds.height*0.25).foregroundColor(SellerConstant.lightBrown).addBorder(Color.black, cornerRadius: 15).padding()
+                Spacer()
+                
+                if currentImage == UIImage(systemName: "plus.circle"){
+                    Image(systemName: "plus.circle")
+                        .resizable().scaledToFit().cornerRadius(15).frame(width: UIScreen.main.bounds.width*0.85, height: UIScreen.main.bounds.height*0.225)
+                }
+                else {
                     Image(uiImage: currentImage).resizable().scaledToFit().cornerRadius(15).frame(width: UIScreen.main.bounds.width*0.85, height: UIScreen.main.bounds.height*0.225)
-            ).background(Text("No Image"))
+                }
+                
+            }
             Spacer()
-            
         }.background(SellerConstant.mainBackground).onTapGesture {
             self.ea = !self.ea
         }.sheet(isPresented: $ea){

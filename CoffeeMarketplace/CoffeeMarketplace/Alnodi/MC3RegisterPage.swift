@@ -22,12 +22,24 @@ struct MC3RegisterPage: View {
     var body: some View {
         ScrollView{
             VStack{
-                Image(uiImage: photoPreview)
+                if photoPreview == UIImage(systemName: "person.fill"){
+                    Image(systemName: "person.fill")
                     .resizable()
                     .frame(width: 200, height: 200)
                     .scaledToFit()
                     .clipShape(Circle())
                     .padding(.top, 20)
+                    
+                }
+                else{
+                    Image(uiImage: photoPreview)
+                    .resizable()
+                    .frame(width: 200, height: 200)
+                    .scaledToFit()
+                    .clipShape(Circle())
+                    .padding(.top, 20)
+                }
+                
 
                 
                 Text("Tap here to select a picture")
@@ -135,11 +147,21 @@ struct RegisterFormText: View {
 struct RegisterButton: View {
     @Environment(\.presentationMode) var presentation
     @Binding var newUser: userData
+    @State var showingAlert = false
+    @State var message = ""
     
     var body: some View {
         Button (action: {
-            self.saveDataToCloudKit()
-            self.presentation.wrappedValue.dismiss()
+            if self.validateRegisterData() {
+                self.saveDataToCloudKit()
+                
+                //self.presentation.wrappedValue.dismiss()
+            }
+            else{
+                self.message = "Register failed, all field must be filled!"
+                self.showingAlert = true
+            }
+            
         }) {
             Text("Register")
                 .padding()
@@ -149,6 +171,14 @@ struct RegisterButton: View {
         .background(Color(red: 0.511, green: 0.298, blue: 0.001))
         .cornerRadius(10)
         .padding(.top, 15)
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text("Alert"), message: Text(message), dismissButton: .default(Text("OK")) {
+                if self.message == "Register Success" {
+                    self.presentation.wrappedValue.dismiss()
+                }
+                    
+                })
+        }
     }
     
     func saveDataToCloudKit(){
@@ -189,11 +219,45 @@ struct RegisterButton: View {
             
             print(record)
             
+            if let record = record {
+                self.message = "Register Success"
+                self.showingAlert = true
+            }
+            else {
+                self.message = "Register Failed"
+                self.showingAlert = true
+            }
+            
             DispatchQueue.main.async {
                 //Update UI
             }
             
         }
+    }
+    
+    func validateRegisterData() -> Bool{
+        if newUser.name == ""{
+            return false
+        }
+        
+        else if newUser.email == "" {
+            return false
+        }
+        
+        else if newUser.password == "" {
+            return false
+        }
+        
+        else if newUser.phoneNumber == "" {
+            return false
+        }
+        
+        else if newUser.profilePhoto == UIImage(systemName: "person.fill") {
+            return false
+        }
+        
+        
+        return true
     }
 }
 
