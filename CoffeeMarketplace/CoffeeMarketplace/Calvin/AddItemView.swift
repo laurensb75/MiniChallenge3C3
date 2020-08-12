@@ -24,6 +24,7 @@ struct AddItemView: View {
     @State var flavourSelected: [String] = []
     
     @State private var showingAlert = false
+    @State var alertMessage = ""
     
     @ObservedObject var UserStore : ShopData = .shared
     
@@ -41,13 +42,17 @@ struct AddItemView: View {
                 .navigationBarItems(trailing:
                     Button (action: {
                         self.saveProductToCloudKit()
-                        self.presentation.wrappedValue.dismiss()
+                        //self.presentation.wrappedValue.dismiss()
                     }) {
                         Text("Add")
                             .foregroundColor(SellerConstant.darkBrown)
                 
                     }).alert(isPresented: $showingAlert) {
-                    Alert(title: Text("All Fields Required"), message: Text("All fields need to be filled"), dismissButton: .default(Text("OK")))
+                        Alert(title: Text("Alert"), message: Text(alertMessage), dismissButton: .default(Text("OK")){
+                            if self.alertMessage == "Add Product Success"{
+                                self.presentation.wrappedValue.dismiss()
+                            }
+                            })
                 }
     }
     
@@ -56,7 +61,9 @@ struct AddItemView: View {
         
         if productName.isEmpty || productPrice.isEmpty || stockNumber <= 0 || productDescription.isEmpty || beanTypeSelected.isEmpty || roastTypeSelected.isEmpty || flavourSelected.isEmpty {
             //Error handling here
+            alertMessage = "All fields need to be filled"
             showingAlert.toggle()
+            
             return
         }
         
@@ -101,7 +108,11 @@ struct AddItemView: View {
                 print(err.localizedDescription)
             }
 
-            print(record)
+            if let record = record {
+                self.alertMessage = "Add Product Success"
+                self.showingAlert.toggle()
+                
+            }
 
             DispatchQueue.main.async {
                 //Update UI
