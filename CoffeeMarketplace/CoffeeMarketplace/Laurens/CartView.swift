@@ -19,7 +19,7 @@ struct CartView: View {
             VStack{
                 ScrollView{
                     if cart.productList.isEmpty {
-                        Text("No item")
+                        Text("No item").padding(.top, UIScreen.main.bounds.height * 0.3)
                     }
                     else {
                         ForEach(0 ..< cart.productList.count, id: \.self) { index in
@@ -37,7 +37,7 @@ struct CartView: View {
                     self.cart.productList.removeAll()
                 }) {
                     Text("Checkout")
-                        .foregroundColor(Color.black)
+                        .foregroundColor(Color.white)
                 }
                     .frame(width: UIScreen.main.bounds.width * 0.6, height: 45)
                     .background(Color.init(.brown))

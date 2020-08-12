@@ -10,6 +10,7 @@ import SwiftUI
 import CloudKit
 
 struct AddItemView: View {
+    @Environment(\.presentationMode) var presentation
     
     @State var productName: String = ""
     @State var productPrice: String = ""
@@ -37,12 +38,15 @@ struct AddItemView: View {
                 Spacer()
             }
                 .background(SellerConstant.mainBackground).navigationBarTitle("Add Item", displayMode: .inline)
-                .navigationBarItems(trailing: Button (action: {
-                self.saveProductToCloudKit()
-            }) {
-                Text("Add")
-                    .foregroundColor(SellerConstant.darkBrown)
-                }).alert(isPresented: $showingAlert) {
+                .navigationBarItems(trailing:
+                    Button (action: {
+                        self.saveProductToCloudKit()
+                        self.presentation.wrappedValue.dismiss()
+                    }) {
+                        Text("Add")
+                            .foregroundColor(SellerConstant.darkBrown)
+                
+                    }).alert(isPresented: $showingAlert) {
                     Alert(title: Text("All Fields Required"), message: Text("All fields need to be filled"), dismissButton: .default(Text("OK")))
                 }
     }

@@ -405,7 +405,7 @@ struct AddToCartBtnView: View {
                 print("Added to cart")
             }) {
                 Text("Add to Cart")
-                    .foregroundColor(Color.black)
+                    .foregroundColor(Color.white)
             }
             .frame(width: UIScreen.main.bounds.width * 0.6, height: 45)
             .background(Color.init(.brown))
