@@ -19,9 +19,12 @@ struct ProductDetail: View {
     var roastImg : [String] = ["Green Beans", "LightRoast", "MediumRoast", "DarkRoast"]
     
     var comments: [Review] = [
-        Review(sender: "Aaaaa", rating: 4, description: "asdfasdfadfasdf"),
-        Review(sender: "Bbbb", rating: 3, description: "asdfasdfadfasdf"),
-        Review(sender: "Ccccc", rating: 1, description: "asdfasdfadfasdf")
+        Review(sender: "Alnodi", rating: 5, description: "kopi sangat memuaskan, rasa sesuai deskripsi, freshly roasted"),
+        Review(sender: "Albert", rating: 5, description: "great, rasa kopinya sesuai deskripsi dan antarnya cepat"),
+        Review(sender: "Steven", rating: 4, description: "sesuai ekspetasi"),
+        Review(sender: "Gilbert", rating: 3, description: "rasa kurang sesuai dengan deskripsi"),
+        Review(sender: "Calvin", rating: 3, description: "kopinya tidak enak")
+        
     ]
     
     @State var averageRating: Int = 4
