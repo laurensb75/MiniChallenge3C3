@@ -132,7 +132,7 @@ struct ProductDetail: View {
 struct ProductDetailCoffeeFlavourView: View {
     //var selectedCoffeeFlavours: [Bool]
     
-    var coffeeFlavours: [String] = ["FruityFlavour", "SpicesFlavour", "GreenVegetativeFlavour", "NuttyCocoaFlavour", "ChemicalFlavour", "SweetFlavour", "FloralFlavour", "SourFermentedFlavour", "PaperyMustyFlavour"]
+    var coffeeFlavours: [String] = ["FruityFlavour", "SpicesFlavour", "GreenVegetativeFlavour", "NuttyCocoaFlavour", "ChemicalFlavour", "SweetFlavour", "FloralFlavour", "SourFermentedFlavour", "PaperyMustyFlavour", "RoastedFlavour"]
     
     var ReceivedCoffeeFlavour : [String] = []
     @ObservedObject var counter : Counter = .shared
@@ -184,6 +184,8 @@ struct ProductDetailCoffeeFlavourView: View {
                 adjustedCoffeeFlavours.append("SourFermentedFlavour")
             case "Papery/Musty":
                 adjustedCoffeeFlavours.append("PaperyMustyFlavour")
+            case "Roasted":
+                adjustedCoffeeFlavours.append("RoastedFlavour")
             default:
                 print("Invalid Flavour")
             }
@@ -227,7 +229,7 @@ struct ProductDetailCoffeeFlavourView: View {
 }
 
 struct ProductDetailCoffeeFlavourViewB {
-    var coffeeFlavours: [String] = ["FruityFlavour", "SpicesFlavour", "GreenVegetativeFlavour", "NuttyCocoaFlavour", "ChemicalFlavour", "SweetFlavour", "FloralFlavour", "SourFermentedFlavour", "PaperyMustyFlavour"]
+    var coffeeFlavours: [String] = ["FruityFlavour", "SpicesFlavour", "GreenVegetativeFlavour", "NuttyCocoaFlavour", "ChemicalFlavour", "SweetFlavour", "FloralFlavour", "SourFermentedFlavour", "PaperyMustyFlavour", "RoastedFlavour"]
     
     var ReceivedCoffeeFlavour : [String] = []
     var indexVertical : Int = 0
@@ -266,6 +268,8 @@ struct ProductDetailCoffeeFlavourViewB {
                 adjustedCoffeeFlavours.append("SourFermentedFlavour")
             case "Papery/Musty":
                 adjustedCoffeeFlavours.append("PaperyMustryFlavour")
+            case "Roasted":
+                adjustedCoffeeFlavours.append("RoastedFlavour")
             default:
                 print("Invalid Flavour")
             }
