@@ -124,7 +124,7 @@ struct LoginButton: View {
     @ObservedObject var userLoggedOn : userData = .shared
     @ObservedObject var loginState : loginStatus = .shared
     @ObservedObject var UserStore : ShopData = .shared
-    
+    @State var showingAlert = false
     
     var body: some View {
         VStack{
@@ -145,6 +145,8 @@ struct LoginButton: View {
             .cornerRadius(10)
             .padding(.top, 15)
             
+        }.alert(isPresented: $showingAlert) {
+            Alert(title: Text("Login Failed"), message: Text("No Account Found"), dismissButton: .default(Text("OK")))
         }
         
     }
@@ -190,6 +192,7 @@ struct LoginButton: View {
                 }
                 else {
                     print("No Login Data Found")
+                    self.showingAlert = true
                 }
                 
             }

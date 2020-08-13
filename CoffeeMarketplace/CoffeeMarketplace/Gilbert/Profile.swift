@@ -35,11 +35,11 @@ struct ProfileBeforeLogin: View {
     var body: some View {
         VStack(spacing: 300){
 
-            
-            Image("test")
+            Image("Logo")
                 .resizable()
-                .frame(height:150)
-                .clipShape(Circle())
+                .scaledToFill()
+                .frame(width:150, height:150)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
             
             VStack(spacing: 15){
                 Button(action: {
@@ -71,9 +71,9 @@ struct ProfileBeforeLogin: View {
                 }
                 
             }
-        }.background(Image("Background")
-            .resizable()
-            .scaledToFill())
+        }.background(Image("Background"))
+            //.resizable()
+            //.scaledToFill())
         
     }
 }

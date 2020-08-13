@@ -13,13 +13,15 @@ struct CartView: View {
     
     @ObservedObject var cart : Cart = .shared
     @ObservedObject var userLoggedOn : userData = .shared
+    @ObservedObject var loginState : loginStatus = .shared
     
     var body: some View {
         NavigationView{
             VStack{
                 ScrollView{
                     if cart.productList.isEmpty {
-                        Text("No item").padding(.top, UIScreen.main.bounds.height * 0.3)
+                        Text("No item in cart.").padding(.top, UIScreen.main.bounds.height * 0.3)
+                            .foregroundColor(.secondary)
                     }
                     else {
                         ForEach(0 ..< cart.productList.count, id: \.self) { index in
@@ -29,21 +31,43 @@ struct CartView: View {
                     }
                 }
                 .padding(.top)
-                Spacer()
-                Button(action: {
-                    self.checkout()
-                    print("success")
-                    self.cart.ammountList.removeAll()
-                    self.cart.productList.removeAll()
-                }) {
-                    Text("Checkout")
-                        .foregroundColor(Color.white)
-                }
+                if loginState.hasLogin {
+                    Button(action: {
+                        self.checkout()
+                        print("success")
+                        self.cart.ammountList.removeAll()
+                        self.cart.productList.removeAll()
+                    }) {
+                        Text("Checkout")
+                            .foregroundColor(Color.white)
+                    }
                     .frame(width: UIScreen.main.bounds.width * 0.6, height: 45)
                     .background(Color.init(.brown))
-                .cornerRadius(10.0).padding(.bottom, 16.0)
+                    .cornerRadius(10.0).padding(.bottom, 16.0)
+                }
+                else {
+                    Button(action: {
+
+                    }) {
+                        Text("You need to login first before proceeding to checkout!")
+                            .foregroundColor(.black)
+                            .multilineTextAlignment(.center)
+                    }
+                    .frame(width: UIScreen.main.bounds.width * 0.7, height: 60)
+                    .background(Color.init(.brown))
+                    .cornerRadius(10.0).padding(.bottom, 16.0)
+                    .disabled(true)
+                }
+                Spacer()
+                
+                
+                
             }.background(Image("Background").scaledToFill().edgesIgnoringSafeArea(.all))
                 .navigationBarTitle("Cart",displayMode: .inline)
+        }
+        .onAppear(){
+            print("user loggedOn Name : \(self.userLoggedOn.name)")
+            print("hasLogin : \(self.loginState.hasLogin)")
         }
     }
     
